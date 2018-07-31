@@ -1,5 +1,5 @@
-set :domain, 'example.com'
+set :domain, 'imin.xin'
 set :deploy_to, '/data/www/iminxin'
-set :repository,  'git@github.com:xx/xxx.git'
+set :repository,  'git@github.com:an-lee/iminxin.git'
 set :branch, 'master'
 set :user, 'ruby'
