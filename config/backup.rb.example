@@ -1,0 +1,30 @@
+# encoding: utf-8
+## backup gem example
+## Howto:
+## $ gem install backup
+## $ backup generate:model --trigger iminxin --archives --storages='local' --compressor='gzip'
+## $ cp config/backup.rb.example ~/Backup/models/iminxin.rb
+## $ backup perform --trigger iminxin
+
+Model.new(:iminxin, 'Description for iminxin') do
+
+  database PostgreSQL do |db|
+    db.name               = "iminxin_production"
+    db.username           = "postgres"
+    db.password           = "postgres"
+    db.host               = "localhost"
+    db.port               = 5432
+  end
+
+  archive :rails_config do |archive|
+    archive.add "/data/www/iminxin/shared/config/application.yml"
+    archive.add "/data/www/iminxin/shared/config/database.yml"
+  end
+
+  store_with Local do |local|
+    local.path       = "/data/www/backups/"
+    local.keep       = 5
+  end
+
+  compress_with Gzip
+end
