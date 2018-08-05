@@ -13,3 +13,7 @@ UPYUN_BUCKET_HOST: ''
 
 # sidekiq namespace
 SIDEKIQ_NAMESPACE: ''
+
+# admin account
+DEFAULT_ADMIN_NAME: 'admin'
+DEFAULT_ADMIN_PASSWORD: 'admin'

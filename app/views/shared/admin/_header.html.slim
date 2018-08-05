@@ -1,0 +1,11 @@
+.header.py-4
+  .container
+    .d-flex
+      = link_to 'imin.xin', admin_root_path, class: 'header-brand'
+      .d-flex.ml-auto
+        .dropdown.d-flex
+          a.nav-link.pr-0.leading-none data-toggle='dropdown'
+            = current_admin.name
+          .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow x-placement='bottom-end'
+            = link_to '帐号设置', edit_admin_account_path, class: 'dropdown-item btn btn-default btn-flat'
+            = link_to '退出', admin_logout_path, method: :delete, class: 'dropdown-item btn btn-default btn-flat'
