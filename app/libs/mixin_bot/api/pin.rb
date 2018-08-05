@@ -1,28 +1,18 @@
 module MixinBot
-  module API
-    class Pin
-      attr_reader :session_id, :pin_code, :pin_token, :private_key
-      attr_reader :client
-
-      def initialize(options)
-        @session_id = options[:session_id]
-        @pin_token = Base64.decode64 options[:pin_token]
-        @private_key = OpenSSL::PKey::RSA.new options[:private_key]
-        @client = Client.new
-      end
-
-      def verify(access_token=nil)
+  class API
+    module Pin
+      def verify_pin(access_token=nil)
         path = '/pin/verify'
         payload = {
           pin: encrypted_pin
         }
 
-        access_token ||= MixinBot.api_auth.access_token('POST', path, payload.to_json)
+        access_token ||= MixinBot.api.access_token('POST', path, payload.to_json)
         authorization = format('Bearer %s', access_token)
         client.post(path, headers: { 'Authorization': authorization }, json: payload)
       end
 
-      def decrypt(msg)
+      def decrypt_pin(msg)
         msg = Base64.strict_decode64 msg
         iv = msg[0..15]
         cipher = msg[16..47]
@@ -36,7 +26,7 @@ module MixinBot
         return plain
       end
 
-      def encrypt(pin_code)
+      def encrypt_pin(pin_code)
         aes_key = JOSE::JWA::PKCS1::rsaes_oaep_decrypt('SHA256', pin_token, private_key, session_id)
         ts = Time.now.utc.to_i
         tszero = ts % 0x100

@@ -8,8 +8,7 @@ class SessionsController < ApplicationController
       user_sign_in(user)
       redirect_to root_path
     else
-      client_id = Figaro.env.MIXIN_CLIENT_ID
-      redirect_to MixinBot.api_auth.request_oauth('PROFILE:READ+PHONE:READ')
+      redirect_to MixinBot.api.request_oauth('PROFILE:READ+PHONE:READ')
     end
   end
 
