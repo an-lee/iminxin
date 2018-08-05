@@ -1,0 +1,6 @@
+zh-CN:
+  activerecord:
+    models:
+      administrator: 管理员
+      user: 用户
+      mx_app: Mixin机器人

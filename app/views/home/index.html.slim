@@ -1,3 +1,15 @@
 .my-3.my-md-5
-  .container.text-center
-    | hello world
+  .container
+    .row
+      .col-lg-3.col-sm-6
+        .card
+          .card-status.bg-green
+          .card-body.text-center
+            .card-category 电商
+            .display-3.my-4 $0
+            ul.list-unstyled.leading-loose
+              li
+                i.fe.fe-check.text-success.mr-2
+                | 虚拟货币交易
+            .text-center.mt-6
+              = link_to '创建', new_mx_app_path, class: 'btn btn-green btn-block'

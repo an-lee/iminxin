@@ -1,0 +1,14 @@
+.container.my-3.my-md-5
+  .card
+    .card-header 我的Mixin 机器人
+    table.table.card-table.table-vcenter
+      tbody
+        - @mx_apps.each do |mx_app|
+          tr
+            td = image_tag (mx_app.avatar_url || 'default-user.png'), class: 'h-8'
+            td = mx_app.name || '未获取'
+            td = mx_app.identity_number || '未获取'
+            td.d-none.d-md-table-cell = mx_app.client_id
+            td
+              = link_to edit_mx_app_path(mx_app.number) do
+                i.fe.fe-edit

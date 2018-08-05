@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_090941) do
+ActiveRecord::Schema.define(version: 2018_08_05_122320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,23 @@ ActiveRecord::Schema.define(version: 2018_08_05_090941) do
     t.index ["name"], name: "index_administrators_on_name", unique: true
   end
 
+  create_table "mx_apps", comment: "mixin 应用", force: :cascade do |t|
+    t.bigint "owner_id"
+    t.string "type"
+    t.string "number", comment: "编号"
+    t.datetime "deleted_at", comment: "软删"
+    t.string "client_id"
+    t.string "client_secret"
+    t.string "session_id"
+    t.string "pin_token"
+    t.text "private_key"
+    t.json "raw", comment: "mixin 返回的 profile"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["number"], name: "index_mx_apps_on_number", unique: true
+    t.index ["owner_id"], name: "index_mx_apps_on_owner_id"
+  end
+
   create_table "user_authorizations", comment: "用户认证", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "provider", comment: "第三方来源"
@@ -61,5 +78,6 @@ ActiveRecord::Schema.define(version: 2018_08_05_090941) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "mx_apps", "users", column: "owner_id"
   add_foreign_key "user_authorizations", "users"
 end

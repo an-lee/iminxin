@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :user_authorizations
   has_one :mixin_authorization, -> { where(provider: :mixin) }, class_name: 'UserAuthorization'
 
+  has_many :mx_apps, foreign_key: 'owner_id'
+  has_many :store_apps, foreign_key: 'owner_id'
+
   validates :name, presence: true
 
   def phone

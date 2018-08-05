@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   match '/auth/failure', to: 'sessions#failure', via: :get
   delete '/logout', to: 'sessions#destroy', as: :logout
 
+  resources :mx_apps, only: [:index, :new, :create, :show, :edit, :update, :destroy], param: :number
+
   namespace :admin do
     get 'login', to: 'sessions#new', as: :login
     post 'login', to: 'sessions#create'
