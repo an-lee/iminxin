@@ -15,6 +15,7 @@ gem 'bcrypt'
 gem 'pg', '0.18'
 gem 'figaro'
 gem 'lograge'
+gem 'enumerize'
 
 # Authorization
 gem 'jwt'

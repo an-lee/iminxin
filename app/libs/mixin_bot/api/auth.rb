@@ -37,7 +37,14 @@ module MixinBot
           code: code
         }
         r = client.post(path, json: payload)
+
+        raise r.inspect if r['error'].present?
+
         return r['data']['access_token']
+      end
+
+      def request_oauth(scope=Figaro.env.MIXIN_DEFAULT_SCOPE)
+        format('https://mixin.one/oauth/authorize?client_id=%s&scope=%s', client_id, scope)
       end
     end
   end

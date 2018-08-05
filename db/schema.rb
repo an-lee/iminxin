@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_063920) do
+ActiveRecord::Schema.define(version: 2018_08_05_090941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,4 +44,22 @@ ActiveRecord::Schema.define(version: 2018_08_05_063920) do
     t.index ["name"], name: "index_administrators_on_name", unique: true
   end
 
+  create_table "user_authorizations", comment: "用户认证", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "provider", comment: "第三方来源"
+    t.string "uid", comment: "第三方 user_id"
+    t.json "raw", comment: "第三方返回的原始数据"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider", "uid"], name: "index_user_authorizations_on_provider_and_uid", unique: true
+    t.index ["user_id"], name: "index_user_authorizations_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", comment: "用户名"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "user_authorizations", "users"
 end

@@ -19,6 +19,8 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag "favicon.ico"
   body
-    main
-      .container
-        == yield
+    .page
+      .page-main
+        = render 'shared/header'
+        = yield
+      = render 'shared/footer'
