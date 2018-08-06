@@ -9,6 +9,9 @@ gem 'rails', '~> 5.2.0'
 # App server
 gem 'puma', '~> 3.11'
 
+# webpack
+gem 'webpacker', '~> 3.5'
+
 # Database
 gem 'aasm'
 gem 'bcrypt'
