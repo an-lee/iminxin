@@ -40,4 +40,14 @@ class MxApp < ApplicationRecord
   def avatar_url
     raw&.fetch('avatar_url', nil)
   end
+
+  def mixin_api
+    MixinBot.api({
+      client_id: client_id,
+      client_secret: client_secret,
+      session_id: session_id,
+      pin_token: pin_token,
+      private_key: private_key
+    })
+  end
 end

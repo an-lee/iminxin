@@ -3,15 +3,7 @@ module MixinBot
     attr_reader :client_id, :client_secret, :session_id, :pin_token, :private_key
     attr_reader :client
 
-    def initialize(options=nil)
-      options ||= {
-        client_id: Figaro.env.MIXIN_CLIENT_ID,
-        client_secret: Figaro.env.MIXIN_CLIENT_SECRET,
-        session_id: Figaro.env.MIXIN_SESSION_ID,
-        pin_token: Figaro.env.MIXIN_PIN_TOKEN,
-        private_key: Figaro.env.MIXIN_PRIVATE_KEY
-      }
-
+    def initialize(options)
       @client_id = options[:client_id]
       @client_secret = options[:client_secret]
       @session_id = options[:session_id]
