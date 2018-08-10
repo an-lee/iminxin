@@ -1,3 +1,12 @@
+require_relative './client'
+require_relative './errors'
+require_relative './api/auth'
+require_relative './api/me'
+require_relative './api/payment'
+require_relative './api/pin'
+require_relative './api/transfer'
+require_relative './api/user'
+
 module MixinBot
   class API
     attr_reader :client_id, :client_secret, :session_id, :pin_token, :private_key

@@ -11,9 +11,7 @@ module Numbering
 
   def setup_number
     loop do
-      now = Time.current
-      candidate = now.strftime('%Y%m%d%H%M%S') + now.nsec.to_s
-      candidate.ljust(24, rand(10).to_s)
+      candidate = SecureRandom.uuid
       unless self.class.exists?(number: candidate)
         self.number = candidate
         break

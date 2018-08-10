@@ -1,3 +1,8 @@
+require 'base64'
+require 'openssl'
+require 'jose'
+require_relative './mixin_bot/api'
+
 module MixinBot
   def self.api(options = nil)
     options ||= {
