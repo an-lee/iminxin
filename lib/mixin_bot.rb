@@ -1,5 +1,6 @@
 require 'base64'
 require 'openssl'
+require 'jwt'
 require 'jose'
 require_relative './mixin_bot/api'
 
