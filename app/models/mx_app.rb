@@ -63,7 +63,7 @@ class MxApp < ApplicationRecord
     end
   end
 
-  def audit?
+  def audited?
     audited_at?
   end
 end

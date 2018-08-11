@@ -7,10 +7,10 @@
           tr
             td
               span.avatar.d-block style=(format('background-image: url(%s)', mx_app.avatar_url || 'default-user.png'))
-            td = mx_app.name || '未审核'
-            td.d-none.d-md-table-cell = mx_app.identity_number || '未审核'
+            td = link_to mx_app.name, format('mixin://users/%s', mx_app.client_id), class: 'text-inherit post-open-button' if mx_app.audited?
+            td.d-none.d-md-table-cell = mx_app.identity_number if mx_app.identity_number
             td.d-none.d-lg-table-cell = mx_app.client_id
             td = link_to edit_mx_app_path(mx_app.number), class: 'icon' do
                 i.fe.fe-edit
             td = link_to audited_mx_app_path(mx_app.number), class: 'icon', method: :put, remote: true do
-                i.fe.fe-refresh-ccw class=(mx_app.audit? ? 'text-green' : '')
+                i.fe.fe-refresh-ccw class=(mx_app.audited? ? 'text-green' : '')
