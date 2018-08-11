@@ -1,16 +1,24 @@
 .container.my-3.my-md-5
   .card
-    .card-header 我的Mixin 机器人
+    .card-header 我的 Mixin 机器人
     table.table.card-table.table-vcenter
       tbody
         - @mx_apps.each do |mx_app|
           tr
-            td
+            td.w-1
               span.avatar.d-block style=(format('background-image: url(%s)', mx_app.avatar_url || 'default-user.png'))
             td = link_to mx_app.name, format('mixin://users/%s', mx_app.client_id), class: 'text-inherit post-open-button' if mx_app.audited?
-            td.d-none.d-md-table-cell = mx_app.identity_number if mx_app.identity_number
-            td.d-none.d-lg-table-cell = mx_app.client_id
-            td = link_to edit_mx_app_path(mx_app.number), class: 'icon' do
-                i.fe.fe-edit
-            td = link_to audited_mx_app_path(mx_app.number), class: 'icon', method: :put, remote: true do
-                i.fe.fe-refresh-ccw class=(mx_app.audited? ? 'text-green' : '')
+            td.d-none.d-md-table-cell
+              = mx_app.identity_number.present? ? mx_app.identity_number : '-'
+            td.text-nowrap
+              - if mx_app.audited?
+                .span.text-green 已绑定
+              - else
+                .span.text-red 未绑定
+            td.text-nowrap.w-1
+              = link_to mx_app_path(mx_app.number), class: 'icon mr-5' do
+                  i.fe.fe-settings.mr-1
+                  span 管理
+              = link_to audited_mx_app_path(mx_app.number), class: 'icon', method: :put, remote: true do
+                i.fe.fe-refresh-ccw.mr-1
+                span = mx_app.audited? ? '重新绑定' : '绑定'

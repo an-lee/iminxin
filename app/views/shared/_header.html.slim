@@ -2,8 +2,13 @@
   .container
     .d-flex
       = link_to root_path, class: 'header-brand' do
-        | I'm in Xin
+        | iXin
       .d-flex.order-lg-2.ml-auto
+        - if current_user
+          .nav-item
+            = link_to mx_apps_path, class: 'text-inherit icon' do
+              i.fe.fe-activity
+              span.ml-1 机器人
         .dropdown.d-flex
           - if current_user
             a.nav-link.pr-0.leading-none data-toggle='dropdown'
