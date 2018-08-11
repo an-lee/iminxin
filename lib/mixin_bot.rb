@@ -5,8 +5,8 @@ require 'jose'
 require_relative './mixin_bot/api'
 
 module MixinBot
-  def self.api(options = nil)
-    options ||= {
+  def self.api
+    options = {
       client_id: Figaro.env.MIXIN_CLIENT_ID,
       client_secret: Figaro.env.MIXIN_CLIENT_SECRET,
       session_id: Figaro.env.MIXIN_SESSION_ID,

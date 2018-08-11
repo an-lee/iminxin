@@ -2,4 +2,4 @@
   .card
     .card-header 编辑 Mixin 机器人
     .card-body
-      = render 'mx_apps/form', mx_app: @mx_app
+      = render 'mx_apps/form', mx_app: @mx_app, url: mx_app_path(@mx_app.number), method: :put

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_122320) do
+ActiveRecord::Schema.define(version: 2018_08_11_044326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2018_08_05_122320) do
     t.json "raw", comment: "mixin 返回的 profile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "audited_at", comment: "mixin账号审核时间"
     t.index ["number"], name: "index_mx_apps_on_number", unique: true
     t.index ["owner_id"], name: "index_mx_apps_on_owner_id"
   end

@@ -1,5 +1,6 @@
 class MxAppsController < ApplicationController
   before_action :load_mx_app, only: [:show, :edit, :update, :update]
+
   def index
     mx_apps = current_user.mx_apps.order(created_at: :desc)
     @mx_apps = mx_apps.page(params[:page])
@@ -26,6 +27,7 @@ class MxAppsController < ApplicationController
 
   def update
     @mx_app.update(mx_app_params)
+    redirect_to mx_apps_path
   end
 
   def destroy

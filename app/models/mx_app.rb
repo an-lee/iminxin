@@ -29,6 +29,8 @@ class MxApp < ApplicationRecord
   validates :pin_token, presence: true
   validates :private_key, format: { with: /\A-----BEGIN RSA PRIVATE KEY-----/i }
 
+  to_param :number
+
   def name
     raw&.fetch('full_name', nil)
   end
@@ -42,12 +44,26 @@ class MxApp < ApplicationRecord
   end
 
   def mixin_api
-    MixinBot.api({
+    MixinBot::API.new({
       client_id: client_id,
       client_secret: client_secret,
       session_id: session_id,
       pin_token: pin_token,
       private_key: private_key
     })
+  end
+
+  def audit!
+    r = mixin_api.read_me
+    if r['error'].present?
+      update! audited_at: nil
+    else
+      update! raw: r['data']
+      touch :audited_at
+    end
+  end
+
+  def audit?
+    audited_at?
   end
 end

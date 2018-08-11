@@ -1,4 +1,4 @@
-= simple_form_for mx_app do |f|
+= simple_form_for mx_app, url: url, method: method  do |f|
   = f.input :client_id, label: 'ClientID', placeholder: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
   = f.input :client_secret, label: 'Client Secret', placeholder: ' eg: 2c52a5f0d3exxxxxxxa9236843'
   = f.input :session_id, label: 'Session ID', placeholder: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'

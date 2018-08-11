@@ -28,14 +28,14 @@ module MixinBot
           memo: memo
         }
 
-        access_token ||= MixinBot.api.access_token('POST', path, payload.to_json)
+        access_token ||= self.access_token('POST', path, payload.to_json)
         authorization = format('Bearer %s', access_token)
         client.post(path, headers: { 'Authorization': authorization }, json: payload)
       end
 
       def read_transfer(trace_id)
         path = format('/transfers/trace/%s', trace_id)
-        access_token ||= MixinBot.api.access_token('GET', path, '')
+        access_token ||= self.access_token('GET', path, '')
         authorization = format('Bearer %s', access_token)
         client.get(path, headers: { 'Authorization': authorization })
       end

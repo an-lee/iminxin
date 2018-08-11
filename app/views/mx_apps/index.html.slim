@@ -5,10 +5,12 @@
       tbody
         - @mx_apps.each do |mx_app|
           tr
-            td = image_tag (mx_app.avatar_url || 'default-user.png'), class: 'h-8'
-            td = mx_app.name || '未获取'
-            td = mx_app.identity_number || '未获取'
-            td.d-none.d-md-table-cell = mx_app.client_id
             td
-              = link_to edit_mx_app_path(mx_app.number) do
+              span.avatar.d-block style=(format('background-image: url(%s)', mx_app.avatar_url || 'default-user.png'))
+            td = mx_app.name || '未审核'
+            td.d-none.d-md-table-cell = mx_app.identity_number || '未审核'
+            td.d-none.d-lg-table-cell = mx_app.client_id
+            td = link_to edit_mx_app_path(mx_app.number), class: 'icon' do
                 i.fe.fe-edit
+            td = link_to audited_mx_app_path(mx_app.number), class: 'icon', method: :put, remote: true do
+                i.fe.fe-refresh-ccw class=(mx_app.audit? ? 'text-green' : '')
