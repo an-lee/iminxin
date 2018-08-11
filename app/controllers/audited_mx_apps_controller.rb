@@ -4,7 +4,7 @@ class AuditedMxAppsController < ApplicationController
   def update
     @mx_app.audit!
 
-    if @mx_app.audit?
+    if @mx_app.audited?
       flash[:notice] = "成功绑定"
     else
       flash[:alert] = "绑定失败，请检查填写的信息是否正确"
