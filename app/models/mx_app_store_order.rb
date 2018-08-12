@@ -31,4 +31,6 @@
 #
 
 class MxAppStoreOrder < ApplicationRecord
+  belongs_to :mx_app_store
+  belongs_to :buyer, class_name: 'MxAppStoreUser', foreign_key: 'mx_app_user_id'
 end

@@ -1,0 +1,22 @@
+.my-3.my-md-5
+  .container
+    .row
+      .col-lg-4
+        .card
+          .card-body
+            .media
+              span.avatar.avatar-xxl.mr-5 style=(format('background-image: url(%s)', current_user.avatar_url))
+              .media-body.m-auto
+                h4 = current_user.name
+                .text-muted
+                  span.mr-2 mixin_id:
+                  = current_user.identity_number
+      .col-lg-8
+        .card
+          .card-header
+            .card-title 我的订单
+          .card-body
+            - if current_user.orders.blank?
+              | 暂时还没有订单，快去
+              = link_to '选个商品', store_products_path(current_store)
+              | 吧

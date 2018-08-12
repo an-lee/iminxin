@@ -12,6 +12,7 @@
               span.ml-2.d-none.d-lg-block
                 span.text-default = current_user.name
             .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow
-              = link_to '登出', store_logout_path(current_store), method: :delete, class: 'dropdown-item icon'
+              = link_to '我的账户', store_account_path(current_store), class: 'dropdown-item'
+              = link_to '登出', store_logout_path(current_store), method: :delete, class: 'dropdown-item'
           - else
             = link_to '登录', store_login_path(current_store), class: 'nav-link pr-0 leading-none icon'

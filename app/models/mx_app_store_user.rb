@@ -19,9 +19,6 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-class MxAppUser < ApplicationRecord
-  belongs_to :mx_app
-  belongs_to :user
-
-  delegate :name, :avatar_url, :phone, :identity_number, to: :user
+class MxAppStoreUser < MxAppUser
+  has_many :orders, class_name: 'MxAppStoreOrder', foreign_key: 'buyer_id'
 end

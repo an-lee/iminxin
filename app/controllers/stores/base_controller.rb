@@ -20,11 +20,11 @@ class Stores::BaseController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= session[:current_user_id] && current_store.users.find_by(id: session[:current_user_id])
+    @current_user ||= session[:current_user_id] && current_store.mx_app_store_users.find_by(id: session[:current_user_id])
   end
 
-  def user_sign_in(user)
-    session[:current_user_id] = user.id
+  def user_sign_in(mx_app_user)
+    session[:current_user_id] = mx_app_user.id
   end
 
   def user_sign_out

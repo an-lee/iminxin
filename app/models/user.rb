@@ -27,4 +27,8 @@ class User < ApplicationRecord
   def avatar_url
     mixin_authorization.raw.fetch('avatar_url')
   end
+
+  def identity_number
+    mixin_authorization.raw.fetch('identity_number')
+  end
 end

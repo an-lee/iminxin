@@ -8,8 +8,8 @@ class Stores::SessionsController < Stores::BaseController
 
   def create
     code = params[:code]
-    user = current_store.auth_user_from_mixin(code)
-    user_sign_in(user) if user
+    mx_app_user = current_store.auth_user_from_mixin(code)
+    user_sign_in(mx_app_user) if mx_app_user
 
     redirect_to store_root_path(current_store)
   end

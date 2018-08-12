@@ -27,7 +27,8 @@ Rails.application.routes.draw do
     match '/auth/failure', to: 'sessions#failure', via: :get
     delete '/logout', to: 'sessions#destroy', as: :logout
 
-    resources :products, only: [:show]
+    resource :account, only: [:show]
+    resources :products, only: [:index, :show]
     get '/', to: 'home#show', as: :root
   end
 

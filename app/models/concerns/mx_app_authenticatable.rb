@@ -11,10 +11,10 @@ module MxAppAuthenticatable
     raw = (auth.raw.presence || {}).merge(profile)
     auth.update! raw: raw
 
-    user = users.create_with(name: auth.raw.fetch('full_name')).find_or_create_by!(mixin_authorization: auth)
+    user = User.create_with(name: auth.raw.fetch('full_name')).find_or_create_by!(mixin_authorization: auth)
     user.name = raw.fetch('full_name')
     user.update! name: auth.raw.fetch('full_name') if user.changed?
 
-    user
+    mx_app_user = mx_app_users.create!(user: user)
   end
 end
