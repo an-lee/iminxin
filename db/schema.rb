@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_11_044326) do
+ActiveRecord::Schema.define(version: 2018_08_12_040321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,99 @@ ActiveRecord::Schema.define(version: 2018_08_11_044326) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_administrators_on_name", unique: true
+  end
+
+  create_table "currencies", comment: "支持的货币", force: :cascade do |t|
+    t.string "name", comment: "mixin 中的 name"
+    t.string "symbol", comment: "mixin 中的 symbol"
+    t.string "icon_url", comment: "mixin 中的 icon_url"
+    t.string "asset_id", comment: "mixin 中的 asset_id"
+    t.string "chain_id", comment: "mixin 中的 chain_id"
+    t.string "price_btc", comment: "mixin 中的 price_btc"
+    t.string "price_usd", comment: "mixin 中的 price_usd"
+    t.string "change_btc", comment: "mixin 中的 change_btc"
+    t.string "change_usd", comment: "mixin 中的 change_usd"
+    t.datetime "synced_at", comment: "同步价格时间"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mx_app_store_order_items", force: :cascade do |t|
+    t.bigint "mx_app_store_order_id"
+    t.bigint "mx_app_store_product_id"
+    t.bigint "currency_id", comment: "支付币种"
+    t.decimal "price", comment: "单价"
+    t.integer "quantity", comment: "数量"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["currency_id"], name: "index_mx_app_store_order_items_on_currency_id"
+    t.index ["mx_app_store_order_id"], name: "index_mx_app_store_order_items_on_mx_app_store_order_id"
+    t.index ["mx_app_store_product_id"], name: "index_mx_app_store_order_items_on_mx_app_store_product_id"
+  end
+
+  create_table "mx_app_store_orders", comment: "商城订单", force: :cascade do |t|
+    t.bigint "mx_app_store_id"
+    t.bigint "buyer_id", comment: " 买家"
+    t.bigint "currency_id", comment: "支付币种"
+    t.decimal "total", comment: "订单总价"
+    t.string "number", comment: "订单编号"
+    t.string "state", comment: "订单状态"
+    t.string "memo", comment: "备注"
+    t.datetime "payment_started_at", comment: "发起支付时间"
+    t.datetime "paid_at", comment: "支付完成时间"
+    t.datetime "delivered_at", comment: "交付时间"
+    t.datetime "completed_at", comment: "订单完成时间"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_mx_app_store_orders_on_buyer_id"
+    t.index ["currency_id"], name: "index_mx_app_store_orders_on_currency_id"
+    t.index ["mx_app_store_id"], name: "index_mx_app_store_orders_on_mx_app_store_id"
+  end
+
+  create_table "mx_app_store_payments", comment: "商城支付", force: :cascade do |t|
+    t.bigint "mx_app_store_order_id"
+    t.bigint "payer_id", comment: "支付者"
+    t.bigint "currency_id", comment: "支付币种"
+    t.decimal "total"
+    t.string "state", comment: "支付状态"
+    t.string "number", comment: "支付编号"
+    t.string "memo", comment: "备注"
+    t.datetime "completed_at", comment: "支付完成时间"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["currency_id"], name: "index_mx_app_store_payments_on_currency_id"
+    t.index ["mx_app_store_order_id"], name: "index_mx_app_store_payments_on_mx_app_store_order_id"
+    t.index ["payer_id"], name: "index_mx_app_store_payments_on_payer_id"
+  end
+
+  create_table "mx_app_store_product_prices", comment: "商品价格", force: :cascade do |t|
+    t.bigint "mx_app_store_product_id", comment: "关联商品"
+    t.bigint "currency_id", comment: "关联货币"
+    t.decimal "value", comment: "价格"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["currency_id"], name: "index_mx_app_store_product_prices_on_currency_id"
+    t.index ["mx_app_store_product_id"], name: "index_mx_app_store_product_prices_on_mx_app_store_product_id"
+  end
+
+  create_table "mx_app_store_products", comment: "电商应用的商品", force: :cascade do |t|
+    t.bigint "mx_app_store_id"
+    t.string "number", comment: "商品编号"
+    t.string "name", comment: "商品名"
+    t.string "cover", comment: "封面"
+    t.text "introduction", comment: "商品介绍"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mx_app_store_id"], name: "index_mx_app_store_products_on_mx_app_store_id"
+  end
+
+  create_table "mx_app_users", comment: "mixin 应用的用户", force: :cascade do |t|
+    t.bigint "mx_app_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mx_app_id"], name: "index_mx_app_users_on_mx_app_id"
+    t.index ["user_id"], name: "index_mx_app_users_on_user_id"
   end
 
   create_table "mx_apps", comment: "mixin 应用", force: :cascade do |t|
@@ -79,6 +172,20 @@ ActiveRecord::Schema.define(version: 2018_08_11_044326) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "mx_app_store_order_items", "currencies"
+  add_foreign_key "mx_app_store_order_items", "mx_app_store_orders"
+  add_foreign_key "mx_app_store_order_items", "mx_app_store_products"
+  add_foreign_key "mx_app_store_orders", "currencies"
+  add_foreign_key "mx_app_store_orders", "mx_app_users", column: "buyer_id"
+  add_foreign_key "mx_app_store_orders", "mx_apps", column: "mx_app_store_id"
+  add_foreign_key "mx_app_store_payments", "currencies"
+  add_foreign_key "mx_app_store_payments", "mx_app_store_orders"
+  add_foreign_key "mx_app_store_payments", "mx_app_users", column: "payer_id"
+  add_foreign_key "mx_app_store_product_prices", "currencies"
+  add_foreign_key "mx_app_store_product_prices", "mx_app_store_products"
+  add_foreign_key "mx_app_store_products", "mx_apps", column: "mx_app_store_id"
+  add_foreign_key "mx_app_users", "mx_apps"
+  add_foreign_key "mx_app_users", "users"
   add_foreign_key "mx_apps", "users", column: "owner_id"
   add_foreign_key "user_authorizations", "users"
 end

@@ -32,6 +32,8 @@ class MxApp < ApplicationRecord
   include SoftDeletable
 
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
+  has_many :mx_app_users
+  has_many :users, through: :mx_app_users
 
   validates :client_id, presence: true
   validates :client_secret, presence: true
