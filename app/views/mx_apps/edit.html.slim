@@ -1,5 +1,11 @@
 .container.my-3.my-md-5
   .card
-    .card-header 编辑 Mixin 机器人
+    .card-header 绑定 Mixin 机器人
     .card-body
-      = render 'mx_apps/form', mx_app: @mx_app, url: mx_app_path(@mx_app.number), method: :put
+      = simple_form_for @mx_app, url: mx_app_path(@mx_app.number) do |f|
+        = f.input :client_id, label: 'ClientID', placeholder: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+        = f.input :client_secret, label: 'Client Secret', placeholder: ' eg: 2c52a5f0d3exxxxxxxa9236843'
+        = f.input :session_id, label: 'Session ID', placeholder: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+        = f.input :pin_token, label: 'Pin Token', placeholder: ' eg: QjIZ/Awxxxxxxxxxxxx8WTXZg='
+        = f.input :private_key, label: 'Private Key', placeholder: "-----BEGIN RSA PRIVATE KEY-----\n lines of code here \n-----END RSA PRIVATE KEY-----"
+        = f.submit '绑定 Mixin', class: 'btn btn-primary'

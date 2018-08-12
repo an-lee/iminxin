@@ -24,4 +24,8 @@ class MxAppStoreProduct < ApplicationRecord
   has_many :mx_app_store_product_prices
   has_many :supported_prices, through: :mx_app_store_product_prices
   has_one :base_price, through: :mx_app_store_product_prices
+
+  def to_param
+    number
+  end
 end

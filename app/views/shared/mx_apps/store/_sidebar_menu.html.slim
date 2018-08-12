@@ -4,9 +4,13 @@
   | 商品管理
 = active_link_to mx_app_store_orders_path(current_mx_app), class: 'list-group-item list-group-item-action' do
   span.icon.mr-3
-    i.fe.fe-shopping-bag
+    i.fe.fe-book-open
   | 订单管理
 = active_link_to mx_app_store_users_path(current_mx_app), class: 'list-group-item list-group-item-action' do
   span.icon.mr-3
-    i.fe.fe-shopping-bag
+    i.fe.fe-users
   | 用户管理
+= active_link_to edit_mx_app_path(current_mx_app), class: 'list-group-item list-group-item-action' do
+  span.icon.mr-3
+    i.fe.fe-activity
+  | 绑定Mixin

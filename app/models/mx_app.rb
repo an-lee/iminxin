@@ -36,11 +36,11 @@ class MxApp < ApplicationRecord
   has_many :mx_app_users
   has_many :users, through: :mx_app_users
 
-  # validates :client_id, presence: true
-  # validates :client_secret, presence: true
-  # validates :session_id, presence: true
-  # validates :pin_token, presence: true
-  # validates :private_key, format: { with: /\A-----BEGIN RSA PRIVATE KEY-----/i }
+  # validates :client_id, presence: true, on: :update
+  # validates :client_secret, presence: true, on: :update
+  # validates :session_id, presence: true, on: :update
+  # validates :pin_token, presence: true, on: :update
+  # validates :private_key, format: { with: /\A-----BEGIN RSA PRIVATE KEY-----/i }, on: :update
 
   def to_param
     number

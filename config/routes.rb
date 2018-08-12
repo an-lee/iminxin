@@ -18,8 +18,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :audited_mx_apps, only: [:update], param: :number
-
   # 买家视角的商店
   resources :stores, only: [], module: 'stores', param: :number do
     get 'login', to: 'sessions#new', as: :login
@@ -28,7 +26,7 @@ Rails.application.routes.draw do
     delete '/logout', to: 'sessions#destroy', as: :logout
 
     resource :account, only: [:show]
-    resources :products, only: [:index, :show]
+    resources :products, only: [:index, :show], param: :number
     get '/', to: 'home#show', as: :root
   end
 

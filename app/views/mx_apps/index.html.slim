@@ -1,24 +1,36 @@
 .container.my-3.my-md-5
   .card
     .card-header 我的 Mixin 机器人
-    table.table.card-table.table-vcenter
-      tbody
-        - @mx_apps.each do |mx_app|
-          tr
-            td.w-1
-              span.avatar.d-block style=(format('background-image: url(%s)', mx_app.avatar_url))
-            td = link_to mx_app.name, format('mixin://users/%s', mx_app.client_id), class: 'text-inherit post-open-button'
-            td.d-none.d-md-table-cell
-              = mx_app.identity_number.present? ? mx_app.identity_number : '-'
-            td.text-nowrap
-              - if mx_app.audited?
-                .span.text-green 已绑定
-              - else
-                .span.text-red 未绑定
-            td.text-nowrap.w-1
-              = link_to mx_app_path(mx_app.number), class: 'icon mr-5' do
-                  i.fe.fe-settings.mr-1
-                  span 管理
-              = link_to audited_mx_app_path(mx_app.number), class: 'icon', method: :put, remote: true do
-                i.fe.fe-refresh-ccw.mr-1
-                span = mx_app.audited? ? '重新绑定' : '绑定'
+    - if current_user.mx_apps.blank?
+      .card-body
+        | 还没有机器人，快去
+        = link_to '创建一个', root_path
+        | 吧
+    - else
+      table.table.card-table.table-vcenter
+        tbody
+          - @mx_apps.each do |mx_app|
+            tr
+              td.w-1
+                span.avatar.d-block style=(format('background-image: url(%s)', image_url(mx_app.avatar_url)))
+              td = link_to mx_app.name, format('mixin://users/%s', mx_app.client_id), class: 'text-inherit post-open-button'
+              td.d-none.d-md-table-cell
+                = mx_app.identity_number.present? ? mx_app.identity_number : '-'
+              td.text-nowrap
+                - if mx_app.audited?
+                  .span.text-green 已绑定
+                - else
+                  .span.text-red 未绑定
+              td.text-nowrap.w-1
+                = link_to mx_app_path(mx_app), class: 'icon mr-5' do
+                    i.fe.fe-settings.mr-1
+                    span 管理
+                = link_to edit_mx_app_path(mx_app), class: 'icon mr-5' do
+                  i.fe.fe-refresh-ccw.mr-1
+                  span 绑定
+                a.icon data-toggle='dropdown'
+                  | 操作
+                  .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow
+                    = link_to mx_app_path(mx_app), class: 'dropdown-item', method: :delete, remote: true, data: { confirm: '确定要删除吗？' } do
+                      i.fe.fe-trash.mr-1
+                      span 删除
