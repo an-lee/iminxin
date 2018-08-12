@@ -25,6 +25,12 @@ class MxAppStoreProduct < ApplicationRecord
   has_many :supported_prices, through: :mx_app_store_product_prices
   has_one :base_price, through: :mx_app_store_product_prices
 
+  validates :cover, presence: true
+  validates :name, presence: true
+  validates :introduction, presence: true
+
+  has_one_attached :cover
+
   def to_param
     number
   end

@@ -18,6 +18,7 @@ gem 'pg', '0.18'
 gem 'figaro'
 gem 'lograge'
 gem 'enumerize'
+gem 'activestorage-aliyun'
 
 # Authorization
 gem 'jwt'
@@ -48,6 +49,7 @@ gem 'redis-namespace'
 gem 'sidekiq'
 gem 'kaminari', '~> 1.1.1'
 gem 'rails-i18n', '~> 5.0.3'
+gem 'breadcrumbs_on_rails'
 
 # Misc
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

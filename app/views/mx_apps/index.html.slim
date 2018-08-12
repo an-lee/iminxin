@@ -22,15 +22,21 @@
                 - else
                   .span.text-red 未绑定
               td.text-nowrap.w-1
-                = link_to mx_app_path(mx_app), class: 'icon mr-5' do
-                    i.fe.fe-settings.mr-1
-                    span 管理
-                = link_to edit_mx_app_path(mx_app), class: 'icon mr-5' do
+                = link_to mx_app_path(mx_app), class: 'icon mr-5 d-none d-md-inline' do
+                  i.fe.fe-settings.mr-1
+                  span 管理
+                = link_to edit_mx_app_path(mx_app), class: 'icon mr-5 d-none d-md-inline' do
                   i.fe.fe-refresh-ccw.mr-1
                   span 绑定
                 a.icon data-toggle='dropdown'
                   | 操作
                   .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow
+                    = link_to mx_app_path(mx_app), class: 'dropdown-item mr-5 d-block d-md-none' do
+                      i.fe.fe-settings.mr-1
+                      span 管理
+                    = link_to edit_mx_app_path(mx_app), class: 'dropdown-item mr-5 d-block d-md-none' do
+                      i.fe.fe-refresh-ccw.mr-1
+                      span 绑定
                     = link_to mx_app_path(mx_app), class: 'dropdown-item', method: :delete, remote: true, data: { confirm: '确定要删除吗？' } do
                       i.fe.fe-trash.mr-1
                       span 删除

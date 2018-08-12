@@ -51,6 +51,9 @@ GEM
       actionpack (= 5.2.0)
       activerecord (= 5.2.0)
       marcel (~> 0.3.1)
+    activestorage-aliyun (0.5.0)
+      aliyun-sdk (>= 0.6.0)
+      rails (>= 5.2.0.rc2)
     activesupport (5.2.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -58,6 +61,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    aliyun-sdk (0.7.0)
+      nokogiri (~> 1.6)
+      rest-client (~> 2.0)
     archive-zip (0.11.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
@@ -72,6 +78,7 @@ GEM
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
     bootstrap_form (2.7.0)
+    breadcrumbs_on_rails (3.0.1)
     browser (2.5.3)
     browser_warrior (0.10.0)
       browser
@@ -357,11 +364,13 @@ PLATFORMS
 DEPENDENCIES
   aasm
   active_link_to
+  activestorage-aliyun
   annotate!
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.0)
   bootstrap_form
+  breadcrumbs_on_rails
   browser_warrior (>= 0.8.0)
   byebug
   capybara (>= 2.15, < 4.0)

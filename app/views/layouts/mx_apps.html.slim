@@ -28,6 +28,7 @@ html
             .row
               = render 'shared/mx_apps/sidebar'
               .col-lg-9.order-lg-2
+                .mb-3.mb-md-5 = render_breadcrumbs separator: ' > '
                 = render 'shared/mx_apps/flash_messages'
                 = yield
       = render 'shared/footer'

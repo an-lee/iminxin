@@ -121,7 +121,6 @@ ActiveRecord::Schema.define(version: 2018_08_12_040321) do
     t.bigint "mx_app_store_id"
     t.string "number", comment: "商品编号"
     t.string "name", comment: "商品名"
-    t.string "cover", comment: "封面"
     t.text "introduction", comment: "商品介绍"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

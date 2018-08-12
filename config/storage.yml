@@ -6,6 +6,15 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+production:
+  service: Aliyun
+  access_key_id: 'LTAIiR95dDSTV8rO'
+  access_key_secret: 'h0P6pOSMTt5L9DPz1Jj9oo2adIB3KK'
+  bucket: 'iminxin'
+  endpoint: 'https://oss-cn-hongkong.aliyuncs.com'
+  path: '/'
+  mode: 'private'
+
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
 #   service: S3

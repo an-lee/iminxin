@@ -4,3 +4,9 @@ zh-CN:
       administrator: 管理员
       user: 用户
       mx_app: Mixin机器人
+      mx_app_store_product: 商品
+    attributes:
+      mx_app_store_product:
+        name: 商品名
+        introduction: 商品介绍
+        cover: 商品封面
