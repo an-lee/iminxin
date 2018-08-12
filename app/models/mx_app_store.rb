@@ -28,5 +28,6 @@
 #
 
 class MxAppStore < MxApp
-  has_many :products, class_name: 'MxAppStoreProduct', foreign_key: :mx_app_store_id
+  has_many :products, class_name: 'MxAppStoreProduct'
+  has_many :orders, class_name: 'MxAppStoreOrder'
 end

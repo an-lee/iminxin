@@ -20,8 +20,6 @@
 #
 
 class MxAppUser < ApplicationRecord
-  include MxAppAuthenticatable
-  
   belongs_to :mx_app
   belongs_to :user
 end

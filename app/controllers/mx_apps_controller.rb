@@ -1,4 +1,5 @@
 class MxAppsController < ApplicationController
+  layout 'application'
   before_action :load_mx_app, only: [:show, :edit, :update, :update]
 
   def index
@@ -6,20 +7,16 @@ class MxAppsController < ApplicationController
     @mx_apps = mx_apps.page(params[:page])
   end
 
-  def new
-    @mx_app = current_user.mx_apps.new
-  end
-
   def create
-    @mx_app = current_user.mx_apps.new(mx_app_params)
-    if @mx_app.save
-      redirect_to mx_apps_path
-    else
-      render :new
-    end
+    @mx_app = current_user.mx_app_stores.create!
+    redirect_to mx_apps_path
   end
 
   def show
+    case @mx_app.type
+    when 'MxAppStore'
+      redirect_to mx_app_store_products_path(@mx_app)
+    end
   end
 
   def edit

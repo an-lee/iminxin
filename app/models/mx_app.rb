@@ -30,29 +30,32 @@
 class MxApp < ApplicationRecord
   include Numbering
   include SoftDeletable
+  include MxAppAuthenticatable
 
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
   has_many :mx_app_users
   has_many :users, through: :mx_app_users
 
-  validates :client_id, presence: true
-  validates :client_secret, presence: true
-  validates :session_id, presence: true
-  validates :pin_token, presence: true
-  validates :private_key, format: { with: /\A-----BEGIN RSA PRIVATE KEY-----/i }
+  # validates :client_id, presence: true
+  # validates :client_secret, presence: true
+  # validates :session_id, presence: true
+  # validates :pin_token, presence: true
+  # validates :private_key, format: { with: /\A-----BEGIN RSA PRIVATE KEY-----/i }
 
-  to_param :number
+  def to_param
+    number
+  end
 
   def name
-    raw&.fetch('full_name', nil)
+    raw&.fetch('full_name') || 'iXin 商城'
   end
 
   def identity_number
-    raw&.fetch('identity_number', nil)
+    raw&.fetch('identity_number')
   end
 
   def avatar_url
-    raw&.fetch('avatar_url', nil)
+    raw&.fetch('avatar_url') || 'default-user.png'
   end
 
   def mixin_api

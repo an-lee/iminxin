@@ -1,4 +1,6 @@
 class MxApps::BaseController < ApplicationController
+  layout 'mx_apps'
+
   before_action :authenticate_mx_app!
 
   helper_method :current_mx_app

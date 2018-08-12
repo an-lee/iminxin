@@ -6,8 +6,8 @@
         - @mx_apps.each do |mx_app|
           tr
             td.w-1
-              span.avatar.d-block style=(format('background-image: url(%s)', mx_app.avatar_url || 'default-user.png'))
-            td = link_to mx_app.name, format('mixin://users/%s', mx_app.client_id), class: 'text-inherit post-open-button' if mx_app.audited?
+              span.avatar.d-block style=(format('background-image: url(%s)', mx_app.avatar_url))
+            td = link_to mx_app.name, format('mixin://users/%s', mx_app.client_id), class: 'text-inherit post-open-button'
             td.d-none.d-md-table-cell
               = mx_app.identity_number.present? ? mx_app.identity_number : '-'
             td.text-nowrap

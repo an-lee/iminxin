@@ -1,8 +1,11 @@
 class Stores::BaseController < ActionController::Base
+  layout 'mx_app_store'
+
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
 
+  helper_method :current_store
   helper_method :current_user
   helper_method :browser_mobile
 
@@ -13,7 +16,7 @@ class Stores::BaseController < ActionController::Base
   end
 
   def current_store
-    @_current_store ||= StoreMxApp.find_by(number: params[:store_number])
+    @_current_store ||= MxAppStore.find_by(number: params[:store_number])
   end
 
   def current_user
