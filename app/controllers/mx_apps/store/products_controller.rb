@@ -1,5 +1,6 @@
 class MxApps::Store::ProductsController < MxApps::Store::BaseController
   before_action :add_index_breadcrumb
+  before_action :load_product, only: [:edit, :update]
 
   def index
     @products = current_mx_app.products.page(params[:page])
@@ -31,6 +32,10 @@ class MxApps::Store::ProductsController < MxApps::Store::BaseController
   end
 
   private
+
+  def load_product
+    @product = current_mx_app.products.find_by(number: params[:number])
+  end
 
   def product_params
     params.require(:mx_app_store_product).permit(:name, :introduction, :cover)

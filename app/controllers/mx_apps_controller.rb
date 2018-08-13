@@ -43,7 +43,7 @@ class MxAppsController < ApplicationController
   def destroy
     @mx_app.soft_delete!
     flash[:warning] = "你的机器人已经删除"
-    renden js: 'Turbolinks.visit()'
+    render js: 'Turbolinks.visit()'
   end
 
   private

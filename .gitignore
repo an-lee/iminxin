@@ -18,6 +18,7 @@
 
 /config/application.yml
 /config/database.yml
+/config/storage.yml
 /config/master.key
 **.orig
 *.old

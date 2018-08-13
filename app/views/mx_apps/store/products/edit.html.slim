@@ -1,0 +1,7 @@
+.card
+  .card-body
+    = simple_form_for @product do |f|
+      = f.input :cover, direct_upload: true, label: '选择图片'
+      = f.input :name
+      = f.input :introduction
+      = f.submit '添加商品', class: 'btn btn-primary'

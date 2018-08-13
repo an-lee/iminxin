@@ -9,5 +9,11 @@
       tbody
         - @products.each do |product|
           tr
-            td = image_tag product.cover, class: 'h-8'
+            td
+              - if product.cover.attached?
+                = image_tag product.cover, class: 'h-8'
             td = product.name
+            td.text-nowrap.w-1
+              = link_to edit_mx_app_store_product_path(current_mx_app, product), class: 'icon mr-5 d-none d-md-inline' do
+                i.fe.fe-settings.mr-1
+                span 管理

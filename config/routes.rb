@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # 应用管理
   resources :mx_apps, only: [], module: 'mx_apps', param: :number do
     namespace :store do
-      resources :products, only: [:index, :new, :create, :edit, :update]
+      resources :products, only: [:index, :new, :create, :edit, :update], param: :number
       resources :users, only: [:index, :show]
       resources :orders, only: [:index]
     end
