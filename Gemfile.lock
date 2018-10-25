@@ -7,6 +7,17 @@ GIT
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
 
+GIT
+  remote: https://github.com/an-lee/mixin_bot.git
+  revision: b5289204eeef0aef65da608aa83936f43c8cd09e
+  specs:
+    mixin_bot (0.0.1.2)
+      activesupport
+      bcrypt
+      http
+      jose
+      jwt
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -396,6 +407,7 @@ DEPENDENCIES
   mina-multistage (~> 1.0.3)
   mina-puma (~> 1.1.0)
   mina-sidekiq (~> 1.0.3)
+  mixin_bot!
   pg (= 0.18)
   puma (~> 3.11)
   rails (~> 5.2.0)

@@ -3,7 +3,7 @@ class Stores::SessionsController < Stores::BaseController
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def new
-    redirect_to current_store.mixin_api.request_oauth('PROFILE:READ+PHONE:READ')
+    redirect_to current_store.mixin_api.request_oauth
   end
 
   def create

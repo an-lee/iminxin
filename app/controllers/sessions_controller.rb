@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       user_sign_in(user)
       redirect_to root_path
     else
-      redirect_to MixinBot.api.request_oauth('PROFILE:READ+PHONE:READ')
+      redirect_to MixinBot.api.request_oauth
     end
   end
 

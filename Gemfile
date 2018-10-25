@@ -21,9 +21,8 @@ gem 'enumerize'
 gem 'activestorage-aliyun'
 
 # Authorization
-gem 'jwt'
-gem 'jose'
 gem 'bcrypt'
+gem 'mixin_bot', github: 'an-lee/mixin_bot'
 
 # admin
 gem 'tabler-rubygem'
