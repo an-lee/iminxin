@@ -3,13 +3,7 @@ class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def new
-    if Figaro.env.SESSION_DEBUG_MODE.present? && User.first.present?
-      user = User.first
-      user_sign_in(user)
-      redirect_to root_path
-    else
-      redirect_to MixinBot.api.request_oauth
-    end
+    redirect_to MixinBot.api.request_oauth
   end
 
   def create
