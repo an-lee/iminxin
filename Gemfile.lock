@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/an-lee/mixin_bot.git
-  revision: b5289204eeef0aef65da608aa83936f43c8cd09e
+  revision: f8da8aff435f8abb108def8b3258e3d8e54e96a7
   specs:
     mixin_bot (0.0.1.2)
       activesupport
@@ -142,7 +142,7 @@ GEM
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
     high_voltage (3.0.0)
-    http (3.3.0)
+    http (4.0.0)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
       http-form_data (~> 2.0)
@@ -157,7 +157,7 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
-    jose (1.1.2)
+    jose (1.1.3)
       hamster
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
@@ -223,7 +223,7 @@ GEM
     open4 (1.3.4)
     pg (0.18.0)
     popper_js (1.14.3)
-    public_suffix (3.0.2)
+    public_suffix (3.0.3)
     puma (3.12.0)
     rack (2.0.5)
     rack-protection (2.0.3)
