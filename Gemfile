@@ -22,7 +22,10 @@ gem 'activestorage-aliyun'
 
 # Authorization
 gem 'bcrypt'
-gem 'mixin_bot', github: 'an-lee/mixin_bot'
+gem 'openssl'
+gem 'jwt'
+gem 'jose'
+# gem 'mixin_bot', github: 'an-lee/mixin_bot'
 
 # admin
 gem 'tabler-rubygem'
