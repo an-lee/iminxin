@@ -8,17 +8,18 @@ html
     meta http-equiv="cleartype" content="on"
     meta name="HandheldFriendly" content="True"
     meta name="MobileOptimized" content="320"
-    - if content_for?(:title)
-      = yield(:title)
-    - else
-      title iminxin
+    title
+      - if content_for?(:title)
+        = yield(:title)
+      - else
+        | iXin
     = csrf_meta_tags
     = action_cable_meta_tag
     = content_for?(:head) ? yield(:head) : ''
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application'
-    = favicon_link_tag "favicon.ico"
+    = favicon_link_tag "favicon.png"
   body
     .page
       .page-main
