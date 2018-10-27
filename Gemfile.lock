@@ -71,7 +71,8 @@ GEM
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
-    bootstrap_form (2.7.0)
+    bootstrap_form (4.0.0.alpha1)
+      rails (>= 5.0)
     breadcrumbs_on_rails (3.0.1)
     browser (2.5.3)
     browser_warrior (0.10.0)
@@ -364,7 +365,7 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.0)
-  bootstrap_form
+  bootstrap_form (>= 4.0.0.alpha1)
   breadcrumbs_on_rails
   browser_warrior (>= 0.8.0)
   byebug
