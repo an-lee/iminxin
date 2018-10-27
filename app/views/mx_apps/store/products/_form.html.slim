@@ -17,6 +17,7 @@
 
     = f.fields_for :store_app_product_price_attributes, product.store_app_product_price do |fp|
       .form-group
+        = fp.number_field :id, class: 'd-none'
         = fp.label :currency, class: 'form-label'
         .selectgroup.selectgoup-pills.store-app-product-form-currency-selectgoup data-current-currency=product.store_app_product_price&.currency_id
           - Currency.all.each do |currency|

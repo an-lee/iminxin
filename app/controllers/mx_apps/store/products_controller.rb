@@ -12,7 +12,6 @@ class MxApps::Store::ProductsController < MxApps::Store::BaseController
   end
 
   def create
-    byebug
     @product = current_mx_app.products.new(product_params)
     if @product.save
       redirect_to mx_app_store_products_path(current_mx_app)
@@ -39,7 +38,7 @@ class MxApps::Store::ProductsController < MxApps::Store::BaseController
   end
 
   def product_params
-    params.require(:store_app_product).permit(:name, :introduction, :cover, store_app_product_price_attributes: [:currency_id, :value])
+    params.require(:store_app_product).permit(:name, :introduction, :cover, store_app_product_price_attributes: [:currency_id, :value, :id])
   end
 
   def add_index_breadcrumb
