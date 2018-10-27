@@ -8,14 +8,14 @@ class MxAppsController < ApplicationController
   end
 
   def create
-    @mx_app = current_user.mx_app_stores.create!
+    @mx_app = current_user.store_apps.create!
     redirect_to mx_apps_path
   end
 
   def show
     case @mx_app.type
-    when 'MxAppStore'
-      redirect_to mx_app_store_products_path(@mx_app)
+    when 'StoreApp'
+      redirect_to store_app_products_path(@mx_app)
     end
   end
 
@@ -24,7 +24,7 @@ class MxAppsController < ApplicationController
 
   def update
     wx_app_params = case @mx_app.type
-                    when 'MxAppStore' then mx_app_store_params
+                    when 'StoreApp' then store_app_params
                     end
 
     if @mx_app.update(wx_app_params)
@@ -52,7 +52,7 @@ class MxAppsController < ApplicationController
     @mx_app = current_user.mx_apps.find_by(number: params[:number])
   end
 
-  def mx_app_store_params
-    params.require(:mx_app_store).permit(:client_id, :client_secret, :session_id, :pin_token, :private_key, :type)
+  def store_app_params
+    params.require(:store_app).permit(:client_id, :client_secret, :session_id, :pin_token, :private_key, :type)
   end
 end

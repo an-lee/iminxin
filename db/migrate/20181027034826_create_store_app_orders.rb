@@ -1,7 +1,7 @@
-class CreateMxAppStoreOrders < ActiveRecord::Migration[5.2]
+class CreateStoreAppOrders < ActiveRecord::Migration[5.2]
   def change
-    create_table :mx_app_store_orders, comment: '商城订单' do |t|
-      t.references :mx_app_store, foreign_key: { to_table: 'mx_apps' }
+    create_table :store_app_orders, comment: '商城订单' do |t|
+      t.references :store_app, foreign_key: { to_table: 'mx_apps' }
       t.references :buyer, foreign_key: { to_table: 'mx_app_users' }, comment: ' 买家'
       t.references :currency, foreign_key: true, comment: '支付币种'
       t.decimal :total, comment: '订单总价'

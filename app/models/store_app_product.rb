@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: mx_app_store_products
+# Table name: store_app_products
 #
 #  id                 :bigint(8)        not null, primary key
-#  mx_app_store_id    :bigint(8)
+#  store_app_id       :bigint(8)
 #  number(商品编号)       :string
 #  name(商品名)          :string
 #  introduction(商品介绍) :text
@@ -12,19 +12,19 @@
 #
 # Indexes
 #
-#  index_mx_app_store_products_on_mx_app_store_id  (mx_app_store_id)
+#  index_store_app_products_on_store_app_id  (store_app_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (mx_app_store_id => mx_apps.id)
+#  fk_rails_...  (store_app_id => mx_apps.id)
 #
 
-class MxAppStoreProduct < ApplicationRecord
+class StoreAppProduct < ApplicationRecord
   include Numbering
 
-  belongs_to :mx_app_store
+  belongs_to :store_app
 
-  has_one :mx_app_store_product_price
+  has_one :store_app_product_price
 
   validates :cover, presence: true
   validates :name, presence: true

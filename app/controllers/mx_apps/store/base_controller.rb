@@ -6,6 +6,6 @@ class MxApps::Store::BaseController < MxApps::BaseController
   private
 
   def current_store
-    @_current_store ||= MxAppStore.find_by(number: params[:mx_app_number])
+    @_current_store ||= StoreApp.find_by(number: params[:mx_app_number])
   end
 end

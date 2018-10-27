@@ -1,5 +1,5 @@
 class Stores::BaseController < ActionController::Base
-  layout 'mx_app_store'
+  layout 'store_app'
 
   protect_from_forgery with: :exception
 
@@ -16,11 +16,11 @@ class Stores::BaseController < ActionController::Base
   end
 
   def current_store
-    @_current_store ||= MxAppStore.find_by(number: params[:store_number])
+    @_current_store ||= StoreApp.find_by(number: params[:store_number])
   end
 
   def current_user
-    @current_user ||= session[:current_user_id] && current_store.mx_app_store_users.find_by(id: session[:current_user_id])
+    @current_user ||= session[:current_user_id] && current_store.store_app_users.find_by(id: session[:current_user_id])
   end
 
   def user_sign_in(mx_app_user)

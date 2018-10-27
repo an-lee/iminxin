@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: mx_app_store_orders
+# Table name: store_app_orders
 #
 #  id                                     :bigint(8)        not null, primary key
-#  mx_app_store_id                        :bigint(8)
+#  store_app_id                           :bigint(8)
 #  buyer_id( 买家)                          :bigint(8)
 #  currency_id(支付币种)                      :bigint(8)
 #  total(订单总价)                            :decimal(, )
@@ -24,19 +24,19 @@
 #
 # Indexes
 #
-#  index_mx_app_store_orders_on_buyer_id         (buyer_id)
-#  index_mx_app_store_orders_on_currency_id      (currency_id)
-#  index_mx_app_store_orders_on_mx_app_store_id  (mx_app_store_id)
+#  index_store_app_orders_on_buyer_id      (buyer_id)
+#  index_store_app_orders_on_currency_id   (currency_id)
+#  index_store_app_orders_on_store_app_id  (store_app_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (buyer_id => mx_app_users.id)
 #  fk_rails_...  (currency_id => currencies.id)
-#  fk_rails_...  (mx_app_store_id => mx_apps.id)
+#  fk_rails_...  (store_app_id => mx_apps.id)
 #
 
 FactoryBot.define do
-  factory :mx_app_store_order do
+  factory :store_app_order do
     
   end
 end

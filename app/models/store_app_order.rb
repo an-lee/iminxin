@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: mx_app_store_orders
+# Table name: store_app_orders
 #
 #  id                                     :bigint(8)        not null, primary key
-#  mx_app_store_id                        :bigint(8)
+#  store_app_id                           :bigint(8)
 #  buyer_id( 买家)                          :bigint(8)
 #  currency_id(支付币种)                      :bigint(8)
 #  total(订单总价)                            :decimal(, )
@@ -24,26 +24,26 @@
 #
 # Indexes
 #
-#  index_mx_app_store_orders_on_buyer_id         (buyer_id)
-#  index_mx_app_store_orders_on_currency_id      (currency_id)
-#  index_mx_app_store_orders_on_mx_app_store_id  (mx_app_store_id)
+#  index_store_app_orders_on_buyer_id      (buyer_id)
+#  index_store_app_orders_on_currency_id   (currency_id)
+#  index_store_app_orders_on_store_app_id  (store_app_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (buyer_id => mx_app_users.id)
 #  fk_rails_...  (currency_id => currencies.id)
-#  fk_rails_...  (mx_app_store_id => mx_apps.id)
+#  fk_rails_...  (store_app_id => mx_apps.id)
 #
 
-class MxAppStoreOrder < ApplicationRecord
+class StoreAppOrder < ApplicationRecord
   RECEIVED_SHIPMENT_EXPIRES_IN = 1.week
   
   include AASM
   include DisplayPrice
   include Numbering
 
-  belongs_to :mx_app_store
-  belongs_to :buyer, class_name: 'MxAppStoreUser'
+  belongs_to :store_app
+  belongs_to :buyer, class_name: 'StoreAppUser'
 
   price_methods :total, :items_total, :shipment_total
 
@@ -106,7 +106,7 @@ class MxAppStoreOrder < ApplicationRecord
   private
 
   def ensure_payment_created?
-    return mx_app_store_payments.present?
+    return store_app_payments.present?
   end
 
   def ensure_payment_expired?
@@ -114,7 +114,7 @@ class MxAppStoreOrder < ApplicationRecord
   end
 
   def ensure_shipment_created?
-    mx_app_store_shipment.present?
+    store_app_shipment.present?
   end
 
   def ensure_received_shipment_expired?

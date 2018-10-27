@@ -19,6 +19,6 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-class MxAppStoreUser < MxAppUser
-  has_many :orders, class_name: 'MxAppStoreOrder', foreign_key: 'buyer_id'
+class StoreAppUser < MxAppUser
+  has_many :orders, class_name: 'StoreAppOrder', foreign_key: 'buyer_id'
 end
