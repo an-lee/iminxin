@@ -11,7 +11,7 @@
           tr
             td
               - if product.cover.attached?
-                = image_tag product.cover, class: 'h-8'
+                = image_tag product.cover.service_url, class: 'h-8'
             td = product.name
             td.text-nowrap.w-1
               = link_to edit_mx_app_store_product_path(current_mx_app, product), class: 'icon mr-5 d-none d-md-inline' do

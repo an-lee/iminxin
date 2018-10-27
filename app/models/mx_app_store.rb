@@ -29,6 +29,7 @@
 
 class MxAppStore < MxApp
   has_many :mx_app_store_users, foreign_key: 'mx_app_id'
+  has_many :mx_app_image_attachments, foreign_key: 'mx_app_id'
 
   has_many :products, class_name: 'MxAppStoreProduct'
   has_many :orders, class_name: 'MxAppStoreOrder'

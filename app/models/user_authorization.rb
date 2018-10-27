@@ -21,7 +21,7 @@
 #
 
 class UserAuthorization < ApplicationRecord
-  include Enumerize
+  extend Enumerize
 
   belongs_to :user, optional: true
 

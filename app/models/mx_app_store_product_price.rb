@@ -21,6 +21,6 @@
 #
 
 class MxAppStoreProductPrice < ApplicationRecord
-  belongs_to :mx_app_store_product, optional: true
-  belongs_to :currency, optional: true
+  belongs_to :mx_app_store_product
+  belongs_to :currency
 end

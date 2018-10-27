@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_12_040321) do
+ActiveRecord::Schema.define(version: 2018_10_27_005904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,14 @@ ActiveRecord::Schema.define(version: 2018_08_12_040321) do
     t.datetime "synced_at", comment: "同步价格时间"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "mx_app_attachments", force: :cascade do |t|
+    t.bigint "mx_app_id"
+    t.string "file", comment: "文件"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mx_app_id"], name: "index_mx_app_attachments_on_mx_app_id"
   end
 
   create_table "mx_app_store_order_items", force: :cascade do |t|
@@ -171,6 +179,7 @@ ActiveRecord::Schema.define(version: 2018_08_12_040321) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "mx_app_attachments", "mx_apps"
   add_foreign_key "mx_app_store_order_items", "currencies"
   add_foreign_key "mx_app_store_order_items", "mx_app_store_orders"
   add_foreign_key "mx_app_store_order_items", "mx_app_store_products"

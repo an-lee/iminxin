@@ -22,10 +22,10 @@
 
 class MxAppStoreProduct < ApplicationRecord
   include Numbering
-  
-  has_many :mx_app_store_product_prices
-  has_many :supported_prices, through: :mx_app_store_product_prices
-  has_one :base_price, through: :mx_app_store_product_prices
+
+  belongs_to :mx_app_store
+
+  has_one :mx_app_store_product_price
 
   validates :cover, presence: true
   validates :name, presence: true

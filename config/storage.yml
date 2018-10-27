@@ -8,7 +8,7 @@ local:
   access_key_secret: <%= ENV["ALIYUN_ACCESS_KEY_SECRET"] %>
   bucket: <%= ENV["ALIYUN_BUCKET"] %>
   endpoint: 'https://oss-cn-hongkong.aliyuncs.com'
-  mode: 'private'
+  mode: 'public'
 
 production:
   service: Aliyun
