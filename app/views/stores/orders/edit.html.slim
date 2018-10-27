@@ -1,0 +1,16 @@
+.container.my-3.my-md-5.pb-5
+  = simple_form_for @order, url: store_orders_path(current_store), method: :post do |f|
+    .card.order-items-list
+      = f.fields_for :store_app_order_items_attributes, @order.store_app_order_items do |item_form|
+        - @order.store_app_order_items.each do |item|
+          .order-item-card.d-flex
+            .order-item-cover
+              = image_tag item.cover_url
+            .order-item-title
+              = item.store_app_product.name
+            .order-item-quantity
+              = item_form.input :quantity
+
+    = f.input :memo
+
+    = f.submit '确认下单', class: 'btn btn-primary'

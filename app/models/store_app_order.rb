@@ -37,13 +37,17 @@
 
 class StoreAppOrder < ApplicationRecord
   RECEIVED_SHIPMENT_EXPIRES_IN = 1.week
-  
+
   include AASM
   include DisplayPrice
   include Numbering
 
   belongs_to :store_app
   belongs_to :buyer, class_name: 'StoreAppUser'
+
+  has_many :store_app_order_items
+
+  accepts_nested_attributes_for :store_app_order_items
 
   price_methods :total, :items_total, :shipment_total
 

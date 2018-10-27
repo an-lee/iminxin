@@ -29,7 +29,9 @@ class StoreAppOrderItem < ApplicationRecord
   belongs_to :store_app_order
   belongs_to :store_app_product
   belongs_to :currency
-  
+
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :quantity, numericality: { only_integer: true, greater_than: 0 }
+
+  delegate :cover_url, to: :store_app_product
 end

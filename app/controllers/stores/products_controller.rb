@@ -1,6 +1,6 @@
 class Stores::ProductsController < Stores::BaseController
   skip_before_action :authenticate_user!
-  
+
   def index
     @products = current_store.products.order(created_at: :desc).page(params[:page])
   end

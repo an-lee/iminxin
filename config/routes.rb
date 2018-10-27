@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
     resource :account, only: [:show]
     resources :products, only: [:index, :show], param: :number
+    resources :orders, only: [:create, :edit, :update], param: :number
+
     get '/', to: 'home#show', as: :root
   end
 
