@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_005904) do
+ActiveRecord::Schema.define(version: 2018_10_27_034924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,13 +50,14 @@ ActiveRecord::Schema.define(version: 2018_10_27_005904) do
     t.string "icon_url", comment: "mixin 中的 icon_url"
     t.string "asset_id", comment: "mixin 中的 asset_id"
     t.string "chain_id", comment: "mixin 中的 chain_id"
-    t.string "price_btc", comment: "mixin 中的 price_btc"
-    t.string "price_usd", comment: "mixin 中的 price_usd"
-    t.string "change_btc", comment: "mixin 中的 change_btc"
-    t.string "change_usd", comment: "mixin 中的 change_usd"
+    t.decimal "price_btc", comment: "mixin 中的 price_btc"
+    t.decimal "price_usd", comment: "mixin 中的 price_usd"
+    t.decimal "change_btc", comment: "mixin 中的 change_btc"
+    t.decimal "change_usd", comment: "mixin 中的 change_usd"
     t.datetime "synced_at", comment: "同步价格时间"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["asset_id"], name: "index_currencies_on_asset_id", unique: true
   end
 
   create_table "mx_app_attachments", force: :cascade do |t|
@@ -73,6 +74,7 @@ ActiveRecord::Schema.define(version: 2018_10_27_005904) do
     t.bigint "currency_id", comment: "支付币种"
     t.decimal "price", comment: "单价"
     t.integer "quantity", comment: "数量"
+    t.json "snapshot", comment: "商品快照"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["currency_id"], name: "index_mx_app_store_order_items_on_currency_id"
@@ -85,12 +87,17 @@ ActiveRecord::Schema.define(version: 2018_10_27_005904) do
     t.bigint "buyer_id", comment: " 买家"
     t.bigint "currency_id", comment: "支付币种"
     t.decimal "total", comment: "订单总价"
+    t.decimal "items_total", comment: "商品总价"
+    t.decimal "shipment_total", comment: "运费总价"
     t.string "number", comment: "订单编号"
     t.string "state", comment: "订单状态"
     t.string "memo", comment: "备注"
     t.datetime "payment_started_at", comment: "发起支付时间"
-    t.datetime "paid_at", comment: "支付完成时间"
-    t.datetime "delivered_at", comment: "交付时间"
+    t.datetime "payment_expired_at", comment: "支付超时时间"
+    t.datetime "payment_completed_at", comment: "支付完成时间"
+    t.datetime "processing_shipment_started_at", comment: "开始发货时间"
+    t.datetime "shipment_shipped_at", comment: "发货时间"
+    t.datetime "cancelled_at", comment: "订单取消时间"
     t.datetime "completed_at", comment: "订单完成时间"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -103,9 +110,9 @@ ActiveRecord::Schema.define(version: 2018_10_27_005904) do
     t.bigint "mx_app_store_order_id"
     t.bigint "payer_id", comment: "支付者"
     t.bigint "currency_id", comment: "支付币种"
-    t.decimal "total"
+    t.decimal "total", comment: "对应 mixin 支付中的 amount"
     t.string "state", comment: "支付状态"
-    t.string "number", comment: "支付编号"
+    t.string "number", comment: "支付编号，对应 mixin 支付中的 trace_id"
     t.string "memo", comment: "备注"
     t.datetime "completed_at", comment: "支付完成时间"
     t.datetime "created_at", null: false

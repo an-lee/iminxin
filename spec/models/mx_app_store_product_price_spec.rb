@@ -2,12 +2,12 @@
 #
 # Table name: mx_app_store_product_prices
 #
-#  id                                :bigint(8)        not null, primary key
+#  id                            :bigint(8)        not null, primary key
 #  mx_app_store_product_id(关联商品) :bigint(8)
 #  currency_id(关联货币)             :bigint(8)
-#  value(价格)                       :decimal(, )
-#  created_at                        :datetime         not null
-#  updated_at                        :datetime         not null
+#  value(价格)                     :decimal(, )
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
 #
 # Indexes
 #

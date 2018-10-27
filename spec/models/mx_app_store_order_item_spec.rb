@@ -8,6 +8,7 @@
 #  currency_id(支付币种)     :bigint(8)
 #  price(单价)               :decimal(, )
 #  quantity(数量)            :integer
+#  snapshot(商品快照)        :json
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #

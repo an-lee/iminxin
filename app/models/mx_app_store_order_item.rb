@@ -8,6 +8,7 @@
 #  currency_id(支付币种)     :bigint(8)
 #  price(单价)               :decimal(, )
 #  quantity(数量)            :integer
+#  snapshot(商品快照)        :json
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #
@@ -25,4 +26,10 @@
 #
 
 class MxAppStoreOrderItem < ApplicationRecord
+  belongs_to :mx_app_store_order
+  belongs_to :mx_app_store_product
+  belongs_to :currency
+  
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
 end

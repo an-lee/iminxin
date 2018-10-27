@@ -6,6 +6,7 @@ class CreateMxAppStoreOrderItems < ActiveRecord::Migration[5.2]
       t.references :currency, foreign_key: true, comment: '支付币种'
       t.decimal :price, comment: '单价'
       t.integer :quantity, comment: '数量'
+      t.json :snapshot, comment: '商品快照'
       t.timestamps
     end
   end
