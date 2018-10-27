@@ -55,7 +55,7 @@ class MxApp < ApplicationRecord
   end
 
   def avatar_url
-    raw&.fetch('avatar_url') || 'default-user.png'
+    raw&.fetch('avatar_url') || '/logo.png'
   end
 
   def mixin_api

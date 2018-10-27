@@ -30,6 +30,8 @@ class StoreAppProduct < ApplicationRecord
   validates :name, presence: true
   validates :introduction, presence: true
 
+  accepts_nested_attributes_for :store_app_product_price
+
   has_one_attached :cover
 
   def to_param

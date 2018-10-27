@@ -1,20 +1,40 @@
-= form_with model: product, url: url, method: method do |f|
-  .form-group
-    label.form-label 商品封面
-    .custom-file.image-uploader
-      = f.label :cover, class: 'image-uploader-label'
-        .image-uploader-mock class=[product.cover.attached? ? '' : 'd-none']
-          | 更改封面
-        .image-uploader-previewer class=[product.cover.attached? ? '' : 'd-none']
-          = image_tag product.cover.attached? ? product.cover.service_url : ''
-        .image-uploader-placeholder class=[product.cover.attached? ? 'd-none' : '']
-          | 点击上传
-      = f.file_field :cover, direct_upload: true, class: 'custom-file-input image-uploader-input'
-  .form-group
-    = f.label :name, class: 'form-label'
-    = f.text_field :name, class: 'form-control'
-  .form-group
-    = f.label :introduction, class: 'form-label'
-    = f.text_area :introduction, class: 'form-control'
+.store-app-product-form
+  = form_for product, url: url, method: method do |f|
+    .form-group
+      label.form-label 商品封面
+      .custom-file.image-uploader
+        = f.label :cover, class: 'image-uploader-label'
+          .image-uploader-mock class=[product.cover.attached? ? '' : 'd-none']
+            | 更改封面
+          .image-uploader-previewer class=[product.cover.attached? ? '' : 'd-none']
+            = image_tag product.cover.attached? ? product.cover.service_url : ''
+          .image-uploader-placeholder class=[product.cover.attached? ? 'd-none' : '']
+            | 点击上传
+        = f.file_field :cover, direct_upload: true, class: 'custom-file-input image-uploader-input'
+    .form-group
+      = f.label :name, class: 'form-label'
+      = f.text_field :name, class: 'form-control'
 
-  = f.submit '添加商品', class: 'btn btn-primary'
+    = f.fields_for :store_app_product_price_attributes, product.store_app_product_price do |fp|
+      .form-group
+        = fp.label :currency, class: 'form-label'
+        .selectgroup.selectgoup-pills.store-app-product-form-currency-selectgoup data-current-currency=product.store_app_product_price&.currency_id
+          - Currency.all.each do |currency|
+            label.selectgroup-item
+              input.selectgroup-input type='radio' name='store_app_product[store_app_product_price_attributes][currency_id]' value=currency.id data-symbol=currency.symbol
+              span.selectgroup-button.selectgroup-button-icon
+                = image_tag currency.icon_url
+
+      .form-group
+        = fp.label :value, class: 'form-label'
+        .input-group
+          span.input-group-prepend
+            .input-group-text.store-app-product-form-currency-value-symbol
+              = product.store_app_product_price&.currency ? product.store_app_product_price&.currency.symbol : '?'
+          = fp.number_field :value, class: 'form-control'
+
+    .form-group
+      = f.label :introduction, class: 'form-label'
+      = f.text_area :introduction, class: 'form-control'
+
+    = f.submit '添加商品', class: 'btn btn-primary'
