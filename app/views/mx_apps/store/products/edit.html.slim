@@ -1,12 +1,7 @@
 .card
   .card-body
-    = form_with model: @product do |f|
-      .form-group
-        = f.file_field :cover, direct_upload: true, label: '选择图片'
-      .form-group
-        = f.label :name
-        = f.text_field :name
-      .form-group
-        = f.label :introduction
-        = f.text_field :introduction
+    = simple_form_for @product do |f|
+      = f.input :cover, direct_upload: true, label: '选择图片'
+      = f.input :name
+      = f.input :introduction
       = f.submit '添加商品', class: 'btn btn-primary'
