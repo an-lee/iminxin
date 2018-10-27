@@ -15,7 +15,7 @@ class MxAppsController < ApplicationController
   def show
     case @mx_app.type
     when 'StoreApp'
-      redirect_to store_app_products_path(@mx_app)
+      redirect_to mx_app_store_products_path(@mx_app)
     end
   end
 
