@@ -32,9 +32,23 @@ class StoreAppProduct < ApplicationRecord
 
   accepts_nested_attributes_for :store_app_product_price
 
+  delegate :value, :display_value, :currency, to: :store_app_product_price
+
   has_one_attached :cover
 
   def to_param
     number
+  end
+
+  def display_price
+    format('%s %s', display_value, currency.symbol)
+  end
+
+  def price_value
+    display_value
+  end
+
+  def cover_url
+    cover.attached? ? cover.service_url : '/logo.png'
   end
 end

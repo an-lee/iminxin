@@ -1,0 +1,20 @@
+.container.my-3.my-md-5.pb-5
+  .row
+    .col-md-4.col-xs-12
+      .card.p-0.product-cover
+        = image_tag @product.cover_url, class: 'product-cover-img'
+    .col-md-8.col-xs-12.pb-5
+      .card.product-info.mb-0
+        .card-body
+          h3 = @product.name
+          .product-info-price.text-right
+            = @product.display_price
+  .row
+    .col-12
+      .card.product-introduction
+        .card-body
+          = @product.introduction
+.floating-action-bar.d-flex.align-items-center
+  .floating-action.floating-action-contact
+    | 联系客服
+  = link_to '立即购买', '#', class: 'btn btn-primary floating-action floating-action-buy'

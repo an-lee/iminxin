@@ -1,0 +1,17 @@
+.container.my-3.my-md-5
+  .row.row-cards.row-deck
+    - @products.each do |product|
+      .col-sm-6.col-md-4
+        .card.product-card
+          = link_to store_product_path(current_store, product), class: 'product-card-link' do
+            .mb-4.text-center.store-app-product-cover
+              = image_tag product.cover_url, class: 'img-fluid store-app-product-cover-img'
+            .card-body.p-3
+              h4.card-title.store-app-product-name.mb-3.text-overflow-ellipsis
+                = product.name
+              .d-flex.mb-3.align-items-center.product-price.text-overflow-ellipsis
+                span.avatar.avatar-sm style="background-image: url(#{product.currency.icon_url})"
+                .ml-1 = product.display_price
+              .d-flex.align-items-center
+                .ml-auto
+                  = link_to '下单', '#', class: 'btn btn-sm btn-pill btn-info'

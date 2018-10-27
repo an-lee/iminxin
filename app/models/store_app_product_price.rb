@@ -21,8 +21,12 @@
 #
 
 class StoreAppProductPrice < ApplicationRecord
+  include DisplayPrice
+
   belongs_to :store_app_product
   belongs_to :currency
 
   validates :value, numericality: { greater_than_or_equal_to: 0 }
+
+  price_methods :value
 end

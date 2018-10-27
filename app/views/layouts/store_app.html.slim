@@ -20,10 +20,9 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application'
     = favicon_link_tag "favicon.png"
-  body
+  body class=body_class
     .page
       .page-main
         = render 'shared/stores/header'
         = render 'shared/stores/flash_messages'
         = yield
-      = render 'shared/stores/footer'
