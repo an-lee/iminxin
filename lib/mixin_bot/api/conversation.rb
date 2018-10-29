@@ -1,12 +1,31 @@
 module MixinBot
   class API
     module Conversation
-      def create_conversation
+      def read_conversation(conversation_id)
+        # 204c0633-ef55-38c3-bbf7-4069cd6661bb
+        path = format('/conversations/%s', conversation_id)
+        _access_token ||= self.access_token('GET', path, '')
+        authorization = format('Bearer %s', _access_token)
+        client.get(path, headers: { 'Authorization': authorization })
+      end
+
+      def read_conversation_by_user_id(user_id)
+        conversation_id = unique_conversation_id(user_id)
+        r = self.read_conversation(conversation_id)
+
+        if r['error'].blank?
+          return r
+        else
+          return self.create_contact_conversation(user_id)
+        end
+      end
+
+      def create_contact_conversation(user_id)
+        # 7ed9292d-7c95-4333-aa48-a8c640064186
         path = '/conversations'
-        access_token ||= self.access_token('GET', path, '')
-        params = {
-          category: category,
-          conversation_id: conversation_id,
+        payload = {
+          category: 'CONTACT',
+          conversation_id: unique_conversation_id(user_id),
           participants: [
             {
               action: 'ADD',
@@ -15,13 +34,15 @@ module MixinBot
             }
           ]
         }
-        # TODO: not finished yet.
+        _access_token ||= self.access_token('POST', path, payload.to_json)
+        authorization = format('Bearer %s', _access_token)
+        client.post(path, headers: { 'Authorization': authorization }, json: payload)
       end
 
       def unique_conversation_id(user_id)
         md5 = Digest::MD5.new
-        md5 << user_id
-        md5 << client_id
+        md5 << [user_id, client_id].min
+        md5 << [user_id, client_id].max
         digest = md5.digest
         digest_6 = (digest[6].ord & 0x0f | 0x30).chr
         digest_8 = (digest[8].ord & 0x3f | 0x80).chr

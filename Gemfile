@@ -27,6 +27,9 @@ gem 'jwt'
 gem 'jose'
 # gem 'mixin_bot', github: 'an-lee/mixin_bot'
 
+# WebSocket
+gem 'faye-websocket'
+
 # admin
 gem 'tabler-rubygem'
 gem 'active_link_to'

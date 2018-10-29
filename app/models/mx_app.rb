@@ -81,4 +81,8 @@ class MxApp < ApplicationRecord
   def audited?
     audited_at?
   end
+
+  def get_user_conversation_id(user)
+    res = mixin_api.read_conversation_by_user_id
+  end
 end
