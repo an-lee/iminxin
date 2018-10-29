@@ -11,13 +11,7 @@ module MixinBot
 
       def read_conversation_by_user_id(user_id)
         conversation_id = unique_conversation_id(user_id)
-        r = self.read_conversation(conversation_id)
-
-        if r['error'].blank?
-          return r
-        else
-          return self.create_contact_conversation(user_id)
-        end
+        return self.read_conversation(conversation_id)
       end
 
       def create_contact_conversation(user_id)
