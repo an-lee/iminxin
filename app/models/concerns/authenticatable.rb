@@ -10,11 +10,10 @@ module Authenticatable
 
       auth = UserAuthorization.find_or_create_by!(uid: profile.fetch('user_id'), provider: :mixin)
       raw = (auth.raw.presence || {}).merge(profile)
-      auth.update! raw: raw
+      auth.raw = raw
+      auth.update! raw: raw if auth.raw_changed?
 
-      user = create_with(name: auth.raw.fetch('full_name')).find_or_create_by!(mixin_authorization: auth)
-      user.name = raw.fetch('full_name')
-      user.update! name: auth.raw.fetch('full_name') if user.changed?
+      user = find_or_create_by!(mixin_authorization: auth)
 
       user
     end

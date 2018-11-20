@@ -2,10 +2,16 @@
 #
 # Table name: users
 #
-#  id           :bigint(8)        not null, primary key
-#  name(用户名) :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id                       :bigint(8)        not null, primary key
+#  name(用户名)                :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  phone(手机号)               :string
+#  identity_number(mixin 号) :string
+#
+# Indexes
+#
+#  index_users_on_identity_number  (identity_number) UNIQUE
 #
 
 class User < ApplicationRecord
@@ -20,15 +26,17 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
-  def phone
-    mixin_authorization.raw.fetch('phone')
-  end
+  before_validation :set_profile
 
   def avatar_url
     mixin_authorization.raw.fetch('avatar_url')
   end
 
-  def identity_number
-    mixin_authorization.raw.fetch('identity_number')
+  private
+
+  def set_profile
+    self.name   = mixin_authorization&.raw['full_name']
+    self.identity_number = mixin_authorization&.raw['identity_number']
+    self.phone  = mixin_authorization&.raw['phone']
   end
 end

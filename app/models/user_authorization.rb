@@ -28,4 +28,14 @@ class UserAuthorization < ApplicationRecord
   validates :uid, presence: true, uniqueness: { scope: :provider }
 
   enumerize :provider, in: { mixin: 0 }, default: 'mixin'
+
+  after_commit :update_user_profile!, if: -> { provider.mixin? && raw_changed? }
+
+  private
+
+  def update_user_profile!
+    return if user.nil?
+
+    user.update!
+  end
 end

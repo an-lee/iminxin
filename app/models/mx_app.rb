@@ -2,25 +2,27 @@
 #
 # Table name: mx_apps
 #
-#  id                      :bigint(8)        not null, primary key
-#  owner_id                :bigint(8)
-#  type                    :string
-#  number(编号)              :string
-#  deleted_at(软删)          :datetime
-#  client_id               :string
-#  client_secret           :string
-#  session_id              :string
-#  pin_token               :string
-#  private_key             :text
-#  raw(mixin 返回的 profile)  :json
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  audited_at(mixin账号审核时间) :datetime
+#  id                       :bigint(8)        not null, primary key
+#  owner_id                 :bigint(8)
+#  type                     :string
+#  number(编号)               :string
+#  deleted_at(软删)           :datetime
+#  client_id                :string
+#  client_secret            :string
+#  session_id               :string
+#  pin_token                :string
+#  private_key              :text
+#  raw(mixin 返回的 profile)   :json
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  audited_at(mixin账号审核时间)  :datetime
+#  identity_number(mixin 号) :string
 #
 # Indexes
 #
-#  index_mx_apps_on_number    (number) UNIQUE
-#  index_mx_apps_on_owner_id  (owner_id)
+#  index_mx_apps_on_identity_number  (identity_number) UNIQUE
+#  index_mx_apps_on_number           (number) UNIQUE
+#  index_mx_apps_on_owner_id         (owner_id)
 #
 # Foreign Keys
 #
@@ -35,6 +37,8 @@ class MxApp < ApplicationRecord
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
   has_many :mx_app_users
   has_many :users, through: :mx_app_users
+
+  before_validation :setup_identity_number, if: -> { raw_changed? }
 
   # validates :client_id, presence: true, on: :update
   # validates :client_secret, presence: true, on: :update
@@ -84,5 +88,11 @@ class MxApp < ApplicationRecord
 
   def get_user_conversation_id(user)
     res = mixin_api.read_conversation_by_user_id
+  end
+
+  private
+
+  def setup_identity_number
+    self.identity_number = raw['identity_number']
   end
 end

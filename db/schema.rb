@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_27_034924) do
+ActiveRecord::Schema.define(version: 2018_11_20_045437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 2018_10_27_034924) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "audited_at", comment: "mixin账号审核时间"
+    t.string "identity_number", comment: "mixin 号"
+    t.index ["identity_number"], name: "index_mx_apps_on_identity_number", unique: true
     t.index ["number"], name: "index_mx_apps_on_number", unique: true
     t.index ["owner_id"], name: "index_mx_apps_on_owner_id"
   end
@@ -184,6 +186,9 @@ ActiveRecord::Schema.define(version: 2018_10_27_034924) do
     t.string "name", comment: "用户名"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "phone", comment: "手机号"
+    t.string "identity_number", comment: "mixin 号"
+    t.index ["identity_number"], name: "index_users_on_identity_number", unique: true
   end
 
   add_foreign_key "mx_app_attachments", "mx_apps"
