@@ -15,6 +15,6 @@ module MxAppAuthenticatable
     user.name = raw.fetch('full_name')
     user.update! name: auth.raw.fetch('full_name') if user.changed?
 
-    mx_app_user = mx_app_users.create!(user: user)
+    mx_app_user = mx_app.users.find_or_create_by!(user: user)
   end
 end

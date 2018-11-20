@@ -2,7 +2,6 @@ module MixinBot
   class API
     module Conversation
       def read_conversation(conversation_id)
-        # 204c0633-ef55-38c3-bbf7-4069cd6661bb
         path = format('/conversations/%s', conversation_id)
         _access_token ||= self.access_token('GET', path, '')
         authorization = format('Bearer %s', _access_token)
@@ -15,7 +14,6 @@ module MixinBot
       end
 
       def create_contact_conversation(user_id)
-        # 7ed9292d-7c95-4333-aa48-a8c640064186
         path = '/conversations'
         payload = {
           category: 'CONTACT',

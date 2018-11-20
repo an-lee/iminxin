@@ -2,21 +2,23 @@ module MixinBot
   class API
     module Payment
       def pay_url(options)
-        options = options.with_indifferent_access
-        recipient_id = options.fetch('recipient_id')
-        asset_id = options.fetch('asset_id')
-        amount = options.fetch('amount')
-        memo = options.fetch('memo')
-        trace = options.fetch('trace')
+        recipient_id = options[:recipient_id]
+        asset_id = options[:asset_id]
+        amount = options[:amount]
+        memo = options[:memo]
+        trace = options[:trace]
+
         url = format('https://mixin.one/pay?recipient=%s&asset=%s&amount=%s&trace=%s&memo=%s', recipient_id, asset_id, amount, trace, memo)
+
+        return URI.parse(url).to_s
       end
 
       def verify_payment(options)
-        options = options.with_indifferent_access
-        recipient_id = options.fetch('recipient_id')
-        asset_id = options.fetch('asset_id')
-        amount = options.fetch('amount')
-        trace = options.fetch('trace')
+        recipient_id = options[:recipient_id]
+        asset_id = options[:asset_id]
+        amount = options[:amount]
+        trace = options[:trace]
+
         path = 'payments'
         payload = {
           asset_id: asset_id,

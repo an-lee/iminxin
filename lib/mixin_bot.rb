@@ -1,5 +1,6 @@
 require 'active_support/all'
 require 'http'
+require 'base64'
 require 'openssl'
 require 'jwt'
 require 'jose'
