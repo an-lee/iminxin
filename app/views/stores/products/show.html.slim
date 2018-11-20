@@ -15,6 +15,5 @@
         .card-body
           = @product.introduction
 .floating-action-bar.d-flex.align-items-center
-  .floating-action.floating-action-contact
-    | 联系客服
-  = link_to '立即购买', new_store_order_path(current_store, product_number: @product.number), class: 'btn btn-primary floating-action floating-action-buy'
+  = link_to '联系店主', format('https://mixin.one/codes/%s', current_store.owner.mixin_code_id), class: 'floating-action floating-action-contact', target: '_blank'
+  = link_to '立即购买', new_store_orders_path(current_store, product_number: @product.number), class: 'btn btn-primary floating-action floating-action-buy'

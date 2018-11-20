@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_045437) do
+ActiveRecord::Schema.define(version: 2018_11_20_054730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,19 @@ ActiveRecord::Schema.define(version: 2018_11_20_045437) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_app_id"], name: "index_store_app_products_on_store_app_id"
+  end
+
+  create_table "store_weapp_addresses", force: :cascade do |t|
+    t.bigint "store_app_order_id"
+    t.string "user_name"
+    t.string "phone"
+    t.string "province"
+    t.string "city"
+    t.string "county"
+    t.string "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_app_order_id"], name: "index_store_weapp_addresses_on_store_app_order_id"
   end
 
   create_table "user_authorizations", comment: "用户认证", force: :cascade do |t|

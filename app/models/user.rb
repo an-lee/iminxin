@@ -29,7 +29,11 @@ class User < ApplicationRecord
   before_validation :set_profile
 
   def avatar_url
-    mixin_authorization.raw.fetch('avatar_url')
+    mixin_authorization.raw['avatar_url']
+  end
+
+  def mixin_code_id
+    mixin_authorization.raw['code_id']
   end
 
   private

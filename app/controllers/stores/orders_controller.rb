@@ -1,6 +1,10 @@
 class Stores::OrdersController < Stores::BaseController
   before_action :load_order, only: [:edit, :update]
 
+  def new
+    @order = current_store.orders.new(params[:product_number])
+  end
+
   def create
     service = StoreApps::CreateOrderService.new
     @order = service.call(current_store, current_store_user, order_params.to_h)

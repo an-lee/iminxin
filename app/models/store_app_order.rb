@@ -46,6 +46,7 @@ class StoreAppOrder < ApplicationRecord
   belongs_to :buyer, class_name: 'StoreAppUser'
 
   has_many :store_app_order_items
+  has_one :store_app_address
 
   accepts_nested_attributes_for :store_app_order_items
 
@@ -62,7 +63,7 @@ class StoreAppOrder < ApplicationRecord
     state :completed
     state :cancelled
 
-    event :started_processing_payment, guards: [:ensure_payment_created?], after: :touch_processing_payment_started_at do
+    event :started_processing_payment, guards: [:ensure_address_created?, :ensure_payment_created?], after: :touch_processing_payment_started_at do
       transitions from: :drafted, to: :processing_payment
     end
 
@@ -108,6 +109,10 @@ class StoreAppOrder < ApplicationRecord
   end
 
   private
+
+  def ensure_address_created?
+    return store_app_address.present?
+  end
 
   def ensure_payment_created?
     return store_app_payments.present?
