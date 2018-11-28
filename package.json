@@ -3,6 +3,13 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "babel-preset-react": "^6.24.1",
+    "element-react": "^1.4.24",
+    "element-theme-default": "^1.4.13",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react_ujs": "^2.4.4",
     "yarn": "^1.9.4"
   },
   "devDependencies": {

@@ -18,7 +18,8 @@ html
     = content_for?(:head) ? yield(:head) : ''
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application'
+    = stylesheet_pack_tag 'store_app'
+    = javascript_pack_tag 'store_app'
     = favicon_link_tag "favicon.png"
   body class=body_class
     .page

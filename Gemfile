@@ -12,6 +12,9 @@ gem 'puma', '~> 3.11'
 # webpack
 gem 'webpacker', '~> 3.5'
 
+# react
+gem 'react-rails'
+
 # Database
 gem 'aasm'
 gem 'pg', '0.18'
