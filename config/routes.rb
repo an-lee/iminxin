@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :show], param: :number
     resources :orders, only: [:new, :create, :edit, :update], param: :number
 
-    get '/', to: 'home#show', as: :root
+    get '/', to: 'app#show', as: :root
   end
 
   namespace :admin do

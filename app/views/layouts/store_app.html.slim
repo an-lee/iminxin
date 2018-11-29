@@ -16,13 +16,9 @@ html
     = csrf_meta_tags
     = action_cable_meta_tag
     = content_for?(:head) ? yield(:head) : ''
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'store-app', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'store_app'
     = favicon_link_tag "favicon.png"
   body class=body_class
     .page
-      .page-main
-        = render 'shared/stores/header'
-        = render 'shared/stores/flash_messages'
-        = yield
+      = yield
