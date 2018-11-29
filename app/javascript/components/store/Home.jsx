@@ -1,26 +1,55 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Carousel } from 'element-react';
-import 'element-theme-default';
+import { withStyles } from '@material-ui/core/styles';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Badge from '@material-ui/core/Badge';
+import Icon from '@material-ui/core/Icon';
+import HomeIcon from '@material-ui/icons/Home';
+import ReorderIcon from '@material-ui/icons/Reorder';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PersonIcon from '@material-ui/icons/Person';
+
+const styles = theme => ({
+  badge: {
+    top: 1,
+    right: -15,
+    // The border color match the background color.
+    border: `2px solid ${
+      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
+    }`,
+  },
+});
 
 class Home extends React.Component {
-  render () {
+  state = {
+    value: 'home',
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  render() {
+    const { value } = this.state;
+
     return (
-      <div className="block">
-        <Carousel indicatorPosition="outside">
-          {
-            [1,2,3,4].map((item, index) => {
-              return (
-                <Carousel.Item key={index}>
-                  <h3>{item}</h3>
-                </Carousel.Item>
-              )
-            })
-          }
-        </Carousel>
-      </div>
+      <BottomNavigation value={value} showLabels onChange={this.handleChange}>
+        <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} />
+        <BottomNavigationAction label="Category" value="category" icon={<ReorderIcon />} />
+        <BottomNavigationAction
+          label="Cart"
+          value="cart"
+          icon={
+            <Badge badgeContent={4}
+              color="primary"
+              classes={{ badge: styles.badge }}>
+              <ShoppingCartIcon />
+            </Badge>} />
+          <BottomNavigationAction label="Mine" value="mine" icon={<PersonIcon />} />
+      </BottomNavigation>
     );
   }
 }
 
-export default Home
+export default withStyles(styles)(Home);

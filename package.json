@@ -2,6 +2,8 @@
   "name": "iminxin",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.6.0",
+    "@material-ui/icons": "^3.0.1",
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
     "element-react": "^1.4.24",
