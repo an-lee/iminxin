@@ -25,9 +25,12 @@ Rails.application.routes.draw do
     match '/auth/failure', to: 'sessions#failure', via: :get
     delete '/logout', to: 'sessions#destroy', as: :logout
 
-    resource :account, only: [:show]
-    resources :products, only: [:index, :show], param: :number
-    resources :orders, only: [:new, :create, :edit, :update], param: :number
+    namespace :pages, default: { format: :json } do
+      resource 'home', only: [:show]
+      resource 'category', only: [:show]
+      resource 'cart', only: [:show]
+      resource 'mine', only: [:show]
+    end
 
     get '/', to: 'app#show', as: :root
   end

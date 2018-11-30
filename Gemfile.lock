@@ -146,6 +146,8 @@ GEM
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
+    jb (0.5.0)
+      multi_json
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -394,6 +396,7 @@ DEPENDENCIES
   font-awesome-sass
   high_voltage (~> 3.0.0)
   http
+  jb
   jbuilder (~> 2.5)
   jose
   jquery-rails
