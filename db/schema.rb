@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_053154) do
+ActiveRecord::Schema.define(version: 2018_12_05_060156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,38 @@ ActiveRecord::Schema.define(version: 2018_12_05_053154) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_administrators_on_name", unique: true
+  end
+
+  create_table "circle_app_orders", comment: "新圈子订单", force: :cascade do |t|
+    t.bigint "circle_app_id"
+    t.bigint "buyer_id", comment: " 买家"
+    t.bigint "currency_id", comment: "支付币种"
+    t.decimal "total", comment: "订单总价"
+    t.string "number", comment: "订单编号"
+    t.string "state", comment: "订单状态"
+    t.datetime "completed_at", comment: "订单完成时间"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_circle_app_orders_on_buyer_id"
+    t.index ["circle_app_id"], name: "index_circle_app_orders_on_circle_app_id"
+    t.index ["currency_id"], name: "index_circle_app_orders_on_currency_id"
+  end
+
+  create_table "circle_app_payments", force: :cascade do |t|
+    t.bigint "circle_app_order_id"
+    t.bigint "payer_id", comment: "支付者"
+    t.bigint "currency_id"
+    t.string "asset_id"
+    t.string "opponent_id"
+    t.string "trace_id"
+    t.decimal "amount"
+    t.string "memo"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_app_order_id"], name: "index_circle_app_payments_on_circle_app_order_id"
+    t.index ["currency_id"], name: "index_circle_app_payments_on_currency_id"
+    t.index ["payer_id"], name: "index_circle_app_payments_on_payer_id"
   end
 
   create_table "circle_app_settings", force: :cascade do |t|
@@ -219,6 +251,12 @@ ActiveRecord::Schema.define(version: 2018_12_05_053154) do
     t.index ["identity_number"], name: "index_users_on_identity_number", unique: true
   end
 
+  add_foreign_key "circle_app_orders", "currencies"
+  add_foreign_key "circle_app_orders", "mx_app_users", column: "buyer_id"
+  add_foreign_key "circle_app_orders", "mx_apps", column: "circle_app_id"
+  add_foreign_key "circle_app_payments", "circle_app_orders"
+  add_foreign_key "circle_app_payments", "currencies"
+  add_foreign_key "circle_app_payments", "mx_app_users", column: "payer_id"
   add_foreign_key "circle_app_settings", "currencies", column: "fee_currency_id"
   add_foreign_key "circle_app_settings", "currencies", column: "holder_limit_currency_id"
   add_foreign_key "circle_app_settings", "mx_apps", column: "circle_app_id"
