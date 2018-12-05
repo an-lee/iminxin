@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   has_many :mx_apps, foreign_key: 'owner_id'
   has_many :store_apps, foreign_key: 'owner_id'
-  has_many :store_apps, foreign_key: 'owner_id'
+  has_many :circle_apps, foreign_key: 'owner_id'
 
   validates :name, presence: true
 

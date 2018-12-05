@@ -50,14 +50,6 @@ class MxApp < ApplicationRecord
     number
   end
 
-  def name
-    raw&.fetch('full_name') || 'iXin 商城'
-  end
-
-  def identity_number
-    raw&.fetch('identity_number')
-  end
-
   def avatar_url
     raw&.fetch('avatar_url') || '/logo.png'
   end

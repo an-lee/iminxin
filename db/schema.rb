@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_054730) do
+ActiveRecord::Schema.define(version: 2018_12_05_053154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,21 @@ ActiveRecord::Schema.define(version: 2018_11_20_054730) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_administrators_on_name", unique: true
+  end
+
+  create_table "circle_app_settings", force: :cascade do |t|
+    t.bigint "circle_app_id"
+    t.integer "accepted_currency_ids", comment: "圈内可流通的货币，主要用于打赏", array: true
+    t.bigint "fee_currency_id", comment: "入圈费用币种"
+    t.decimal "fee_amount", comment: "入圈费用"
+    t.bigint "holder_limit_currency_id", comment: " 持仓限制的币种"
+    t.decimal "holder_limit_amount", comment: " 持仓限制的数量"
+    t.string "state", comment: "状态"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_app_id"], name: "index_circle_app_settings_on_circle_app_id"
+    t.index ["fee_currency_id"], name: "index_circle_app_settings_on_fee_currency_id"
+    t.index ["holder_limit_currency_id"], name: "index_circle_app_settings_on_holder_limit_currency_id"
   end
 
   create_table "currencies", comment: "支持的货币", force: :cascade do |t|
@@ -204,6 +219,9 @@ ActiveRecord::Schema.define(version: 2018_11_20_054730) do
     t.index ["identity_number"], name: "index_users_on_identity_number", unique: true
   end
 
+  add_foreign_key "circle_app_settings", "currencies", column: "fee_currency_id"
+  add_foreign_key "circle_app_settings", "currencies", column: "holder_limit_currency_id"
+  add_foreign_key "circle_app_settings", "mx_apps", column: "circle_app_id"
   add_foreign_key "mx_app_attachments", "mx_apps"
   add_foreign_key "mx_app_users", "mx_apps"
   add_foreign_key "mx_app_users", "users"

@@ -29,14 +29,17 @@
 #  fk_rails_...  (owner_id => users.id)
 #
 
-class StoreApp < MxApp
-  has_many :store_app_users, foreign_key: 'mx_app_id'
+class CircleApp < MxApp
+  has_many :circle_app_users, foreign_key: 'mx_app_id'
   has_many :mx_app_image_attachments, foreign_key: 'mx_app_id'
 
-  has_many :products, class_name: 'StoreAppProduct'
-  has_many :orders, class_name: 'StoreAppOrder'
+  has_one :circle_app_setting, foreign_key: 'mx_app_id'
+
+  after_create :create_circle_app_setting!
 
   def name
-    raw&.fetch('full_name') || 'iXin 商城'
+    raw&.fetch('full_name') || 'Xin Circle'
   end
+
+  private
 end
