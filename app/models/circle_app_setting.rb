@@ -27,7 +27,7 @@
 #
 
 class CircleAppSetting < ApplicationRecord
-  belongs_to :circle_app, foreign_key: 'mx_app_id'
-  belongs_to :fee_currency, class_name: 'Currency'
-  belongs_to :holder_limit_currency, class_name: 'Currency'
+  belongs_to :circle_app
+  belongs_to :fee_currency, class_name: 'Currency', optional: true
+  belongs_to :holder_limit_currency, class_name: 'Currency', optional: true
 end

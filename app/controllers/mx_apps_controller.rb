@@ -8,14 +8,23 @@ class MxAppsController < ApplicationController
   end
 
   def create
-    @mx_app = current_user.store_apps.create!
-    redirect_to mx_apps_path
+    app_klass =
+      case params[:type]
+      when 'StoreApp' then StoreApp
+      when 'CircleApp' then CircleApp
+      end
+
+    @mx_app = app_klass.create!(
+      owner: current_user
+    )
+
+    redirect_to mx_app_path(@mx_app)
   end
 
   def show
     case @mx_app.type
-    when 'StoreApp'
-      redirect_to mx_app_store_products_path(@mx_app)
+    when 'StoreApp'  then redirect_to mx_app_store_products_path(@mx_app)
+    when 'CircleApp' then redirect_to edit_mx_app_circle_setting_path(@mx_app)
     end
   end
 
@@ -24,7 +33,8 @@ class MxAppsController < ApplicationController
 
   def update
     wx_app_params = case @mx_app.type
-                    when 'StoreApp' then store_app_params
+                    when 'StoreApp'  then store_app_params
+                    when 'CircleApp' then circle_app_params
                     end
 
     if @mx_app.update(wx_app_params)
@@ -54,5 +64,9 @@ class MxAppsController < ApplicationController
 
   def store_app_params
     params.require(:store_app).permit(:client_id, :client_secret, :session_id, :pin_token, :private_key, :type)
+  end
+
+  def circle_app_params
+    params.require(:circle_app).permit(:client_id, :client_secret, :session_id, :pin_token, :private_key, :type)
   end
 end

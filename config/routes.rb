@@ -16,6 +16,12 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show]
       resources :orders, only: [:index]
     end
+
+    namespace :circle do
+      resource  :setting, only: [:edit, :update]
+      resources :users, only: [:index, :show]
+      resources :orders, only: [:index]
+    end
   end
 
   # 买家视角的商店

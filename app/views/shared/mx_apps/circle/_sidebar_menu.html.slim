@@ -1,0 +1,16 @@
+= active_link_to edit_mx_app_circle_setting_path(current_circle), class: 'list-group-item list-group-item-action' do
+  span.icon.mr-3
+    i.fe.fe-shopping-bag
+  | 入圈条件
+= active_link_to mx_app_circle_orders_path(current_circle), class: 'list-group-item list-group-item-action' do
+  span.icon.mr-3
+    i.fe.fe-book-open
+  | 订单管理
+= active_link_to mx_app_circle_users_path(current_circle), class: 'list-group-item list-group-item-action' do
+  span.icon.mr-3
+    i.fe.fe-users
+  | 用户管理
+= active_link_to edit_mx_app_path(current_circle), class: 'list-group-item list-group-item-action' do
+  span.icon.mr-3
+    i.fe.fe-activity
+  | 绑定Mixin

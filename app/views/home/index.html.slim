@@ -5,6 +5,19 @@
         .card
           .card-status.bg-green
           .card-body.text-center
+            .card-category 新圈子
+            .display-3.my-4 $0
+            ul.list-unstyled.leading-loose
+              li
+                i.fe.fe-check.text-success.mr-2
+                | 能好好说话的圈子
+            .text-center.mt-6
+              = link_to '创建', mx_apps_path(type: 'CircleApp'), method: :post, class: 'btn btn-green btn-block'
+
+      .col-lg-3.col-sm-6
+        .card
+          .card-status.bg-green
+          .card-body.text-center
             .card-category 电商
             .display-3.my-4 $0
             ul.list-unstyled.leading-loose
@@ -12,4 +25,4 @@
                 i.fe.fe-check.text-success.mr-2
                 | 虚拟货币交易
             .text-center.mt-6
-              = link_to '创建', mx_apps_path, method: :post, class: 'btn btn-green btn-block'
+              = link_to '创建', mx_apps_path(type: 'StoreApp'), method: :post, class: 'btn btn-green btn-block'

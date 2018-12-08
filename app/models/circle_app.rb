@@ -33,7 +33,7 @@ class CircleApp < MxApp
   has_many :circle_app_users, foreign_key: 'mx_app_id'
   has_many :mx_app_image_attachments, foreign_key: 'mx_app_id'
 
-  has_one :circle_app_setting, foreign_key: 'mx_app_id'
+  has_one :circle_app_setting
 
   after_create :create_circle_app_setting!
 
