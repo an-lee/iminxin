@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy', as: :logout
 
   resources :mx_apps, only: [:index, :new, :create, :show, :edit, :update, :destroy], param: :number
+  resources :preview_mx_apps, only: [:show], param: :number
 
   # 应用管理
   resources :mx_apps, only: [], module: 'mx_apps', param: :number do
@@ -24,7 +25,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # 买家视角的商店
+  # 用户视角的商店
   resources :stores, only: [], module: 'stores', param: :number do
     get 'login', to: 'sessions#new', as: :login
     match '/auth/mixin/callback', to: 'sessions#create', via: [:get, :post]
@@ -39,6 +40,16 @@ Rails.application.routes.draw do
     end
 
     get '/', to: 'app#show', as: :root
+  end
+
+  # 用户视角的新圈子
+  resources :circles, only: [], module: 'circles', param: :number do
+    get 'login', to: 'sessions#new', as: :login
+    match '/auth/mixin/callback', to: 'sessions#create', via: [:get, :post]
+    match '/auth/failure', to: 'sessions#failure', via: :get
+    delete '/logout', to: 'sessions#destroy', as: :logout
+
+    get '/', to: 'home#index', as: :root
   end
 
   namespace :admin do

@@ -6,7 +6,7 @@
         span = current_mx_app.name
       .d-flex.order-lg-2.ml-auto
         .nav-item
-          = link_to store_root_path(current_mx_app), class: 'btn btn-sm btn-outline-primary', target: '_blank' do
+          = link_to preview_mx_app_path(current_mx_app), class: 'btn btn-sm btn-outline-primary', target: '_blank' do
             | 预览
         .nav-item
           = link_to mx_apps_path, class: 'text-inherit icon' do
