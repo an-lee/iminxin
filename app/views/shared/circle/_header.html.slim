@@ -1,0 +1,17 @@
+.header.py-4
+  .container
+    .d-flex
+      = link_to circle_root_path, class: 'header-brand' do
+        img src='/logo.png' class='header-brand-img' alt='ixin logo'
+        | iXin
+      .d-flex.order-lg-2.ml-auto
+        .dropdown.d-flex
+          - if current_circle_user
+            a.nav-link.pr-0.leading-none data-toggle='dropdown'
+              span.avatar style=(format('background-image: url(%s)', current_circle_user.avatar_url))
+              span.ml-2.d-none.d-lg-block
+                span.text-default = current_circle_user.name
+            .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow
+              = link_to '登出', circle_logout_path, method: :delete, class: 'dropdown-item'
+          - else
+            = link_to '登录', circle_login_path, class: 'nav-link pr-0 leading-none'

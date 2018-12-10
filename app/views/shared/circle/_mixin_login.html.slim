@@ -1,0 +1,14 @@
+- unless current_circle_user
+  #mixin-login-modal.modal.fade
+    .modal-dialog.modal-md
+      .modal-content
+        .modal-header
+          | 请先登录
+          button.close[data-dismiss="modal"]
+        .modal-body
+          .d-flex.my-5
+            .m-auto.text-center
+              = link_to circle_login_path do
+                = image_tag 'mixin-logo.png', class: 'avatar-xl'
+                .text-muted.mt-2
+                  | 使用 Mixin 登录

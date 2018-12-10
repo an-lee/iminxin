@@ -1,0 +1,21 @@
+.card
+  .card-header
+    h3.card-title 用户管理
+  .table-responsive
+    table.table.card-table.table-hover.table-outline.table-vcenter.text-nowrap.card-table.datatable.dataTable.no-footer
+      thead
+        tr
+          th.text-center.w-1
+          th 用户名
+          th 手机号
+          th 注册时间
+      tbody
+        - @users.each do |user|
+          tr
+            td.text-center
+              .avatar.d-block style=(format('background-image: url(%s)', user.avatar_url))
+            td = user.name
+            td = user.phone
+            td = user.created_at
+
+    = paginate @users

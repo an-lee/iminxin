@@ -16,10 +16,13 @@ html
     = csrf_meta_tags
     = action_cable_meta_tag
     = content_for?(:head) ? yield(:head) : ''
-    = stylesheet_link_tag 'store-app', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'store_app', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'store_app'
+    = stylesheet_link_tag 'circle-app', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'circle_app', 'data-turbolinks-track': 'reload'
     = favicon_link_tag "favicon.png"
   body class=body_class
     .page
-      = yield
+      .page-main
+        = render 'shared/circle/header'
+        = render 'shared/circle/flash_messages'
+        = yield
+      = render 'shared/circle/mixin_login'

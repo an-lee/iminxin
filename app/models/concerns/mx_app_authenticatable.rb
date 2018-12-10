@@ -13,6 +13,6 @@ module MxAppAuthenticatable
     auth.update! raw: raw if auth.raw_changed?
 
     user = User.find_or_create_by!(mixin_authorization: auth)
-    mx_app_user = mx_app.users.find_or_create_by!(user: user)
+    mx_app_user = mx_app_users.find_or_create_by!(user: user)
   end
 end
