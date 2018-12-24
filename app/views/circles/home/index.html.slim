@@ -1,15 +1,28 @@
-.my-3.my-md-5
+.my-5.my-md-5
   .container
+    .text-center.py-5
+      .avatar.avatar-xl style=(format('background-image: url(%s)', current_circle.avatar_url))
+      .pt-3.h4
+        = current_circle.name
     .row
       .col-md-6.mx-auto
-        .card
+        .card.mb-5
           .card-body
-            p 介绍
-            p 入圈条件
-            - unless current_circle.circle_app_setting.fee_amount.blank?
-              .text-center.mb-3
-                .mb-1.avatar style=(format('background-image: url(%s)', current_circle.circle_app_setting.fee_currency.icon_url))
-                h3.m-0 = current_circle.circle_app_setting.fee_amount
+            .introduction.mb-5
+              = simple_format current_circle.circle_app_setting.introduction
+            .text-right
+              span.avatar.avatar-sm style=(format('background-image: url(%s)', current_circle.owner.avatar_url))
+              small.ml-1 = current_circle.owner.name
 
-            .text-center
-              = link_to '进入', '#', class: "btn btn-primary #{current_circle_user.present? ? '' : 'mixin-login-required'}"
+        .alert.alert-info.mb-5
+          - unless current_circle.circle_app_setting.fee_amount.blank? && current_circle.circle_app_setting.holder_limit_amount.blank?
+            | Limit to this circle:
+            ul
+              li.mt-3
+                - if current_circle.circle_app_setting.fee_amount.present?
+                  = format('Pay %s %s', current_circle.circle_app_setting.fee_amount, current_circle.circle_app_setting.fee_currency.symbol)
+              li
+                - if current_circle.circle_app_setting.holder_limit_amount.present?
+                  = format('Hold at least %s %s in your Mixin wallet', current_circle.circle_app_setting.holder_limit_amount, current_circle.circle_app_setting.holder_limit_currency.symbol)
+    .text-center
+      = link_to 'Enter', '#', class: "btn btn-pill btn-info #{current_circle_user.present? ? '' : 'mixin-login-required'}"

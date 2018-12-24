@@ -1,4 +1,8 @@
-= active_link_to edit_mx_app_circle_setting_path(current_circle), class: 'list-group-item list-group-item-action' do
+= active_link_to edit_mx_app_circle_basic_setting_path(current_circle), class: 'list-group-item list-group-item-action' do
+  span.icon.mr-3
+    i.fe.fe-settings
+  | 基本设置
+= active_link_to edit_mx_app_circle_limit_setting_path(current_circle), class: 'list-group-item list-group-item-action' do
   span.icon.mr-3
     i.fe.fe-shopping-bag
   | 入圈条件

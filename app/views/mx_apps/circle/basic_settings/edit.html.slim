@@ -1,0 +1,6 @@
+.card
+  .card-body
+    .circle-app-setting-form
+      = simple_form_for current_circle.circle_app_setting, url: mx_app_circle_basic_setting_path(current_circle), method: :put do |f|
+        = f.input :introduction, input_html: { rows: '7' }
+        = f.submit '更新设置', class: 'btn btn-primary'

@@ -1,4 +1,4 @@
-class MxApps::Circle::SettingsController < MxApps::Circle::BaseController
+class MxApps::Circle::LimitSettingsController < MxApps::Circle::BaseController
   before_action :add_index_breadcrumb
 
   def edit
@@ -6,7 +6,7 @@ class MxApps::Circle::SettingsController < MxApps::Circle::BaseController
 
   def update
     if current_circle.circle_app_setting.update(setting_params)
-      redirect_to edit_mx_app_circle_setting_path(current_circle), notice: '成功更新'
+      redirect_to edit_mx_app_circle_limit_setting_path(current_circle), notice: '成功更新'
     else
       render :edit
     end
@@ -19,6 +19,6 @@ class MxApps::Circle::SettingsController < MxApps::Circle::BaseController
   end
 
   def add_index_breadcrumb
-    add_breadcrumb '入圈条件', edit_mx_app_circle_setting_path(current_circle)
+    add_breadcrumb '入圈条件', edit_mx_app_circle_limit_setting_path(current_circle)
   end
 end

@@ -24,7 +24,7 @@ class MxAppsController < ApplicationController
   def show
     case @mx_app.type
     when 'StoreApp'  then redirect_to mx_app_store_products_path(@mx_app)
-    when 'CircleApp' then redirect_to edit_mx_app_circle_setting_path(@mx_app)
+    when 'CircleApp' then redirect_to edit_mx_app_circle_basic_setting_path(@mx_app)
     end
   end
 

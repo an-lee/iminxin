@@ -19,7 +19,8 @@ Rails.application.routes.draw do
     end
 
     namespace :circle do
-      resource  :setting, only: [:edit, :update]
+      resource  :basic_setting, only: [:edit, :update]
+      resource  :limit_setting, only: [:edit, :update]
       resources :users, only: [:index, :show]
       resources :orders, only: [:index]
     end

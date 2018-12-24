@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_060156) do
+ActiveRecord::Schema.define(version: 2018_12_24_133034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_060156) do
     t.string "state", comment: "状态"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "introduction", comment: "介绍"
     t.index ["circle_app_id"], name: "index_circle_app_settings_on_circle_app_id"
     t.index ["fee_currency_id"], name: "index_circle_app_settings_on_fee_currency_id"
     t.index ["holder_limit_currency_id"], name: "index_circle_app_settings_on_holder_limit_currency_id"

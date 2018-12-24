@@ -1,7 +1,7 @@
 .card
   .card-body
     .circle-app-setting-form
-      = simple_form_for current_circle.circle_app_setting, url: mx_app_circle_setting_path(current_circle), method: :put do |f|
+      = simple_form_for current_circle.circle_app_setting, url: mx_app_circle_limit_setting_path(current_circle), method: :put do |f|
         .form-group
           = f.label :fee_currency_id, class: 'form-label'
           .selectgroup.selectgoup-pills.circle-app-setting-form-fee-currency-selectgoup data-fee-currency=current_circle.circle_app_setting&.fee_currency_id
