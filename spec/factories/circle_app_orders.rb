@@ -2,16 +2,16 @@
 #
 # Table name: circle_app_orders
 #
-#  id                   :bigint(8)        not null, primary key
-#  circle_app_id        :bigint(8)
-#  buyer_id( 买家)        :bigint(8)
-#  currency_id(支付币种)    :bigint(8)
-#  total(订单总价)          :decimal(, )
-#  number(订单编号)         :string
-#  state(订单状态)          :string
+#  id                         :bigint(8)        not null, primary key
+#  circle_app_id              :bigint(8)
+#  buyer_id( 买家)            :bigint(8)
+#  currency_id(支付币种)      :bigint(8)
+#  total(订单总价)            :decimal(, )
+#  number(订单编号)           :string
+#  state(订单状态)            :string
 #  completed_at(订单完成时间) :datetime
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
 #
 # Indexes
 #

@@ -22,7 +22,15 @@
 class CircleAppUser < MxAppUser
   belongs_to :circle_app, foreign_key: 'mx_app_id'
 
-  def is_owner?
+  has_one :membership, class_name: 'CircleAppUserMembership'
+
+  after_create :create_membership
+
+  def owner?
     user == circle_app.owner
+  end
+
+  def member?
+    membership.activated?
   end
 end

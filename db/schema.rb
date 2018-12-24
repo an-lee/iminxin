@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_24_133034) do
+ActiveRecord::Schema.define(version: 2018_12_24_223322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,14 @@ ActiveRecord::Schema.define(version: 2018_12_24_133034) do
     t.index ["circle_app_id"], name: "index_circle_app_settings_on_circle_app_id"
     t.index ["fee_currency_id"], name: "index_circle_app_settings_on_fee_currency_id"
     t.index ["holder_limit_currency_id"], name: "index_circle_app_settings_on_holder_limit_currency_id"
+  end
+
+  create_table "circle_app_user_memberships", force: :cascade do |t|
+    t.bigint "circle_app_user_id"
+    t.datetime "expired_at", comment: "会员到期时间"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_app_user_id"], name: "index_circle_app_user_memberships_on_circle_app_user_id"
   end
 
   create_table "currencies", comment: "支持的货币", force: :cascade do |t|
@@ -239,6 +247,7 @@ ActiveRecord::Schema.define(version: 2018_12_24_133034) do
     t.json "raw", comment: "第三方返回的原始数据"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "assets", comment: "资产信息"
     t.index ["provider", "uid"], name: "index_user_authorizations_on_provider_and_uid", unique: true
     t.index ["user_id"], name: "index_user_authorizations_on_user_id"
   end
@@ -261,6 +270,7 @@ ActiveRecord::Schema.define(version: 2018_12_24_133034) do
   add_foreign_key "circle_app_settings", "currencies", column: "fee_currency_id"
   add_foreign_key "circle_app_settings", "currencies", column: "holder_limit_currency_id"
   add_foreign_key "circle_app_settings", "mx_apps", column: "circle_app_id"
+  add_foreign_key "circle_app_user_memberships", "mx_app_users", column: "circle_app_user_id"
   add_foreign_key "mx_app_attachments", "mx_apps"
   add_foreign_key "mx_app_users", "mx_apps"
   add_foreign_key "mx_app_users", "users"

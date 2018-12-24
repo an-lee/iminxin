@@ -2,16 +2,17 @@
 #
 # Table name: circle_app_settings
 #
-#  id                                     :bigint(8)        not null, primary key
-#  circle_app_id                          :bigint(8)
+#  id                                                    :bigint(8)        not null, primary key
+#  circle_app_id                                         :bigint(8)
 #  accepted_currency_ids(圈内可流通的货币，主要用于打赏) :integer          is an Array
-#  fee_currency_id(入圈费用币种)                :bigint(8)
-#  fee_amount(入圈费用)                       :decimal(, )
-#  holder_limit_currency_id( 持仓限制的币种)     :bigint(8)
-#  holder_limit_amount( 持仓限制的数量)          :decimal(, )
-#  state(状态)                              :string
-#  created_at                             :datetime         not null
-#  updated_at                             :datetime         not null
+#  fee_currency_id(入圈费用币种)                         :bigint(8)
+#  fee_amount(入圈费用)                                  :decimal(, )
+#  holder_limit_currency_id( 持仓限制的币种)             :bigint(8)
+#  holder_limit_amount( 持仓限制的数量)                  :decimal(, )
+#  state(状态)                                           :string
+#  created_at                                            :datetime         not null
+#  updated_at                                            :datetime         not null
+#  introduction(介绍)                                    :text
 #
 # Indexes
 #

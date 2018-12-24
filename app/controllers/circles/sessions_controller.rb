@@ -3,7 +3,13 @@ class Circles::SessionsController < Circles::BaseController
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def new
-    redirect_to current_circle.mixin_api.request_oauth
+    scope =
+      if current_circle.circle_app_setting.holder_limit_amount.present?
+        'PROFILE:READ+PHONE:READ+ASSETS:READ'
+      else
+        'PROFILE:READ+PHONE:READ'
+      end
+    redirect_to current_circle.mixin_api.request_oauth(scope: scope)
   end
 
   def create

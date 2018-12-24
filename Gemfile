@@ -82,7 +82,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'annotate', require: false
+  gem 'annotate', github: '80percent/annotate_models', branch: 'develop', require: false
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'

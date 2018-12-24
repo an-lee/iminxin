@@ -2,7 +2,7 @@
 #
 # Table name: currencies
 #
-#  id                              :bigint(8)        not null, primary key
+#  id                                :bigint(8)        not null, primary key
 #  name(mixin 中的 name)             :string
 #  symbol(mixin 中的 symbol)         :string
 #  icon_url(mixin 中的 icon_url)     :string
@@ -12,9 +12,9 @@
 #  price_usd(mixin 中的 price_usd)   :decimal(, )
 #  change_btc(mixin 中的 change_btc) :decimal(, )
 #  change_usd(mixin 中的 change_usd) :decimal(, )
-#  synced_at(同步价格时间)               :datetime
-#  created_at                      :datetime         not null
-#  updated_at                      :datetime         not null
+#  synced_at(同步价格时间)           :datetime
+#  created_at                        :datetime         not null
+#  updated_at                        :datetime         not null
 #
 # Indexes
 #

@@ -4,6 +4,7 @@ class Circles::BaseController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
+  before_action :authenticate_member!
 
   helper_method :current_circle
   helper_method :current_circle_user
@@ -12,6 +13,10 @@ class Circles::BaseController < ActionController::Base
 
   def authenticate_user!
     redirect_to circle_login_path(current_circle) unless current_circle_user
+  end
+
+  def authenticate_member!
+    redirect_to circle_root_path(current_circle) unless current_circle_user.member?
   end
 
   def current_circle
