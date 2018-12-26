@@ -29,4 +29,34 @@
 #
 
 class CircleAppPayment < ApplicationRecord
+  extend Enumerize
+  include AASM
+  include DisplayPrice
+  include Numbering
+
+  belongs_to :circle_app_order
+  belongs_to :payer, class_name: 'CircleAppUser'
+
+  enumerize :status, in: %w(pending paid), default: 'pending'
+
+  before_validation :setup_attributes
+
+  aasm column: :state do
+    state :pending, initial: true
+    state :paid
+
+    event :pay do
+      transitions from: :pending, to: :paid
+    end
+  end
+
+  private
+
+  def setup_attributes
+    self.currency = circle_app_order.currency
+    self.asset_id = currency.asset_id
+    self.opponent_id = circle_app_order.circle_app.client_id
+    self.amount = circle_app_order.total
+    self.memo = format('Best wishes from %s', circle_app_order.circle_app.name)
+  end
 end

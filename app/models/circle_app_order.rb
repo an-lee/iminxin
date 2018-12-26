@@ -27,4 +27,32 @@
 #
 
 class CircleAppOrder < ApplicationRecord
+  include AASM
+  include DisplayPrice
+  include Numbering
+
+  belongs_to :currency
+  belongs_to :circle_app
+  belongs_to :buyer, class_name: 'CircleAppUser'
+
+  has_one :circle_app_payment
+
+  aasm column: :state do
+    state :drafted, initial: true
+    state :completed
+
+    event :complete, guards: :ensure_payment_completed?, after: :touch_completed_at do
+      transitions from: :drafted, to: :completed
+    end
+  end
+
+  private
+
+  def ensure_payment_completed?
+    circle_app_payment&.completed?
+  end
+
+  def touch_completed_at
+    touch(:completed_at)
+  end
 end

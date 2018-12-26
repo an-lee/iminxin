@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_26_055532) do
+ActiveRecord::Schema.define(version: 2018_12_26_134529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2018_12_26_055532) do
     t.datetime "completed_at", comment: "订单完成时间"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "order_type", comment: "订单类型"
     t.index ["buyer_id"], name: "index_circle_app_orders_on_buyer_id"
     t.index ["circle_app_id"], name: "index_circle_app_orders_on_circle_app_id"
     t.index ["currency_id"], name: "index_circle_app_orders_on_currency_id"

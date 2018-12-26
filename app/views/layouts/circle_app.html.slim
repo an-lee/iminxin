@@ -23,4 +23,8 @@ html
     .page
       .page-main
         = yield
-    #modal-window
+        
+    - if content_for?(:modal_window)
+      = yield(:modal_window)
+    - else
+      #modal-window

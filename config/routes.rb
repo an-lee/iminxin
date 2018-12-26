@@ -52,6 +52,9 @@ Rails.application.routes.draw do
 
     get '/', to: 'home#index', as: :root
 
+    resources :membership_orders, only: [:new, :create]
+    resources :payment_states, only: [:show]
+
     resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   end
 
