@@ -8,6 +8,7 @@
 //= require qrcode
 //= require_self
 
+//= require_tree ./circle
 //= require_tree ./components
 //= require_tree ./pages
 

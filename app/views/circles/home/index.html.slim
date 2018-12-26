@@ -25,5 +25,18 @@
               li
                 - if current_circle.holder_limit_amount.present?
                   = format('Hold at least %s %s in your Mixin wallet', current_circle.holder_limit_amount, current_circle.holder_limit_currency.symbol)
+
+    - if current_circle_user.blank?
+      - btnClass = 'mixin-login-required'
+      = render 'shared/circle/mixin_login_modal'
+    - elsif current_circle_user.holder_limited?
+      - btnClass = 'mixin-holder-limit'
+      = render 'shared/circle/mixin_holder_limit_modal'
+    - elsif current_circle_user.fee_limited?
+      - btnClass = 'mixin-fee-limit'
+      = render 'shared/circle/mixin_fee_limit_modal'
+    - else
+      - btnClass = ''
+
     .text-center
-      = link_to 'Enter', circle_posts_path(current_circle), class: "btn btn-pill btn-info #{current_circle_user.present? ? '' : 'mixin-login-required'}"
+      = link_to 'Enter', circle_posts_path(current_circle), class: "btn btn-pill btn-info #{btnClass}"

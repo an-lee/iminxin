@@ -21,6 +21,19 @@ class CircleAppUserMembership < ApplicationRecord
   belongs_to :circle_app_user
 
   def activated?
+    fee_activated? && holder_activated?
+  end
+
+  def fee_activated?
+    circle_app = circle_app_user.circle_app
+    if circle_app.fee_amount.present?
+      return false if expired_at.blank? || expired_at < Time.current
+    end
+
+    return true
+  end
+
+  def holder_activated?
     circle_app = circle_app_user.circle_app
 
     if circle_app.holder_limit_amount.present?
@@ -28,10 +41,6 @@ class CircleAppUserMembership < ApplicationRecord
 
       asset = circle_app_user.user.mixin_authorization.assets.bsearch { |asset| asset['asset_id'] == circle_app.holder_limit_currency.asset_id }
       return false if asset.blank? || asset['balance'].to_f < circle_app.holder_limit_amount
-    end
-
-    if circle_app.fee_amount.present?
-      return false if expired_at.blank? || expired_at < Time.current
     end
 
     return true

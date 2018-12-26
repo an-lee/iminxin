@@ -1,0 +1,10 @@
+#mixin-fee-limit-modal.modal.fade
+  .modal-dialog.modal-md.modal-dialog-centered
+    .modal-content
+      .modal-header
+        | 请先付款
+        button.close[data-dismiss="modal"]
+      .modal-body
+        .d-flex.my-5
+          .m-auto.text-center
+            = link_to '付款', circle_login_path, class: 'btn btn-primary'
