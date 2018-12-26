@@ -37,10 +37,11 @@ class CircleAppUserMembership < ApplicationRecord
     circle_app = circle_app_user.circle_app
 
     if circle_app.holder_limit_amount.present?
-      return false if circle_app_user.user.mixin_authorization.assets.blank?
+      assets = circle_app_user.user.mixin_authorization.assets
+      return false if assets.blank?
 
-      asset = circle_app_user.user.mixin_authorization.assets.bsearch { |asset| asset['asset_id'] == circle_app.holder_limit_currency.asset_id }
-      return false if asset.blank? || asset['balance'].to_f < circle_app.holder_limit_amount
+      asset_index = assets.index { |asset| asset['asset_id'] == circle_app.holder_limit_currency.asset_id }
+      return false if assets[asset_index].blank? || assets[asset_index]['balance'].to_f < circle_app.holder_limit_amount
     end
 
     return true
