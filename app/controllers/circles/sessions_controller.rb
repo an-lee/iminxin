@@ -1,5 +1,6 @@
 class Circles::SessionsController < Circles::BaseController
   skip_before_action :authenticate_user!, only: [:new, :create, :failure]
+  skip_before_action :authenticate_member!
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def new
@@ -14,8 +15,9 @@ class Circles::SessionsController < Circles::BaseController
 
   def create
     code = params[:code]
-    mx_app_user = current_circle.auth_user_from_mixin(code)
-    user_sign_in(mx_app_user) if mx_app_user
+    user = current_circle.auth_user_from_mixin(code)
+    circle_app_user = current_circle.circle_app_users.find_or_create_by(user: user)
+    user_sign_in(circle_app_user) if circle_app_user
 
     redirect_to circle_root_path(current_circle)
   end
