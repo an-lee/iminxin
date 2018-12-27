@@ -27,6 +27,7 @@
 #
 
 class CircleAppOrder < ApplicationRecord
+  extend Enumerize
   include AASM
   include DisplayPrice
   include Numbering
@@ -37,22 +38,40 @@ class CircleAppOrder < ApplicationRecord
 
   has_one :circle_app_payment
 
+  enumerize :order_type, in: %w(membership), default: 'membership'
+
   aasm column: :state do
     state :drafted, initial: true
+    state :processing_payment
     state :completed
 
-    event :complete, guards: :ensure_payment_completed?, after: :touch_completed_at do
-      transitions from: :drafted, to: :completed
+    event :started_processing_payment, guards: :ensure_payment_created? do
+      transitions from: :drafted, to: :processing_payment
+    end
+
+    event :complete, guards: :ensure_payment_paid?, after: [:touch_completed_at, :callback_after_order_completed] do
+      transitions from: :processing_payment, to: :completed
     end
   end
 
   private
 
-  def ensure_payment_completed?
-    circle_app_payment&.completed?
+  def ensure_payment_created?
+    circle_app_payment.present?
+  end
+
+  def ensure_payment_paid?
+    circle_app_payment&.paid?
   end
 
   def touch_completed_at
     touch(:completed_at)
+  end
+
+  def callback_after_order_completed
+    case order_type
+    when 'membership'
+      buyer.membership.update_1_year_membership!
+    end
   end
 end

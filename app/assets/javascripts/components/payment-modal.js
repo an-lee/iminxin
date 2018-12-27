@@ -3,7 +3,7 @@
     pollingPaymentStateTimer: null,
 
     init: function(options) {
-      this.modal = $(options['modal_class']);
+      this.modal = options.modal;
     },
 
     startPollingPaymentState: function() {
@@ -14,7 +14,6 @@
         that.pollingPaymentStateTimer = null;
       }
 
-      var traceId = that.modal.data('traceId');
       var pollingPath = that.modal.data('pollingPath');
       var path = pollingPath;
       var fn = function() {
@@ -23,6 +22,8 @@
             Turbolinks.visit();
             that.pollingPaymentStateTimer = null;
           } else {
+            console.log(data);
+            
             that.pollingPaymentStateTimer = setTimeout(fn, 1000);
           }
         }).fail(function() {

@@ -1,9 +1,11 @@
-#mixin-fee-limit-modal.modal.fade
+- trace_id = SecureRandom.uuid
+
+#mixin-fee-limit-modal.modal.fade data-backdrop="static" data-polling-path=circle_payment_state_path(trace_id: trace_id)
   .modal-dialog.modal-md.modal-dialog-centered
     .modal-content
       .modal-body
         .my-5
-          .mb-5.text-center
+          .mb-5.text-section.text-center
             - if current_circle_user.membership.expired_at?
               .text-gray 
                 | Your membership is expired at 
@@ -12,5 +14,10 @@
             - else
               .text-gray
                 | You are not a member yet.
-          .text-center
-            = link_to 'Pay with Mixin', new_circle_membership_order_path, class: 'btn btn-pill btn-danger'
+          .text-center.mb-3
+            .mr-3.btn.btn-pill.btn-secondary.cancel-btn data-dismiss="modal"
+              | forget it
+            = link_to 'Pay for it', circle_membership_orders_path(trace_id: trace_id), method: :post, remote: true, class: 'btn btn-pill btn-danger pay-btn'
+          .d-flex
+            .m-auto
+              #mixin-pay-qrcode

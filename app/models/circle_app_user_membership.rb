@@ -20,6 +20,10 @@
 class CircleAppUserMembership < ApplicationRecord
   belongs_to :circle_app_user
 
+  def update_1_year_membership!
+    update! expired_at: Time.current + 1.year
+  end
+  
   def activated?
     fee_activated? && holder_activated?
   end

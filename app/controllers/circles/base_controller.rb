@@ -1,4 +1,6 @@
 class Circles::BaseController < ActionController::Base
+  include RenderingHelper
+  
   layout 'circle_app'
 
   protect_from_forgery with: :exception

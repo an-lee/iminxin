@@ -1,15 +1,17 @@
-$("#modal-window .modal .new-order-submit-btn").hide();
-$("#modal-window .modal .modal-header-title").text('Do not close the window until it is paid');
+$("#modal-window .modal .text-section").text('Do not refresh the window until it is paid');
+$("#modal-window .modal .pay-btn").hide();
+$("#modal-window .modal .cancel-btn").hide();
 
 var pay_url = "<%= @pay_url %>".replace(/\&amp;/gi,'&');
+
+console.log(pay_url)
 
 if (App.environment()) {
   Turbolinks.visit(pay_url);
 } else {
-  $("#modal-window .modal .new-order-pay-tips").removeClass('d-none');
   var el = $('#mixin-pay-qrcode');
   new QRCode(el[0], { text: pay_url, width: 200, height: 200 } );
-  $('#pay-in-minx-btn').html("<%= j render('shared/pay_in_mixin_btn', pay_url: @pay_url) %>")
 };
 
+App.paymentModal.init({modal: $('#mixin-fee-limit-modal')});
 App.paymentModal.startPollingPaymentState();

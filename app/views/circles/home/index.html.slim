@@ -37,10 +37,11 @@
       - modal = 'shared/circle/mixin_fee_limit_modal'
     - else
       - btnClass = ''
+      - modal = ''
 
     .text-center
       = link_to 'Enter', circle_posts_path(current_circle), class: "btn btn-pill btn-info #{btnClass}"
 
   - content_for(:modal_window) do
     #modal-window
-      = render modal
+      = render modal unless modal.blank?
