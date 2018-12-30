@@ -23,6 +23,8 @@
 class CircleAppUser < MxAppUser
   belongs_to :circle_app, foreign_key: 'mx_app_id'
 
+  has_many :posts, class_name: 'CircleAppPost', foreign_key: 'author_id'
+  has_many :comments, class_name: 'CircleAppComment', foreign_key: 'author_id'
   has_many :orders, class_name: 'CircleAppOrder', foreign_key: 'buyer_id'
   has_one :membership, class_name: 'CircleAppUserMembership'
 

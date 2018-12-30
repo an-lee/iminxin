@@ -2,8 +2,8 @@
   .container
     .d-flex
       = link_to circle_root_path, class: 'header-brand' do
-        img src='/logo.png' class='header-brand-img' alt='ixin logo'
-        | iXin
+        img src=current_circle.avatar_url class='header-brand-img' alt=current_circle.name
+        = current_circle.name
       .d-flex.order-lg-2.ml-auto
         .dropdown.d-flex
           - if current_circle_user

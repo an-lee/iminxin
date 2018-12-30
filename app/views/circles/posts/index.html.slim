@@ -1,3 +1,8 @@
 .my-5.my-md-5
   .container
-    
+    .row
+      .col-md-6.mx-auto.px-0
+        .mb-5.sticked-posts-section
+          | 置顶区
+        .card.border-0.rounded-0.shadow-none.posts-list-section
+          = render 'posts_list', posts: @posts

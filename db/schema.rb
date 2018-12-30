@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_26_134529) do
+ActiveRecord::Schema.define(version: 2018_12_30_010913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 2018_12_26_134529) do
     t.index ["name"], name: "index_administrators_on_name", unique: true
   end
 
+  create_table "circle_app_comments", force: :cascade do |t|
+    t.bigint "author_id"
+    t.bigint "circle_app_post_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_circle_app_comments_on_author_id"
+    t.index ["circle_app_post_id"], name: "index_circle_app_comments_on_circle_app_post_id"
+  end
+
   create_table "circle_app_orders", comment: "新圈子订单", force: :cascade do |t|
     t.bigint "circle_app_id"
     t.bigint "buyer_id", comment: " 买家"
@@ -75,6 +85,16 @@ ActiveRecord::Schema.define(version: 2018_12_26_134529) do
     t.index ["circle_app_order_id"], name: "index_circle_app_payments_on_circle_app_order_id"
     t.index ["currency_id"], name: "index_circle_app_payments_on_currency_id"
     t.index ["payer_id"], name: "index_circle_app_payments_on_payer_id"
+  end
+
+  create_table "circle_app_posts", force: :cascade do |t|
+    t.bigint "author_id"
+    t.bigint "circle_app_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_circle_app_posts_on_author_id"
+    t.index ["circle_app_id"], name: "index_circle_app_posts_on_circle_app_id"
   end
 
   create_table "circle_app_settings", force: :cascade do |t|
@@ -263,12 +283,16 @@ ActiveRecord::Schema.define(version: 2018_12_26_134529) do
     t.index ["identity_number"], name: "index_users_on_identity_number", unique: true
   end
 
+  add_foreign_key "circle_app_comments", "circle_app_posts"
+  add_foreign_key "circle_app_comments", "mx_app_users", column: "author_id"
   add_foreign_key "circle_app_orders", "currencies"
   add_foreign_key "circle_app_orders", "mx_app_users", column: "buyer_id"
   add_foreign_key "circle_app_orders", "mx_apps", column: "circle_app_id"
   add_foreign_key "circle_app_payments", "circle_app_orders"
   add_foreign_key "circle_app_payments", "currencies"
   add_foreign_key "circle_app_payments", "mx_app_users", column: "payer_id"
+  add_foreign_key "circle_app_posts", "mx_app_users", column: "author_id"
+  add_foreign_key "circle_app_posts", "mx_apps", column: "circle_app_id"
   add_foreign_key "circle_app_settings", "currencies", column: "fee_currency_id"
   add_foreign_key "circle_app_settings", "currencies", column: "holder_limit_currency_id"
   add_foreign_key "circle_app_settings", "mx_apps", column: "circle_app_id"

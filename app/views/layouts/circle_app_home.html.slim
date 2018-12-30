@@ -22,7 +22,6 @@ html
   body class=body_class
     .page
       .page-main
-        = render 'shared/circle/header'
         = yield
         
     - if content_for?(:modal_window)
