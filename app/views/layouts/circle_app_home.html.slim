@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    meta charset='utf-8'
+    meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"
+    meta name="renderer" content="webkit"
+    meta http-equiv="cleartype" content="on"
+    meta name="HandheldFriendly" content="True"
+    meta name="MobileOptimized" content="320"
+    title
+      - if content_for?(:title)
+        = yield(:title)
+      - else
+        = current_circle.name
+    = csrf_meta_tags
+    = action_cable_meta_tag
+    = content_for?(:head) ? yield(:head) : ''
+    = stylesheet_link_tag 'circle-app', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'circle_app', 'data-turbolinks-track': 'reload'
+    = favicon_link_tag current_circle.avatar_url
+  body class=body_class
+    .page
+      .page-main
+        = yield
+        
+    - if content_for?(:modal_window)
+      = yield(:modal_window)
+    - else
+      #modal-window

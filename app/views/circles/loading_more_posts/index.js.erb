@@ -1,0 +1,2 @@
+$('.posts-list').append("<%= j render(partial: 'circles/posts/post', collection: @posts, as: :post) %>");
+$('.loading-more').replaceWith("<%= j render('shared/loading_more', records: @posts, url: circle_loading_more_posts_path(current_circle)) %>");

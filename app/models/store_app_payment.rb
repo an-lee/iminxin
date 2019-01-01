@@ -2,17 +2,17 @@
 #
 # Table name: store_app_payments
 #
-#  id                                  :bigint(8)        not null, primary key
-#  store_app_order_id                  :bigint(8)
-#  payer_id(支付者)                       :bigint(8)
-#  currency_id(支付币种)                   :bigint(8)
-#  total(对应 mixin 支付中的 amount)         :decimal(, )
-#  state(支付状态)                         :string
+#  id                                             :bigint(8)        not null, primary key
+#  store_app_order_id                             :bigint(8)
+#  payer_id(支付者)                               :bigint(8)
+#  currency_id(支付币种)                          :bigint(8)
+#  total(对应 mixin 支付中的 amount)              :decimal(, )
+#  state(支付状态)                                :string
 #  number(支付编号，对应 mixin 支付中的 trace_id) :string
-#  memo(备注)                            :string
-#  completed_at(支付完成时间)                :datetime
-#  created_at                          :datetime         not null
-#  updated_at                          :datetime         not null
+#  memo(备注)                                     :string
+#  completed_at(支付完成时间)                     :datetime
+#  created_at                                     :datetime         not null
+#  updated_at                                     :datetime         not null
 #
 # Indexes
 #

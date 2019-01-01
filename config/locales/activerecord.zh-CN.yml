@@ -10,3 +10,9 @@ zh-CN:
         name: 商品名
         introduction: 商品介绍
         cover: 商品封面
+      circle_app_setting:
+        introduction: 基本介绍
+        fee_currency_id: 入圈货币
+        fee_amount: 入圈费用
+        holder_limit_currency_id: 持仓限制货币
+        holder_limit_amount: 持仓限制数量

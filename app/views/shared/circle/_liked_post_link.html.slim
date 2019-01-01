@@ -1,0 +1,9 @@
+- post = post.reload
+- if current_circle_user.find_action(:like, target: post).present?
+  = link_to circle_liked_post_path(current_circle, post), class: 'icon', id: "#{format('post-%s-like', post.id)}", method: :delete, remote: true do
+    i.fe.fe-thumbs-up.mr-1.text-blue
+    span.text-blue = post.likes_count if post.likes_count > 0
+- else
+  = link_to circle_liked_post_path(current_circle, post), class: 'icon', id: "#{format('post-%s-like', post.id)}", method: :put, remote: true do
+    i.fe.fe-thumbs-up.mr-1.text-gray
+    span.text-gray = post.likes_count if post.likes_count > 0

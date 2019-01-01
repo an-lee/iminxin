@@ -3,11 +3,12 @@ Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
 
 Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: :login
-  match '/auth/mixin/callback', to: 'sessions#create', via: [:get, :post]
+  match '/auth/mixin/callback', to: 'sessions#create', via: [:get, :post], as: :session
   match '/auth/failure', to: 'sessions#failure', via: :get
   delete '/logout', to: 'sessions#destroy', as: :logout
 
   resources :mx_apps, only: [:index, :new, :create, :show, :edit, :update, :destroy], param: :number
+  resources :preview_mx_apps, only: [:show], param: :number
 
   # 应用管理
   resources :mx_apps, only: [], module: 'mx_apps', param: :number do
@@ -16,12 +17,19 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show]
       resources :orders, only: [:index]
     end
+
+    namespace :circle do
+      resource  :basic_setting, only: [:edit, :update]
+      resource  :limit_setting, only: [:edit, :update]
+      resources :users, only: [:index, :show]
+      resources :orders, only: [:index]
+    end
   end
 
-  # 买家视角的商店
+  # 用户视角的商店
   resources :stores, only: [], module: 'stores', param: :number do
     get 'login', to: 'sessions#new', as: :login
-    match '/auth/mixin/callback', to: 'sessions#create', via: [:get, :post]
+    match '/auth/mixin/callback', to: 'sessions#create', via: [:get, :post], as: :session
     match '/auth/failure', to: 'sessions#failure', via: :get
     delete '/logout', to: 'sessions#destroy', as: :logout
 
@@ -33,6 +41,25 @@ Rails.application.routes.draw do
     end
 
     get '/', to: 'app#show', as: :root
+  end
+
+  # 用户视角的新圈子
+  resources :circles, only: [], module: 'circles', param: :number do
+    get 'login', to: 'sessions#new', as: :login
+    match '/auth/mixin/callback', to: 'sessions#create', via: [:get, :post], as: :session
+    match '/auth/failure', to: 'sessions#failure', via: :get
+    delete '/logout', to: 'sessions#destroy', as: :logout
+
+    get '/', to: 'home#index', as: :root
+
+    resources :membership_orders, only: [:new, :create]
+    resource :payment_state, only: [:show]
+
+    resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+      resources :comments, only: [:new, :create, :destroy]
+    end
+    resources :loading_more_posts, only: [:index]
+    resources :liked_posts, only: [:update, :destroy]
   end
 
   namespace :admin do

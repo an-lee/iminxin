@@ -1,0 +1,35 @@
+.card
+  .card-body
+    .circle-app-setting-form
+      = simple_form_for current_circle.circle_app_setting, url: mx_app_circle_limit_setting_path(current_circle), method: :put do |f|
+        .form-group
+          = f.label :fee_currency_id, class: 'form-label'
+          .selectgroup.selectgoup-pills.circle-app-setting-form-fee-currency-selectgoup data-fee-currency=current_circle.circle_app_setting&.fee_currency_id
+            - Currency.all.each do |currency|
+              label.selectgroup-item
+                input.selectgroup-input type='radio' name='circle_app_setting[fee_currency_id]' value=currency.id data-symbol=currency.symbol
+                span.selectgroup-button.selectgroup-button-icon
+                  = image_tag currency.icon_url
+          = f.label :fee_amount, class: 'form-label'
+          .input-group
+            span.input-group-prepend
+              .input-group-text.circle-app-setting-form-fee-currency-symbol
+                = current_circle.circle_app_setting&.fee_currency ? current_circle.circle_app_setting&.fee_currency.symbol : '?'
+            = f.number_field :fee_amount, placeholder: '不填则不限', class: "form-control"
+
+        .form-group
+          = f.label :holder_limit_currency_id, class: 'form-label'
+          .selectgroup.selectgoup-pills.circle-app-setting-form-holder-currency-selectgoup data-holder-currency=current_circle.circle_app_setting&.holder_limit_currency_id
+            - Currency.all.each do |currency|
+              label.selectgroup-item
+                input.selectgroup-input type='radio' name='circle_app_setting[holder_limit_currency_id]' value=currency.id data-symbol=currency.symbol
+                span.selectgroup-button.selectgroup-button-icon
+                  = image_tag currency.icon_url
+          = f.label :holder_limit_amount, class: 'form-label'
+          .input-group
+            span.input-group-prepend
+              .input-group-text.circle-app-setting-form-holder-currency-symbol
+                = current_circle.circle_app_setting&.holder_limit_currency ? current_circle.circle_app_setting&.holder_limit_currency.symbol : '?'
+            = f.number_field :holder_limit_amount, placeholder: '不填则不限', class: "form-control"
+
+        = f.submit '更新设置', class: 'btn btn-primary'

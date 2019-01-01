@@ -1,0 +1,14 @@
+= paginator.render do
+  .kaminari
+    ul.custom-list-pagination
+      .pagination-navigator-wrap
+        == prev_page_tag
+
+      .pagination-content-wrap
+        = format("%s/%s", current_page.number, total_pages)
+
+      .pagination-navigator-wrap
+        == next_page_tag
+
+      .pagination-goto-wrap.d-none.d-sm-block
+        == page_tag(1)

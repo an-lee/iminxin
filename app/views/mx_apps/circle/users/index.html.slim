@@ -1,0 +1,31 @@
+.card
+  .card-header
+    h3.card-title 用户管理
+  .table-responsive
+    table.table.card-table.table-hover.table-outline.table-vcenter.text-nowrap.card-table.datatable.dataTable.no-footer
+      thead
+        tr
+          th.text-center.w-1
+          th 用户名
+          th 会员
+          th 会员到期时间
+          th 注册时间
+      tbody
+        - @users.each do |user|
+          tr
+            td.text-center
+              .avatar.d-block style=(format('background-image: url(%s)', user.avatar_url))
+            td = user.name
+            td
+              - if user.member?
+                .tag.tag-green 会员
+              - else
+                .tag.tag-gray 非会员
+            td
+              - if user.member?
+                = display_datetime user.membership.expired_at
+              - else
+                | -
+            td = display_datetime user.created_at
+
+    = paginate @users

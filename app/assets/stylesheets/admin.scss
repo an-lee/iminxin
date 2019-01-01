@@ -2,32 +2,3 @@
 @import "bootstrap";
 @import "tabler";
 @import "tabler.plugins";
-
-// Navbar
-.navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
-  right: 0;
-}
-.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
-  height: auto;
-}
-
-// Messages
-.content-messages {
-  padding: 15px;
-}
-
-// Table
-.table {
-  .actions {
-    .action {
-      margin-right: 8px;
-    }
-  }
-}
-
-// Actions
-.actions {
-  .action {
-    margin-right: 20px;
-  }
-}

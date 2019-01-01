@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_054730) do
+ActiveRecord::Schema.define(version: 2019_01_01_034424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actions", id: :serial, force: :cascade do |t|
+    t.string "action_type", null: false
+    t.string "action_option"
+    t.string "target_type"
+    t.integer "target_id"
+    t.string "user_type"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["target_type", "target_id", "action_type"], name: "index_actions_on_target_type_and_target_id_and_action_type"
+    t.index ["user_type", "user_id", "action_type"], name: "index_actions_on_user_type_and_user_id_and_action_type"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,6 +55,85 @@ ActiveRecord::Schema.define(version: 2018_11_20_054730) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_administrators_on_name", unique: true
+  end
+
+  create_table "circle_app_comments", force: :cascade do |t|
+    t.bigint "author_id"
+    t.bigint "circle_app_post_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0
+    t.index ["author_id"], name: "index_circle_app_comments_on_author_id"
+    t.index ["circle_app_post_id"], name: "index_circle_app_comments_on_circle_app_post_id"
+  end
+
+  create_table "circle_app_orders", comment: "新圈子订单", force: :cascade do |t|
+    t.bigint "circle_app_id"
+    t.bigint "buyer_id", comment: " 买家"
+    t.bigint "currency_id", comment: "支付币种"
+    t.decimal "total", comment: "订单总价"
+    t.string "number", comment: "订单编号"
+    t.string "state", comment: "订单状态"
+    t.datetime "completed_at", comment: "订单完成时间"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "order_type", comment: "订单类型"
+    t.index ["buyer_id"], name: "index_circle_app_orders_on_buyer_id"
+    t.index ["circle_app_id"], name: "index_circle_app_orders_on_circle_app_id"
+    t.index ["currency_id"], name: "index_circle_app_orders_on_currency_id"
+  end
+
+  create_table "circle_app_payments", force: :cascade do |t|
+    t.bigint "circle_app_order_id"
+    t.bigint "payer_id", comment: "支付者"
+    t.bigint "currency_id"
+    t.string "asset_id"
+    t.string "opponent_id"
+    t.string "trace_id"
+    t.decimal "amount"
+    t.string "memo"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_app_order_id"], name: "index_circle_app_payments_on_circle_app_order_id"
+    t.index ["currency_id"], name: "index_circle_app_payments_on_currency_id"
+    t.index ["payer_id"], name: "index_circle_app_payments_on_payer_id"
+  end
+
+  create_table "circle_app_posts", force: :cascade do |t|
+    t.bigint "author_id"
+    t.bigint "circle_app_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0
+    t.index ["author_id"], name: "index_circle_app_posts_on_author_id"
+    t.index ["circle_app_id"], name: "index_circle_app_posts_on_circle_app_id"
+  end
+
+  create_table "circle_app_settings", force: :cascade do |t|
+    t.bigint "circle_app_id"
+    t.integer "accepted_currency_ids", comment: "圈内可流通的货币，主要用于打赏", array: true
+    t.bigint "fee_currency_id", comment: "入圈费用币种"
+    t.decimal "fee_amount", comment: "入圈费用"
+    t.bigint "holder_limit_currency_id", comment: " 持仓限制的币种"
+    t.decimal "holder_limit_amount", comment: " 持仓限制的数量"
+    t.string "state", comment: "状态"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "introduction", comment: "介绍"
+    t.index ["circle_app_id"], name: "index_circle_app_settings_on_circle_app_id"
+    t.index ["fee_currency_id"], name: "index_circle_app_settings_on_fee_currency_id"
+    t.index ["holder_limit_currency_id"], name: "index_circle_app_settings_on_holder_limit_currency_id"
+  end
+
+  create_table "circle_app_user_memberships", force: :cascade do |t|
+    t.bigint "circle_app_user_id"
+    t.datetime "expired_at", comment: "会员到期时间"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_app_user_id"], name: "index_circle_app_user_memberships_on_circle_app_user_id"
   end
 
   create_table "currencies", comment: "支持的货币", force: :cascade do |t|
@@ -73,6 +165,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_054730) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type", comment: "STI"
     t.index ["mx_app_id"], name: "index_mx_app_users_on_mx_app_id"
     t.index ["user_id"], name: "index_mx_app_users_on_user_id"
   end
@@ -191,6 +284,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_054730) do
     t.json "raw", comment: "第三方返回的原始数据"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "assets", comment: "资产信息"
     t.index ["provider", "uid"], name: "index_user_authorizations_on_provider_and_uid", unique: true
     t.index ["user_id"], name: "index_user_authorizations_on_user_id"
   end
@@ -204,6 +298,20 @@ ActiveRecord::Schema.define(version: 2018_11_20_054730) do
     t.index ["identity_number"], name: "index_users_on_identity_number", unique: true
   end
 
+  add_foreign_key "circle_app_comments", "circle_app_posts"
+  add_foreign_key "circle_app_comments", "mx_app_users", column: "author_id"
+  add_foreign_key "circle_app_orders", "currencies"
+  add_foreign_key "circle_app_orders", "mx_app_users", column: "buyer_id"
+  add_foreign_key "circle_app_orders", "mx_apps", column: "circle_app_id"
+  add_foreign_key "circle_app_payments", "circle_app_orders"
+  add_foreign_key "circle_app_payments", "currencies"
+  add_foreign_key "circle_app_payments", "mx_app_users", column: "payer_id"
+  add_foreign_key "circle_app_posts", "mx_app_users", column: "author_id"
+  add_foreign_key "circle_app_posts", "mx_apps", column: "circle_app_id"
+  add_foreign_key "circle_app_settings", "currencies", column: "fee_currency_id"
+  add_foreign_key "circle_app_settings", "currencies", column: "holder_limit_currency_id"
+  add_foreign_key "circle_app_settings", "mx_apps", column: "circle_app_id"
+  add_foreign_key "circle_app_user_memberships", "mx_app_users", column: "circle_app_user_id"
   add_foreign_key "mx_app_attachments", "mx_apps"
   add_foreign_key "mx_app_users", "mx_apps"
   add_foreign_key "mx_app_users", "users"
