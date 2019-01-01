@@ -1,10 +1,13 @@
 .container.my-3.my-md-5
   .card
-    .card-header 我的 Mixin 机器人
+    .card-header 
+      | 我的 Mixin 机器人
+      .ml-auto
+        = link_to '新建', mx_apps_path(type: 'CircleApp'), method: :post, class: 'btn btn-sm btn-green'
     - if current_user.mx_apps.blank?
       .card-body
         | 还没有机器人，快去
-        = link_to '创建一个', root_path
+        = link_to '创建一个', mx_apps_path(type: 'CircleApp'), method: :post, class: 'btn btn-green btn-block'
         | 吧
     - else
       table.table.card-table.table-vcenter
