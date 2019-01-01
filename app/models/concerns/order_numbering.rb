@@ -1,4 +1,4 @@
-module Numbering
+module OrderNumbering
   extend ActiveSupport::Concern
 
   included do
@@ -11,7 +11,8 @@ module Numbering
 
   def setup_number
     loop do
-      candidate = SecureRandom.random_number(1_00_000_000)
+      now = Time.current
+      candidate = now.strftime('%Y%m%d%H%M%S') + now.nsec.to_s
       unless self.class.exists?(number: candidate)
         self.number = candidate
         break

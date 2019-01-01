@@ -30,7 +30,7 @@ class CircleAppOrder < ApplicationRecord
   extend Enumerize
   include AASM
   include DisplayPrice
-  include Numbering
+  include OrderNumbering
 
   belongs_to :currency
   belongs_to :circle_app

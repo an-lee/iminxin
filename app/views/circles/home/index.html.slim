@@ -4,43 +4,48 @@
       .avatar.avatar-xl style=(format('background-image: url(%s)', current_circle.avatar_url))
       .pt-3.h4
         = current_circle.name
-    .row
-      .col-md-6.mx-auto
-        - unless current_circle.introduction.blank?
-          .card.mb-5
-            .card-body
-              .introduction.mb-5
-                = simple_format current_circle.introduction
-              .text-right
-                span.avatar.avatar-sm style=(format('background-image: url(%s)', current_circle.owner.avatar_url))
-                small.ml-1 = current_circle.owner.name
-
-        .alert.alert-info.mb-5
-          - unless current_circle.fee_amount.blank? && current_circle.holder_limit_amount.blank?
-            | 入圈限制：
-            ul
-              li.mt-3
-                - if current_circle.fee_amount.present?
-                  = format('支付 %s %s', current_circle.fee_amount, current_circle.fee_currency.symbol)
-              li
-                - if current_circle.holder_limit_amount.present?
-                  = format('Mixin 钱包至少持仓 %s %s', current_circle.holder_limit_amount, current_circle.holder_limit_currency.symbol)
-
-    - if current_circle_user.blank?
-      - btnClass = 'mixin-login-required'
-      - modal = 'shared/circle/mixin_login_modal'
-    - elsif current_circle_user.holder_limited?
-      - btnClass = 'mixin-holder-limit'
-      - modal = 'shared/circle/mixin_holder_limit_modal'
-    - elsif current_circle_user.fee_limited?
-      - btnClass = 'mixin-fee-limit'
-      - modal = 'shared/circle/mixin_fee_limit_modal'
+    - if !current_circle.audited?
+      .text-center.text-muted
+        | 还没准备好
     - else
-      - btnClass = ''
-      - modal = ''
+      .row
+        .col-md-6.mx-auto
+          - unless current_circle.introduction.blank?
+            .card.mb-5
+              .card-body
+                .introduction.mb-5
+                  = simple_format current_circle.introduction
+                .text-right
+                  span.avatar.avatar-sm style=(format('background-image: url(%s)', current_circle.owner.avatar_url))
+                  small.ml-1 = current_circle.owner.name
 
-    .text-center
-      = link_to '进入', circle_posts_path(current_circle), class: "btn btn-pill btn-info #{btnClass}"
+          .mb-5
+            - unless current_circle.fee_amount.blank? && current_circle.holder_limit_amount.blank?
+              .alert.alert-info
+                | 入圈限制：
+                ul
+                  li.mt-3
+                    - if current_circle.fee_amount.present?
+                      = format('支付 %s %s', current_circle.fee_amount, current_circle.fee_currency.symbol)
+                  li
+                    - if current_circle.holder_limit_amount.present?
+                      = format('Mixin 钱包至少持仓 %s %s', current_circle.holder_limit_amount, current_circle.holder_limit_currency.symbol)
+
+      - if current_circle_user.blank?
+        - btnClass = 'mixin-login-required'
+        - modal = 'shared/circle/mixin_login_modal'
+      - elsif current_circle_user.holder_limited?
+        - btnClass = 'mixin-holder-limit'
+        - modal = 'shared/circle/mixin_holder_limit_modal'
+      - elsif current_circle_user.fee_limited?
+        - btnClass = 'mixin-fee-limit'
+        - modal = 'shared/circle/mixin_fee_limit_modal'
+      - else
+        - btnClass = ''
+        - modal = ''
+
+      .text-center
+        = link_to '进入', circle_posts_path(current_circle), class: "btn btn-pill btn-info #{btnClass}"
 
   - content_for(:modal_window) do
     #modal-window
