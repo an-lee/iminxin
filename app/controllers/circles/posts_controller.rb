@@ -47,6 +47,6 @@ class Circles::PostsController < Circles::BaseController
   end
 
   def load_post
-    @post = current_circle_user.posts.find(params[:post_id])
+    @post = current_circle_user.posts.find(params[:id])
   end
 end

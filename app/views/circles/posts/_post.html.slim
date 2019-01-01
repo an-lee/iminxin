@@ -1,4 +1,4 @@
-li.post-item.list-group-item.p-3.p-md-5 data-post-id=post.id
+li.post-item.list-group-item.p-3.p-md-5 data-post-id=post.id id=format('post-%s-item', post.id)
   .media.pt-3
     .media-object.avatar.avatar-sm.mr-3 style=(format('background-image: url(%s)', post.author.avatar_url))
     .media-body
@@ -9,8 +9,15 @@ li.post-item.list-group-item.p-3.p-md-5 data-post-id=post.id
       .media-content
         = simple_format post.content
       .media-actions.d-flex.justify-content-center
-        .ml-auto.action-like.text-center.px-3.py-2
+        .ml-auto.action-like.text-center.p-2
           = render 'shared/circle/liked_post_link', post: post
-        .action-comment.text-center.px-3.py-2
-          i.fe.fe-message-square
-      
+        .action-comment.text-center.p-2
+          = link_to new_circle_post_comment_path(current_circle, post), class: 'icon', id: "#{format('post-%s-comment', post.id)}", remote: true do
+            div class=(post.comments.count > 0 ? 'text-blue' : 'text-gray')
+              i.fe.fe-message-square.mr-1
+              span = post.comments.count if post.comments.count > 0
+      .media-comment-form.d-none.mt-3 id=format('post-%s-comments-form', post.id)
+        = render 'circles/comments/form', post: post
+      .media-comments-list.mt-3 id=format('post-%s-comments-list', post.id)
+        ul.list-group.card-list-group.comments-list
+          = render partial: 'circles/comments/comment', collection: post.comments, as: :comment

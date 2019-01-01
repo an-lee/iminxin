@@ -23,7 +23,7 @@
 
 class CircleAppComment < ApplicationRecord
   belongs_to :author, class_name: 'CircleAppUser'
-  belongs_to :circle_app_post
+  belongs_to :post, class_name: 'CircleAppPost', foreign_key: 'circle_app_post_id'
 
   validates :content, presence: :true
 end

@@ -25,5 +25,7 @@ class CircleAppPost < ApplicationRecord
   belongs_to :author, class_name: 'CircleAppUser'
   belongs_to :circle_app
 
+  has_many :comments, class_name: 'CircleAppComment'
+
   validates :content, presence: :true
 end

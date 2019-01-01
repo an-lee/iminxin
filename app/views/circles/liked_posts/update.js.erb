@@ -1,1 +1,1 @@
-$('#post-<%= @post.id %>').html('<%= render "shared/circle/liked_post_link", post: @post %>');
+$('#post-<%= @post.id %>-like').replaceWith('<%= render "shared/circle/liked_post_link", post: @post %>');

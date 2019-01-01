@@ -55,7 +55,9 @@ Rails.application.routes.draw do
     resources :membership_orders, only: [:new, :create]
     resource :payment_state, only: [:show]
 
-    resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+      resources :comments, only: [:new, :create, :destroy]
+    end
     resources :loading_more_posts, only: [:index]
     resources :liked_posts, only: [:update, :destroy]
   end

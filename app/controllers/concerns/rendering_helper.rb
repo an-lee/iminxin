@@ -49,7 +49,7 @@ module RenderingHelper
   end
 
   def render_turbolinks_reload
-    render js: 'Turbolinks.reload()'
+    render js: 'Turbolinks.visit()'
   end
 
   def render_noty_success(message)
