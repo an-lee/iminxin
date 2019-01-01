@@ -1,0 +1,32 @@
+.list-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #9E9F9E;
+  font-size: 14px;
+
+  form {
+    display: flex;
+    .form-group {
+      margin-bottom: 0;
+      margin-right: 13px;
+      input {
+        width: 60px;
+        height: 28px;
+        border: 1px #E1E1E1 solid;
+      }
+    }
+    input[type="submit"] {
+      min-width: 28px;
+      width: 28px;
+      height: 28px;
+      background-color: #03a9f4;
+      border-color: #03a9f4;
+      font-size: 14px;
+      color: #FFF;
+      line-height: 1;
+      text-indent: 0;
+      letter-spacing: 0;
+    }
+  }
+}

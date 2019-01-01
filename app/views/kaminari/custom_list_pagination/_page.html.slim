@@ -1,0 +1,4 @@
+li
+  = form_tag url, method: :get, remote: remote do
+    = number_field_tag :page, '', min: 1, max: total_pages, class: 'form-control'
+    = submit_tag 'GO', class: 'form-control cursor-pointer'

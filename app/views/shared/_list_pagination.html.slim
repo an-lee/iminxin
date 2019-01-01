@@ -1,0 +1,4 @@
+.list-pagination
+  - if records_count.nonzero?
+    span = format('共%s条记录', records_count)
+  = paginate records, theme: 'custom_list_pagination', remote: (defined?(remote) ? remote : false), params: (defined?(url_options) ? url_options : nil)

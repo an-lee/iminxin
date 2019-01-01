@@ -17,14 +17,14 @@
 
         .alert.alert-info.mb-5
           - unless current_circle.fee_amount.blank? && current_circle.holder_limit_amount.blank?
-            | Limit to this circle:
+            | 入圈限制：
             ul
               li.mt-3
                 - if current_circle.fee_amount.present?
-                  = format('Pay %s %s', current_circle.fee_amount, current_circle.fee_currency.symbol)
+                  = format('支付 %s %s', current_circle.fee_amount, current_circle.fee_currency.symbol)
               li
                 - if current_circle.holder_limit_amount.present?
-                  = format('Hold at least %s %s in your Mixin wallet', current_circle.holder_limit_amount, current_circle.holder_limit_currency.symbol)
+                  = format('Mixin 钱包至少持仓 %s %s', current_circle.holder_limit_amount, current_circle.holder_limit_currency.symbol)
 
     - if current_circle_user.blank?
       - btnClass = 'mixin-login-required'
@@ -40,7 +40,7 @@
       - modal = ''
 
     .text-center
-      = link_to 'Enter', circle_posts_path(current_circle), class: "btn btn-pill btn-info #{btnClass}"
+      = link_to '进入', circle_posts_path(current_circle), class: "btn btn-pill btn-info #{btnClass}"
 
   - content_for(:modal_window) do
     #modal-window

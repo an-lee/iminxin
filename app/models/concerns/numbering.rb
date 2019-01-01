@@ -11,7 +11,7 @@ module Numbering
 
   def setup_number
     loop do
-      candidate = SecureRandom.uuid
+      candidate = SecureRandom.random_number(11)
       unless self.class.exists?(number: candidate)
         self.number = candidate
         break

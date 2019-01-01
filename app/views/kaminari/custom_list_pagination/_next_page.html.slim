@@ -1,0 +1,7 @@
+li
+  - if current_page.last?
+    = link_to "javascript:void(0)", class: 'anchor-navigator inactive-anchor-navigator' do
+      i.fe.fe-arrow-right
+  - else
+    = link_to url, rel: 'next', remote: remote, class: 'anchor-navigator active-anchor-navigator' do
+      i.fe.fe-arrow-right

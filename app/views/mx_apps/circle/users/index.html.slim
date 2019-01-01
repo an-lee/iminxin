@@ -7,7 +7,8 @@
         tr
           th.text-center.w-1
           th 用户名
-          th 手机号
+          th 会员
+          th 会员到期时间
           th 注册时间
       tbody
         - @users.each do |user|
@@ -15,7 +16,16 @@
             td.text-center
               .avatar.d-block style=(format('background-image: url(%s)', user.avatar_url))
             td = user.name
-            td = user.phone
-            td = user.created_at
+            td
+              - if user.member?
+                .tag.tag-green 会员
+              - else
+                .tag.tag-gray 非会员
+            td
+              - if user.member?
+                = display_datetime user.membership.expired_at
+              - else
+                | -
+            td = display_datetime user.created_at
 
     = paginate @users
