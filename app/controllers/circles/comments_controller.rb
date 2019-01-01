@@ -2,6 +2,7 @@ class Circles::CommentsController < Circles::BaseController
   before_action :load_post
 
   def create
+    return if comment_params[:content].blank?
     @comment = @post.comments.create!(comment_params.merge(author: current_circle_user))
   end
   

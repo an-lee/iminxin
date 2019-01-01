@@ -36,7 +36,7 @@ class Circles::PostsController < Circles::BaseController
   
   def destroy
     @post.destroy!
-    redirect_to circle_posts_path(current_circle)
+    render_turbolinks_reload
   end
   
 

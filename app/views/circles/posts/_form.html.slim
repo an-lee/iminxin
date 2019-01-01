@@ -1,4 +1,5 @@
 = simple_form_for post, url: url do |f|
-  = f.input :content, placeholder: 'What do you want to post?', input_html: { rows: '7' }
+  = f.input :content, label: false, placeholder: 'What do you want to post?', input_html: { rows: '7' }
   .text-center
-    = f.submit 'Submit', class: 'btn btn-pill btn-info'
+    = link_to '取消', circle_posts_path(current_circle), class: 'btn btn-pill btn-secondary mr-3'
+    = f.submit '提交', class: 'btn btn-pill btn-info'
