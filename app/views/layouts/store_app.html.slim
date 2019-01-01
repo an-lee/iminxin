@@ -19,7 +19,7 @@ html
     = stylesheet_link_tag 'store-app', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'store_app', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'store_app'
-    = favicon_link_tag "favicon.png"
+    = favicon_link_tag current_circle.avatar_url
   body class=body_class
     .page
       = yield

@@ -40,7 +40,7 @@ class StoreAppOrder < ApplicationRecord
 
   include AASM
   include DisplayPrice
-  include Numbering
+  include OrderNumbering
 
   belongs_to :store_app
   belongs_to :buyer, class_name: 'StoreAppUser'
