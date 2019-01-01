@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_30_010913) do
+ActiveRecord::Schema.define(version: 2019_01_01_034424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actions", id: :serial, force: :cascade do |t|
+    t.string "action_type", null: false
+    t.string "action_option"
+    t.string "target_type"
+    t.integer "target_id"
+    t.string "user_type"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["target_type", "target_id", "action_type"], name: "index_actions_on_target_type_and_target_id_and_action_type"
+    t.index ["user_type", "user_id", "action_type"], name: "index_actions_on_user_type_and_user_id_and_action_type"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +63,7 @@ ActiveRecord::Schema.define(version: 2018_12_30_010913) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0
     t.index ["author_id"], name: "index_circle_app_comments_on_author_id"
     t.index ["circle_app_post_id"], name: "index_circle_app_comments_on_circle_app_post_id"
   end
@@ -93,6 +107,7 @@ ActiveRecord::Schema.define(version: 2018_12_30_010913) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0
     t.index ["author_id"], name: "index_circle_app_posts_on_author_id"
     t.index ["circle_app_id"], name: "index_circle_app_posts_on_circle_app_id"
   end

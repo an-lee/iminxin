@@ -1,0 +1,4 @@
+= simple_form_for post, url: url do |f|
+  = f.input :content, placeholder: 'What do you want to post?', input_html: { rows: '7' }
+  .text-center
+    = f.submit 'Submit', class: 'btn btn-pill btn-info'

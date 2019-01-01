@@ -34,6 +34,7 @@ class CircleApp < MxApp
   has_many :mx_app_image_attachments, foreign_key: 'mx_app_id'
   has_many :orders, class_name: 'CircleAppOrder'
   has_many :payments, through: :orders, source: :circle_app_payment
+  has_many :posts, class_name: 'CircleAppPost'
 
   has_one :circle_app_setting
 

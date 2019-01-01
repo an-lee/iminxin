@@ -1,0 +1,6 @@
+- if records.next_page.present?
+  button.btn.btn-secondary.loading-more.width-100 data-url=url data-current-page=records.current_page
+    | 加载更多
+- else
+  .text-center.text-muted 
+    | - 没有更多了 -

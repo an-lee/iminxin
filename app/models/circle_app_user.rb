@@ -30,6 +30,8 @@ class CircleAppUser < MxAppUser
 
   after_create :create_membership
 
+  action_store :like, :circle_app_post, counter_cache: true
+
   def owner?
     user == circle_app.owner
   end

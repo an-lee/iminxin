@@ -1,0 +1,16 @@
+li.post-item.list-group-item.p-3.p-md-5 data-post-id=post.id
+  .media.pt-3
+    .media-object.avatar.avatar-sm.mr-3 style=(format('background-image: url(%s)', post.author.avatar_url))
+    .media-body
+      .media-heading
+        small.float-right.text-muted
+          = time_ago_in_words post.created_at
+        h5 = post.author.name
+      .media-content
+        = simple_format post.content
+      .media-actions.d-flex.justify-content-center
+        .ml-auto.action-like.text-center.px-3.py-2
+          = render 'shared/circle/liked_post_link', post: post
+        .action-comment.text-center.px-3.py-2
+          i.fe.fe-message-square
+      

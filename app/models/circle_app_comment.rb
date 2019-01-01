@@ -8,6 +8,7 @@
 #  content            :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  likes_count        :integer          default(0)
 #
 # Indexes
 #
@@ -24,5 +25,5 @@ class CircleAppComment < ApplicationRecord
   belongs_to :author, class_name: 'CircleAppUser'
   belongs_to :circle_app_post
 
-  validate :content
+  validates :content, presence: :true
 end

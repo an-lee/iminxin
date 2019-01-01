@@ -56,6 +56,8 @@ Rails.application.routes.draw do
     resource :payment_state, only: [:show]
 
     resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    resources :loading_more_posts, only: [:index]
+    resources :liked_posts, only: [:update, :destroy]
   end
 
   namespace :admin do

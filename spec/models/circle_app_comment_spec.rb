@@ -8,6 +8,7 @@
 #  content            :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  likes_count        :integer          default(0)
 #
 # Indexes
 #

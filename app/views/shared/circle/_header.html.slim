@@ -1,7 +1,7 @@
 .header.py-4
   .container
     .d-flex
-      = link_to circle_root_path, class: 'header-brand' do
+      = link_to circle_posts_path, class: 'header-brand' do
         img src=current_circle.avatar_url class='header-brand-img' alt=current_circle.name
         = current_circle.name
       .d-flex.order-lg-2.ml-auto

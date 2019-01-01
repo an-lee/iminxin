@@ -22,6 +22,7 @@ gem 'figaro'
 gem 'lograge'
 gem 'enumerize'
 gem 'activestorage-aliyun'
+gem 'action-store'
 
 # Authorization
 gem 'bcrypt'
