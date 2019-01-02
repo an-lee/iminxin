@@ -38,8 +38,8 @@ class MxAppsController < ApplicationController
                     end
 
     if @mx_app.update(wx_app_params)
-      @mx_app.audit!
-      if @mx_app.audited?
+      @mx_app.bind!
+      if @mx_app.binded?
         flash[:notice] = "成功绑定"
       else
         flash[:alert] = "绑定失败，请检查填写的信息是否正确"

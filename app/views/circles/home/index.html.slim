@@ -4,7 +4,7 @@
       .avatar.avatar-xl style=(format('background-image: url(%s)', current_circle.avatar_url))
       .pt-3.h4
         = current_circle.name
-    - if !current_circle.audited?
+    - if !current_circle.binded?
       .text-center.text-muted
         | 还没准备好
     - else

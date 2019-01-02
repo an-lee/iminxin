@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_01_034424) do
+ActiveRecord::Schema.define(version: 2019_01_02_131905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 2019_01_01_034424) do
     t.json "raw", comment: "mixin 返回的 profile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "audited_at", comment: "mixin账号审核时间"
+    t.datetime "binded_at", comment: "mixin账号审核时间"
     t.string "identity_number", comment: "mixin 号"
     t.index ["identity_number"], name: "index_mx_apps_on_identity_number", unique: true
     t.index ["number"], name: "index_mx_apps_on_number", unique: true
