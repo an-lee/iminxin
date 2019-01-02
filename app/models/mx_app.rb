@@ -2,21 +2,21 @@
 #
 # Table name: mx_apps
 #
-#  id                            :bigint(8)        not null, primary key
-#  owner_id                      :bigint(8)
-#  type                          :string
-#  number(编号)                  :string
-#  deleted_at(软删)              :datetime
-#  client_id                     :string
-#  client_secret                 :string
-#  session_id                    :string
-#  pin_token                     :string
-#  private_key                   :text
-#  raw(mixin 返回的 profile)     :json
-#  created_at                    :datetime         not null
-#  updated_at                    :datetime         not null
-#  audited_at(mixin账号审核时间) :datetime
-#  identity_number(mixin 号)     :string
+#  id                           :bigint(8)        not null, primary key
+#  owner_id                     :bigint(8)
+#  type                         :string
+#  number(编号)                 :string
+#  deleted_at(软删)             :datetime
+#  client_id                    :string
+#  client_secret                :string
+#  session_id                   :string
+#  pin_token                    :string
+#  private_key                  :text
+#  raw(mixin 返回的 profile)    :json
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  binded_at(mixin账号审核时间) :datetime
+#  identity_number(mixin 号)    :string
 #
 # Indexes
 #
@@ -64,18 +64,18 @@ class MxApp < ApplicationRecord
     })
   end
 
-  def audit!
+  def bind!
     r = mixin_api.read_me
     if r['error'].present?
-      update! audited_at: nil
+      update! binded_at: nil
     else
       update! raw: r['data']
-      touch :audited_at
+      touch :binded_at
     end
   end
 
-  def audited?
-    audited_at?
+  def binded?
+    binded_at?
   end
 
   def get_user_conversation_id(user)
