@@ -23,6 +23,7 @@ html
     .page
       .page-main
         = render 'shared/circle/header'
+        = render 'shared/flash_messages'
         = yield
         
     - if content_for?(:modal_window)

@@ -17,7 +17,9 @@
               .avatar.d-block style=(format('background-image: url(%s)', user.avatar_url))
             td = user.name
             td
-              - if user.member?
+              - if user.owner?
+                .tag.tag-red 圈主
+              - elsif user.member?
                 .tag.tag-green 会员
               - else
                 .tag.tag-gray 非会员
