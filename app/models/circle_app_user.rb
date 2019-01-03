@@ -37,7 +37,7 @@ class CircleAppUser < MxAppUser
   end
 
   def member?
-    membership.activated?
+    owner? || membership.activated?
   end
 
   def fee_limited?
