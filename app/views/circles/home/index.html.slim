@@ -34,15 +34,15 @@
       - if current_circle_user.blank?
         - btnClass = 'mixin-login-required'
         - modal = 'shared/circle/mixin_login_modal'
+      - elsif current_circle_user.member?
+        - btnClass = ''
+        - modal = ''
       - elsif current_circle_user.holder_limited?
         - btnClass = 'mixin-holder-limit'
         - modal = 'shared/circle/mixin_holder_limit_modal'
       - elsif current_circle_user.fee_limited?
         - btnClass = 'mixin-fee-limit'
         - modal = 'shared/circle/mixin_fee_limit_modal'
-      - else
-        - btnClass = ''
-        - modal = ''
 
       .text-center
         = link_to '进入', circle_posts_path(current_circle), class: "btn btn-pill btn-info #{btnClass}"
