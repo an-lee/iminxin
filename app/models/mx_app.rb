@@ -40,12 +40,6 @@ class MxApp < ApplicationRecord
 
   before_validation :setup_identity_number, if: -> { raw_changed? }
 
-  # validates :client_id, presence: true, on: :update
-  # validates :client_secret, presence: true, on: :update
-  # validates :session_id, presence: true, on: :update
-  # validates :pin_token, presence: true, on: :update
-  # validates :private_key, format: { with: /\A-----BEGIN RSA PRIVATE KEY-----/i }, on: :update
-
   def to_param
     number
   end
@@ -76,10 +70,6 @@ class MxApp < ApplicationRecord
 
   def binded?
     binded_at?
-  end
-
-  def get_user_conversation_id(user)
-    res = mixin_api.read_conversation_by_user_id
   end
 
   private
