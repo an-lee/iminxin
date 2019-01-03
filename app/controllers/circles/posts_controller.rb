@@ -12,7 +12,7 @@ class Circles::PostsController < Circles::BaseController
   def create
     @post = current_circle.posts.create(post_params.merge(author: current_circle_user))
     if @post.save
-      redirect_to circle_posts_path(current_circle), notice: 'A new post was created successfully.'
+      redirect_to circle_posts_path(current_circle), notice: '成功创建'
     else
       render :new
     end
