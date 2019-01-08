@@ -40,12 +40,6 @@ class MxApp < ApplicationRecord
 
   before_validation :setup_identity_number, if: -> { raw_changed? }
 
-  # validates :client_id, presence: true, on: :update
-  # validates :client_secret, presence: true, on: :update
-  # validates :session_id, presence: true, on: :update
-  # validates :pin_token, presence: true, on: :update
-  # validates :private_key, format: { with: /\A-----BEGIN RSA PRIVATE KEY-----/i }, on: :update
-
   def to_param
     number
   end
@@ -78,8 +72,18 @@ class MxApp < ApplicationRecord
     binded_at?
   end
 
-  def get_user_conversation_id(user)
-    res = mixin_api.read_conversation_by_user_id
+  def home_url
+    case type
+    when 'CircleApp' then format('https://imxin.xin/circles/%s', number)
+    when 'StoreApp' then format('https://imxin.xin/stores/%s', number)
+    end
+  end
+
+  def auth_callback_url
+    case type
+    when 'CircleApp' then format('https://imxin.xin/circles/%s/auth/mixin/callback', number)
+    when 'StoreApp' then format('https://imxin.xin/stores/%s/auth/mixin/callback', number)
+    end
   end
 
   private
