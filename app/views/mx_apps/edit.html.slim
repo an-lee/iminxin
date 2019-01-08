@@ -2,10 +2,18 @@
   .card
     .card-header 绑定 Mixin 机器人
     .card-body
+      .form-group
+        label.form-control-label 
+          | The home uri
+        code.form-control = @mx_app.home_url
+      .form-group
+        label.form-control-label 
+          | The OAuth redirect uri
+        code.form-control = @mx_app.auth_callback_url
       = simple_form_for @mx_app, url: mx_app_path(@mx_app.number) do |f|
         = f.input :client_id, label: 'ClientID', placeholder: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
         = f.input :client_secret, label: 'Client Secret', placeholder: ' eg: 2c52a5f0d3exxxxxxxa9236843'
         = f.input :session_id, label: 'Session ID', placeholder: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
         = f.input :pin_token, label: 'Pin Token', placeholder: ' eg: QjIZ/Awxxxxxxxxxxxx8WTXZg='
-        = f.input :private_key, label: 'Private Key', placeholder: "-----BEGIN RSA PRIVATE KEY-----\n lines of code here \n-----END RSA PRIVATE KEY-----"
+        = f.input :private_key, label: 'Private Key', placeholder: "-----BEGIN RSA PRIVATE KEY-----\n lines of code here \n-----END RSA PRIVATE KEY-----", input_html: { rows: '15' }
         = f.submit '绑定 Mixin', class: 'btn btn-primary'

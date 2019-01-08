@@ -72,6 +72,20 @@ class MxApp < ApplicationRecord
     binded_at?
   end
 
+  def home_url
+    case type
+    when 'CircleApp' then format('https://imxin.xin/circles/%s', number)
+    when 'StoreApp' then format('https://imxin.xin/stores/%s', number)
+    end
+  end
+
+  def auth_callback_url
+    case type
+    when 'CircleApp' then format('https://imxin.xin/circles/%s/auth/mixin/callback', number)
+    when 'StoreApp' then format('https://imxin.xin/stores/%s/auth/mixin/callback', number)
+    end
+  end
+
   private
 
   def setup_identity_number
