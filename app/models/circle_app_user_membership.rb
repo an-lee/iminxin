@@ -30,7 +30,7 @@ class CircleAppUserMembership < ApplicationRecord
 
   def fee_activated?
     circle_app = circle_app_user.circle_app
-    if circle_app.fee_amount.present?
+    if circle_app.fee_currency.present? && circle_app.fee_amount.present?
       return false if expired_at.blank? || expired_at < Time.current
     end
 
@@ -40,7 +40,7 @@ class CircleAppUserMembership < ApplicationRecord
   def holder_activated?
     circle_app = circle_app_user.circle_app
 
-    if circle_app.holder_limit_amount.present?
+    if circle_app.holder_limit_currency.present? && circle_app.holder_limit_amount.present?
       assets = circle_app_user.user.mixin_authorization.assets
       return false if assets.blank?
 
