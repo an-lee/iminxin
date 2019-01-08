@@ -25,10 +25,10 @@
                 | 入圈限制：
                 ul
                   li.mt-3
-                    - if circle_app.fee_currency.present? && current_circle.fee_amount.present?
+                    - if current_circle.fee_currency.present? && current_circle.fee_amount.present?
                       = format('支付 %s %s', current_circle.fee_amount, current_circle.fee_currency.symbol)
                   li
-                    - if circle_app.holder_limit_currency.present? && current_circle.holder_limit_amount.present?
+                    - if current_circle.holder_limit_currency.present? && current_circle.holder_limit_amount.present?
                       = format('Mixin 钱包至少持仓 %s %s', current_circle.holder_limit_amount, current_circle.holder_limit_currency.symbol)
 
       - if current_circle_user.blank?
