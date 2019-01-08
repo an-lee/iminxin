@@ -69,6 +69,7 @@ Rails.application.routes.draw do
     resource :account, only: [:edit, :update]
 
     resources :users, only: [:index]
+    resources :mx_apps, only: [:index]
 
     root to: 'dashboard#index'
   end

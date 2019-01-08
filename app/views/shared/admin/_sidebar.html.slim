@@ -5,5 +5,9 @@
     | 控制台
   = active_link_to admin_users_path, active: :exclusive, class: 'list-group-item list-group-item-action' do
     span.icon.mr-3
-      i.fa.fa-user
+      i.fe.fe-user
     | 用户管理
+  = active_link_to admin_mx_apps_path, active: :exclusive, class: 'list-group-item list-group-item-action' do
+    span.icon.mr-3
+      i.fe.fe-activity
+    | 应用管理

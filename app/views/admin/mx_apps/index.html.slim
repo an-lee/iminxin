@@ -1,0 +1,24 @@
+.card
+  .card-header
+    h3.card-title 应用管理
+  .table-responsive
+    table.table.card-table.table-hover.table-outline.table-vcenter.text-nowrap.card-table.datatable.dataTable.no-footer
+      thead
+        tr
+          th.text-center.w-1
+          th 应用名
+          th mixin id
+          th 编号
+          th 绑定时间
+          th 创建时间
+      tbody
+        - @mx_apps.each do |mx_app|
+          tr
+            td.text-center
+              .avatar.d-block style=(format('background-image: url(%s)', mx_app.avatar_url))
+            td = mx_app.name
+            td = mx_app.binded? ? mx_app.raw['identity_number'] : '未绑定'
+            td = mx_app.number
+            td = mx_app.binded? ? display_datetime(mx_app.binded_at) : '未绑定'
+            td = display_datetime(mx_app.created_at)
+    = paginate @mx_apps
