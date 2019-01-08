@@ -74,15 +74,15 @@ class MxApp < ApplicationRecord
 
   def home_url
     case type
-    when 'CircleApp' then format('https://imxin.xin/circles/%s', number)
-    when 'StoreApp' then format('https://imxin.xin/stores/%s', number)
+    when 'CircleApp' then format('https://imin.xin/circles/%s', number)
+    when 'StoreApp' then format('https://imin.xin/stores/%s', number)
     end
   end
 
   def auth_callback_url
     case type
-    when 'CircleApp' then format('https://imxin.xin/circles/%s/auth/mixin/callback', number)
-    when 'StoreApp' then format('https://imxin.xin/stores/%s/auth/mixin/callback', number)
+    when 'CircleApp' then format('https://imin.xin/circles/%s/auth/mixin/callback', number)
+    when 'StoreApp' then format('https://imin.xin/stores/%s/auth/mixin/callback', number)
     end
   end
 
