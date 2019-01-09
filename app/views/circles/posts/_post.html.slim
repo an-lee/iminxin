@@ -11,7 +11,7 @@ li.post-item.list-group-item.p-3.p-md-5 data-post-id=post.id id=format('post-%s-
               .dropdown-menu.dropdown-menu-right
                 = link_to '删除', circle_post_path(current_circle, post), method: :delete, class: 'dropdown-item', remote: true, data: { confirm: 'Are you sure?' }
         h5 = post.author.name
-      .media-content
+      .media-content.post-content
         = simple_format post.content
       .media-actions.d-flex.justify-content-center
         .ml-auto.action-like.text-center.p-2
