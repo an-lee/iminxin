@@ -11,4 +11,10 @@
     opacity: 0.8;
     z-index: 10;
   }
+
+  .post-item {
+    .post-content {
+      word-break: break-all;
+    }
+  }
 }

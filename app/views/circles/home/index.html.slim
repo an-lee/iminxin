@@ -20,15 +20,15 @@
                   small.ml-1 = current_circle.owner.name
 
           .mb-5
-            - unless current_circle.fee_amount.blank? && current_circle.holder_limit_amount.blank?
+            - if current_circle.fee_limited? || current_circle.holder_limited?
               .alert.alert-info
                 | 入圈限制：
                 ul
-                  li.mt-3
-                    - if current_circle.fee_currency.present? && current_circle.fee_amount.present?
+                  - if current_circle.fee_limited?
+                    li.mt-3
                       = format('支付 %s %s', current_circle.fee_amount, current_circle.fee_currency.symbol)
-                  li
-                    - if current_circle.holder_limit_currency.present? && current_circle.holder_limit_amount.present?
+                  - if current_circle.holder_limited?
+                    li
                       = format('Mixin 钱包至少持仓 %s %s', current_circle.holder_limit_amount, current_circle.holder_limit_currency.symbol)
 
       - if current_circle_user.blank?

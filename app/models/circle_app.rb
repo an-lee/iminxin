@@ -46,5 +46,11 @@ class CircleApp < MxApp
     raw&.fetch('full_name') || 'Xin Circle'
   end
 
-  private
+  def fee_limited?
+    return fee_currency.present? && fee_amount.to_f > 0
+  end
+
+  def holder_limited?
+    return holder_limit_currency.present? && holder_limit_amount.to_f > 0
+  end
 end

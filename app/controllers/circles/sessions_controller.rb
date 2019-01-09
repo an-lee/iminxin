@@ -5,7 +5,7 @@ class Circles::SessionsController < Circles::BaseController
 
   def new
     scope =
-      if current_circle.circle_app_setting.holder_limit_amount.present?
+      if current_circle.holder_limited?
         'PROFILE:READ+PHONE:READ+ASSETS:READ'
       else
         'PROFILE:READ+PHONE:READ'
