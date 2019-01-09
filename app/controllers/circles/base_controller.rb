@@ -26,15 +26,15 @@ class Circles::BaseController < ActionController::Base
   end
 
   def current_circle_user
-    @current_circle_user ||= session[:current_circle_user_id] && current_circle.circle_app_users.find_by(id: session[:current_circle_user_id])
+    @_current_circle_user ||= session["current_circle_#{current_circle.number}_user_id"] && current_circle.circle_app_users.find_by(id: session["current_circle_#{current_circle.number}_user_id"])
   end
 
   def user_sign_in(mx_app_user)
-    session[:current_circle_user_id] = mx_app_user.id
+    session["current_circle_#{current_circle.number}_user_id"] = mx_app_user.id
   end
 
   def user_sign_out
-    session[:current_circle_user_id] = nil
-    @current_circle_user = nil
+    session["current_circle_#{current_circle.number}_user_id"] = nil
+    @_current_circle_user = nil
   end
 end
