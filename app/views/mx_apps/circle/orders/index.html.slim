@@ -5,7 +5,7 @@
         = text_field_tag 'q', params[:q], placeholder: '用户昵称/手机号', type: 'search', class: 'form-control header-search pl-2'
         .input-icon-addon
           i.fe.fe-search
-  - if @users.blank?
+  - if @orders.blank?
     .card-body
       .text-center 还没有用户
   - else

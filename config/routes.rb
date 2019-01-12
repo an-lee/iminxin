@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resource  :limit_setting, only: [:edit, :update]
       resources :users, only: [:index, :show]
       resources :orders, only: [:index]
+      resources :posts, only: [:index]
     end
   end
 
