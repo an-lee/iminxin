@@ -15,6 +15,7 @@
           tr
             th.text-center.w-1
             th 作者名
+            th 作者MixinID
             th 作者手机
             th 内容
             th 评论数
@@ -25,8 +26,9 @@
               td.text-center
                 .avatar.d-block style=(format('background-image: url(%s)', post.author.avatar_url))
               td = post.author.name
-              td = post.author.phone
-              td.text-overflow-ellipsis-3 = post.content
+              td = post.author.identity_number
+              td = post.author.phone || '-'
+              td = post.content.truncate(20)
               td = post.comments.count
               td = display_datetime(post.created_at)
 
