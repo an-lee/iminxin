@@ -23,6 +23,7 @@ gem 'lograge'
 gem 'enumerize'
 gem 'activestorage-aliyun'
 gem 'action-store'
+gem 'ransack'
 
 # Authorization
 gem 'bcrypt'

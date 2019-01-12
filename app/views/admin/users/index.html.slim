@@ -7,6 +7,7 @@
         th.text-center.w-1
         th 用户名
         th 手机号
+        th Mixin ID
         th 注册时间
     tbody
       - @users.each do |user|
@@ -15,5 +16,6 @@
             .avatar.d-block style=(format('background-image: url(%s)', user.avatar_url))
           td = user.name
           td = user.phone
-          td = user.created_at
+          td = user.identity_number
+          td = display_datetime(user.created_at)
   = paginate @users

@@ -1,25 +1,33 @@
-.card
+.card.mb-0
   .card-header
-    h3.card-title 订单管理
-  .table-responsive
-    table.table.card-table.table-hover.table-outline.table-vcenter.text-nowrap.card-table.datatable.dataTable.no-footer
-      thead
-        tr
-          th.text-center.w-1
-          th 订单号
-          th 代币
-          th 数额
-          th 完成时间
-      tbody
-        - @orders.each do |order|
+    .card-title.ml-auto
+      = form_tag mx_app_circle_orders_path(current_circle), method: :get, class: 'input-icon my-3 my-lg-0'
+        = text_field_tag 'q', params[:q], placeholder: '用户昵称/手机号', type: 'search', class: 'form-control header-search pl-2'
+        .input-icon-addon
+          i.fe.fe-search
+  - if @users.blank?
+    .card-body
+      .text-center 还没有用户
+  - else
+    .table-responsive
+      table.table.card-table.table-hover.table-outline.table-vcenter.text-nowrap.card-table.datatable.dataTable.no-footer
+        thead
           tr
-            td.text-center
-              .avatar.d-block style=(format('background-image: url(%s)', order.buyer.avatar_url))
-            td = order.number
-            td.text-center
-              .avatar.d-block style=(format('background-image: url(%s)', order.currency.icon_url))
-            td = order.total
-            td = display_datetime order.completed_at
+            th.text-center.w-1
+            th 订单号
+            th 代币
+            th 数额
+            th 完成时间
+        tbody
+          - @orders.each do |order|
+            tr
+              td.text-center
+                .avatar.d-block style=(format('background-image: url(%s)', order.buyer.avatar_url))
+              td = order.number
+              td.text-center
+                .avatar.d-block style=(format('background-image: url(%s)', order.currency.icon_url))
+              td = order.total
+              td = display_datetime order.completed_at
 
   .card-footer
     = render 'shared/list_pagination', records_count: @orders_count, records: @orders

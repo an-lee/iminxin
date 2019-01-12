@@ -1,33 +1,44 @@
-.card
+.card.mb-0
   .card-header
-    h3.card-title 用户管理
-  .table-responsive
-    table.table.card-table.table-hover.table-outline.table-vcenter.text-nowrap.card-table.datatable.dataTable.no-footer
-      thead
-        tr
-          th.text-center.w-1
-          th 用户名
-          th 会员
-          th 会员到期时间
-          th 注册时间
-      tbody
-        - @users.each do |user|
+    .card-title.ml-auto
+      = form_tag mx_app_circle_users_path(current_circle), method: :get, class: 'input-icon my-3 my-lg-0'
+        = text_field_tag 'q', params[:q], placeholder: '昵称/手机号', type: 'search', class: 'form-control header-search pl-2'
+        .input-icon-addon
+          i.fe.fe-search
+  - if @users.blank?
+    .card-body
+      .text-center 还没有用户
+  - else
+    .table-responsive
+      table.table.card-table.table-hover.table-outline.table-vcenter.text-nowrap.card-table.datatable.dataTable.no-footer
+        thead
           tr
-            td.text-center
-              .avatar.d-block style=(format('background-image: url(%s)', user.avatar_url))
-            td = user.name
-            td
-              - if user.owner?
-                .tag.tag-red 圈主
-              - elsif user.member?
-                .tag.tag-green 会员
-              - else
-                .tag.tag-gray 非会员
-            td
-              - if user.member?
-                = display_datetime user.membership.expired_at
-              - else
-                | -
-            td = display_datetime user.created_at
+            th.text-center.w-1
+            th 用户名
+            th 会员
+            th 会员到期时间
+            th 注册时间
+        tbody
+          - @users.each do |user|
+            tr
+              td.text-center
+                .avatar.d-block style=(format('background-image: url(%s)', user.avatar_url))
+              td = user.name
+              td
+                - if user.owner?
+                  .tag.tag-red 圈主
+                - elsif user.member?
+                  .tag.tag-green 会员
+                - else
+                  .tag.tag-gray 非会员
+              td
+                - if user.owner?
+                  | 永久
+                - elsif user.member?
+                  = display_datetime user.membership.expired_at
+                - else
+                  | -
+              td = display_datetime user.created_at
 
-    = paginate @users
+  .card-footer
+    = render 'shared/list_pagination', records_count: @users_count, records: @users

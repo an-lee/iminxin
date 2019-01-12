@@ -1,12 +1,24 @@
-.card
+.card.mb-0
   .card-header
-    h3.card-title 应用管理
+    .card-title.d-flex.align-items-center.w-100
+      .btn-groups
+        = link_to  "全部", admin_mx_apps_path(f: 'all'), class: 'btn btn-sm btn-info'
+      .ml-auto
+        = form_tag admin_mx_apps_path, method: :get, class: 'input-icon my-3 my-lg-0'
+          = text_field_tag 'q', params[:q], placeholder: 'mixin ID / 所有者', type: 'search', class: 'form-control header-search pl-2'
+          .input-icon-addon
+            i.fe.fe-search
+  - if @mx_apps.blank?
+    .card-body
+      .text-center 还没有应用
+  - else
   .table-responsive
     table.table.card-table.table-hover.table-outline.table-vcenter.text-nowrap.card-table.datatable.dataTable.no-footer
       thead
         tr
           th.text-center.w-1
           th 应用名
+          th 所有者
           th mixin id
           th 编号
           th 绑定时间
@@ -17,8 +29,14 @@
             td.text-center
               .avatar.d-block style=(format('background-image: url(%s)', mx_app.avatar_url))
             td = mx_app.name
+            td.d-flex.align-items-center
+              span.mr-2.avatar.d-block style=(format('background-image: url(%s)', mx_app.owner.avatar_url))
+              span = mx_app.owner.name
             td = mx_app.binded? ? mx_app.raw['identity_number'] : '未绑定'
             td = mx_app.number
             td = mx_app.binded? ? display_datetime(mx_app.binded_at) : '未绑定'
             td = display_datetime(mx_app.created_at)
-    = paginate @mx_apps
+  
+  .card-footer
+    = render 'shared/list_pagination', records_count: @mx_apps_count, records: @mx_apps
+
