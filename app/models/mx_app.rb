@@ -40,6 +40,8 @@ class MxApp < ApplicationRecord
 
   before_validation :setup_identity_number, if: -> { raw_changed? }
 
+  scope :binding, -> { where.not(binded_at: nil)}
+
   def to_param
     number
   end

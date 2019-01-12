@@ -14,6 +14,10 @@
   span.icon.mr-3
     i.fe.fe-users
   | 用户管理
+= active_link_to mx_app_circle_posts_path(current_circle), class: 'list-group-item list-group-item-action' do
+  span.icon.mr-3
+    i.fe.fe-file-text
+  | 帖子管理
 = active_link_to edit_mx_app_path(current_circle), class: 'list-group-item list-group-item-action' do
   span.icon.mr-3
     i.fe.fe-activity

@@ -1,0 +1,10 @@
+- content_for :page_title, '出错了...'
+
+.container.text-center
+  .display-1.text-muted.mb-5
+    | 403
+  h1.h2.mb-3
+    | Oops..
+  p.h4.text-muted.font-weight-normal.mb-7
+    | 出错了
+  = link_to '回到首页', root_path, class: 'btn btn-primary'

@@ -23,6 +23,7 @@ gem 'lograge'
 gem 'enumerize'
 gem 'activestorage-aliyun'
 gem 'action-store'
+gem 'ransack'
 
 # Authorization
 gem 'bcrypt'
@@ -75,13 +76,6 @@ gem 'mina-logs', '~> 1.1.0', require: false
 gem 'http'
 gem 'rest-client'
 
-group :development, :test do
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rails_apps_testing'
-end
-
 group :development do
   gem 'annotate', github: '80percent/annotate_models', branch: 'develop', require: false
   gem 'web-console', '>= 3.3.0'
@@ -90,10 +84,19 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :development, :test do
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails'
+end
+
 group :test do
-  gem 'capybara', '>= 2.15', '< 4.0'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
   gem 'database_cleaner'
-  gem 'launchy'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'rspec-sidekiq'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+  gem 'timecop'
+  gem 'vcr'
+  gem 'webmock'
 end

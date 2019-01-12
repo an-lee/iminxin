@@ -1,0 +1,34 @@
+.card.mb-0
+  .card-header
+    .card-title.ml-auto
+      = form_tag mx_app_circle_posts_path(current_circle), method: :get, class: 'input-icon my-3 my-lg-0'
+        = text_field_tag 'q', params[:q], placeholder: '内容/作者昵称/手机号', type: 'search', class: 'form-control header-search pl-2'
+        .input-icon-addon
+          i.fe.fe-search
+  - if @posts.blank?
+    .card-body
+      .text-center 还没有帖子
+  - else
+    .table-responsive
+      table.table.card-table.table-hover.table-outline.table-vcenter.text-nowrap.card-table.datatable.dataTable.no-footer
+        thead
+          tr
+            th.text-center.w-1
+            th 作者名
+            th 作者手机
+            th 内容
+            th 评论数
+            th 发表时间
+        tbody
+          - @posts.each do |post|
+            tr
+              td.text-center
+                .avatar.d-block style=(format('background-image: url(%s)', post.author.avatar_url))
+              td = post.author.name
+              td = post.author.phone
+              td.text-overflow-ellipsis-3 = post.content
+              td = post.comments.count
+              td = display_datetime(post.created_at)
+
+  .card-footer
+    = render 'shared/list_pagination', records_count: @posts_count, records: @posts
