@@ -15,6 +15,8 @@
           tr
             th.text-center.w-1
             th 用户名
+            th MixinID
+            th 手机号
             th 会员
             th 会员到期时间
             th 注册时间
@@ -24,6 +26,8 @@
               td.text-center
                 .avatar.d-block style=(format('background-image: url(%s)', user.avatar_url))
               td = user.name
+              td = user.identity_number || '-'
+              td = user.phone || '-'
               td
                 - if user.owner?
                   .tag.tag-red 圈主
