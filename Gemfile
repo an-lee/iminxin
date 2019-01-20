@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.3.3'
+ruby '2.6.0'
 
 # A web-application framework
-gem 'rails', '~> 5.2.1'
+gem 'rails', '~> 5.2.2'
 
 # App server
 gem 'puma', '~> 3.11'
