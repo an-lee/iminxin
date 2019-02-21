@@ -1,4 +1,4 @@
-class Circles::PostsController < Circles::BaseController
+class Circles::API::PostsController < Circles::BaseController
   before_action :load_post, only: [:edit, :update, :destroy]
 
   def index

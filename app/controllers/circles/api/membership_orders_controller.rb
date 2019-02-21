@@ -1,4 +1,4 @@
-class Circles::MembershipOrdersController < Circles::BaseController
+class Circles::API::MembershipOrdersController < Circles::BaseController
   skip_before_action :authenticate_member!
 
   def create

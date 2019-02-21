@@ -1,4 +1,4 @@
-class Circles::CommentsController < Circles::BaseController
+class Circles::API::CommentsController < Circles::BaseController
   before_action :load_post
 
   def create

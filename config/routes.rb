@@ -51,7 +51,15 @@ Rails.application.routes.draw do
     match '/auth/failure', to: 'sessions#failure', via: :get
     delete '/logout', to: 'sessions#destroy', as: :logout
 
-    get '/', to: 'home#index', as: :root
+    get '/', to: 'app#index', as: :root
+
+    namespace :api, default: { format: :json } do
+      resources :posts, only: [:index, :show, :create, :update, :destroy] do
+        resources :comments, only: [:create, :destroy]
+      end
+      resources :liked_posts, only: [:update, :destroy]
+      resources :membership_orders, only: [:create]
+    end
 
     resources :membership_orders, only: [:new, :create]
     resource :payment_state, only: [:show]

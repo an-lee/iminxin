@@ -1,4 +1,4 @@
-class Circles::LikedPostsController < Circles::BaseController
+class Circles::API::LikedPostsController < Circles::BaseController
   before_action :load_post
 
   def update
