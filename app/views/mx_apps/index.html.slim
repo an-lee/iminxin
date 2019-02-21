@@ -7,7 +7,7 @@
     - if current_user.mx_apps.blank?
       .card-body
         | 还没有机器人，快去
-        = link_to '创建一个', mx_apps_path(type: 'CircleApp'), method: :post, class: 'btn btn-green btn-block'
+        = link_to '创建一个', mx_apps_path(type: 'CircleApp'), method: :post, class: 'btn btn-green mx-3'
         | 吧
     - else
       table.table.card-table.table-vcenter

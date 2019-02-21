@@ -1,52 +1,54 @@
-.my-5.my-md-5
-  .container
-    .text-center.py-5
-      .avatar.avatar-xl style=(format('background-image: url(%s)', current_circle.avatar_url))
-      .pt-3.h4
-        = current_circle.name
-    - if !current_circle.binded?
-      .text-center.text-muted
-        | 还没准备好
-    - else
-      .row
-        .col-md-6.mx-auto
-          - unless current_circle.introduction.blank?
-            .card.mb-5
-              .card-body
-                .introduction.mb-5
-                  = simple_format current_circle.introduction
-                .text-right
-                  span.avatar.avatar-sm style=(format('background-image: url(%s)', current_circle.owner.avatar_url))
-                  small.ml-1 = current_circle.owner.name
+= react_component('Home')
 
-          .mb-5
-            - if current_circle.fee_limited? || current_circle.holder_limited?
-              .alert.alert-info
-                | 入圈限制：
-                ul
-                  - if current_circle.fee_limited?
-                    li.mt-3
-                      = format('支付 %s %s', current_circle.fee_amount, current_circle.fee_currency.symbol)
-                  - if current_circle.holder_limited?
-                    li
-                      = format('Mixin 钱包至少持仓 %s %s', current_circle.holder_limit_amount, current_circle.holder_limit_currency.symbol)
+/ .my-5.my-md-5
+/   .container
+/     .text-center.py-5
+/       .avatar.avatar-xl style=(format('background-image: url(%s)', current_circle.avatar_url))
+/       .pt-3.h4
+/         = current_circle.name
+/     - if !current_circle.binded?
+/       .text-center.text-muted
+/         | 还没准备好
+/     - else
+/       .row
+/         .col-md-6.mx-auto
+/           - unless current_circle.introduction.blank?
+/             .card.mb-5
+/               .card-body
+/                 .introduction.mb-5
+/                   = simple_format current_circle.introduction
+/                 .text-right
+/                   span.avatar.avatar-sm style=(format('background-image: url(%s)', current_circle.owner.avatar_url))
+/                   small.ml-1 = current_circle.owner.name
 
-      - if current_circle_user.blank?
-        - btnClass = 'mixin-login-required'
-        - modal = 'shared/circle/mixin_login_modal'
-      - elsif current_circle_user.member?
-        - btnClass = ''
-        - modal = ''
-      - elsif current_circle_user.holder_limited?
-        - btnClass = 'mixin-holder-limit'
-        - modal = 'shared/circle/mixin_holder_limit_modal'
-      - elsif current_circle_user.fee_limited?
-        - btnClass = 'mixin-fee-limit'
-        - modal = 'shared/circle/mixin_fee_limit_modal'
+/           .mb-5
+/             - if current_circle.fee_limited? || current_circle.holder_limited?
+/               .alert.alert-info
+/                 | 入圈限制：
+/                 ul
+/                   - if current_circle.fee_limited?
+/                     li.mt-3
+/                       = format('支付 %s %s', current_circle.fee_amount, current_circle.fee_currency.symbol)
+/                   - if current_circle.holder_limited?
+/                     li
+/                       = format('Mixin 钱包至少持仓 %s %s', current_circle.holder_limit_amount, current_circle.holder_limit_currency.symbol)
 
-      .text-center
-        = link_to '进入', circle_posts_path(current_circle), class: "btn btn-pill btn-info #{btnClass}"
+/       - if current_circle_user.blank?
+/         - btnClass = 'mixin-login-required'
+/         - modal = 'shared/circle/mixin_login_modal'
+/       - elsif current_circle_user.member?
+/         - btnClass = ''
+/         - modal = ''
+/       - elsif current_circle_user.holder_limited?
+/         - btnClass = 'mixin-holder-limit'
+/         - modal = 'shared/circle/mixin_holder_limit_modal'
+/       - elsif current_circle_user.fee_limited?
+/         - btnClass = 'mixin-fee-limit'
+/         - modal = 'shared/circle/mixin_fee_limit_modal'
 
-  - content_for(:modal_window) do
-    #modal-window
-      = render modal unless modal.blank?
+/       .text-center
+/         = link_to '进入', circle_posts_path(current_circle), class: "btn btn-pill btn-info #{btnClass}"
+
+/   - content_for(:modal_window) do
+/     #modal-window
+/       = render modal unless modal.blank?

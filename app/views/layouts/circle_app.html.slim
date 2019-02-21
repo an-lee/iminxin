@@ -16,15 +16,11 @@ html
     = csrf_meta_tags
     = action_cable_meta_tag
     = content_for?(:head) ? yield(:head) : ''
-    = stylesheet_link_tag 'circle-app', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'circle_app', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'circle_app'
     = favicon_link_tag current_circle.avatar_url
   body class=body_class
     .page
-      .page-main
-        = render 'shared/circle/header'
-        = render 'shared/flash_messages'
-        = yield
+      = yield
         
     - if content_for?(:modal_window)
       = yield(:modal_window)
