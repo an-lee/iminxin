@@ -16,8 +16,8 @@
   this.App || (this.App = {});
 
   // Configure noty
-  Noty.overrideDefaults({ timeout: 5000, theme: 'mint', layout: 'center', closeWith: ['click', 'button'] });
+  Noty.overrideDefaults({ timeout: 5000, theme: "mint", layout: "center", closeWith: ["click", "button"] });
 
-  $(document).on('turbolinks:load', function() {
+  $(document).on("turbolinks:load", function() {
   });
 }).call(this);

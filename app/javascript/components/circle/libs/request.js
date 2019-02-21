@@ -3,19 +3,19 @@ const baseURL = document.URL;
 class Request {
   constructor() {
     this.get = (options) => {
-      options.method = 'GET';
+      options.method = "GET";
       this._request(options);
-    }
+    };
   
     this.put = (options) => {
-      options.method = 'PUT';
+      options.method = "PUT";
       this._request(options);
-    }
+    };
   
     this.post = (options) => {
-      options.method = 'POST';
+      options.method = "POST";
       this._request(options);
-    }
+    };
   
     this._request = (options) => {
       let requestUrl = baseUrl + options.url;
@@ -29,8 +29,8 @@ class Request {
         options.fail && options.fail(res);
       }).always((res) => {
         options.complete && options.complete(res);
-      })
-    }
+      });
+    };
   }
 }
 

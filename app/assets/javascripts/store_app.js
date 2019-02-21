@@ -4,6 +4,6 @@
 
 (function() {
   this.App || (this.App = {});
-  $(document).on('turbolinks:load', function() {
+  $(document).on("turbolinks:load", function() {
   });
 }).call(this);

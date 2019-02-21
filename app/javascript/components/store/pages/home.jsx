@@ -1,13 +1,13 @@
-import React from "react"
-import PropTypes from "prop-types"
-import api from '../libs/api';
+import React from "react";
+import PropTypes from "prop-types";
+import api from "../libs/api";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       ui: { pageInited: false }
-    }
+    };
   }
 
   componentDidMount() {
@@ -16,16 +16,16 @@ class Home extends React.Component {
         success: (res) => {
           this.setState({
             ui: { pageInited: true }
-          })
+          });
         }
-      })
+      });
     }
   }
 
   render() {
     return (
       <div>
-        { this.state.ui.pageInited ? 'pageInited!' : 'loading' }
+        { this.state.ui.pageInited ? "pageInited!" : "loading" }
       </div>
     );
   }

@@ -19,8 +19,7 @@ html
     = javascript_pack_tag 'circle_app'
     = favicon_link_tag current_circle.avatar_url
   body class=body_class
-    .page
-      = yield
+    = yield
         
     - if content_for?(:modal_window)
       = yield(:modal_window)

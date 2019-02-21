@@ -14,11 +14,11 @@
         that.pollingPaymentStateTimer = null;
       }
 
-      var pollingPath = that.modal.data('pollingPath');
+      var pollingPath = that.modal.data("pollingPath");
       var path = pollingPath;
       var fn = function() {
         $.get(path, function(data) {
-          if (data === 'paid') {
+          if (data === "paid") {
             Turbolinks.visit();
             that.pollingPaymentStateTimer = null;
           } else {

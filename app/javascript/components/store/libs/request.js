@@ -1,18 +1,18 @@
-const url = document.URL
+const url = document.URL;
 
 const request = {
   get: function(options) {
-    options.method = 'GET';
+    options.method = "GET";
     this._request(options);
   },
 
   put: function(options) {
-    options.method = 'PUT';
+    options.method = "PUT";
     this._request(options);
   },
 
   post: function(options) {
-    options.method = 'POST';
+    options.method = "POST";
     this._request(options);
   },
 
@@ -28,8 +28,8 @@ const request = {
       options.fail && options.fail(res);
     }).always((res) => {
       options.complete && options.complete(res);
-    })
+    });
   }
-}
+};
 
 export default request;
