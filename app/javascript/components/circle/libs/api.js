@@ -9,27 +9,23 @@ class API {
     };
 
     this.logout = (options={}) => {
-      options.url = "/logout";
       request.baseUrl = this.baseUrl;
+      options.url = "/logout";
       options.complete = () => {
-        console.log('here');
         window.location.href=`${this.baseUrl}`;
       };
       request.delete(options);
     };
 
-    this.getPagesHome = (options={}) => {
-      options.url = "api/home";
-      request.get(options);
+    this.createPost = (options = {}) => {
+      request.baseUrl = this.baseUrl;
+      options.url = "/api/posts";
+      request.post(options);
     };
-  
-    this.getPagesPostNew = (options={}) => {
-      options.url = "api/category";
-      request.get(options);
-    };
-  
-    this.getPagesMine = (options={}) => {
-      options.url = "api/cart";
+
+    this.getPosts = (options={}) => {
+      request.baseUrl = this.baseUrl;
+      options.url = "/api/posts";
       request.get(options);
     };
   }

@@ -68,4 +68,13 @@ class Circles::BaseController < ActionController::Base
       base_url: format('/circles/%s', current_circle.number)
     }
   end
+
+  def render_ok(data = nil)
+    render json: { msg: 'ok', data: data }
+  end
+
+  def render_error(msg:)
+    render json: { msg: msg, data: nil }
+  end
+
 end

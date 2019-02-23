@@ -26,14 +26,16 @@ class Request {
     };
   
     this._request = (options) => {
-      let requestUrl = this.baseUrl + options.url;
+      const requestUrl = this.baseUrl + options.url;
+
       axios({
         headers: {
           "X-CSRF-Token": csrfToken
         },
         url: requestUrl,
         method: options.method,
-        data: options.data
+        data: options.data,
+        params: options.params
       }).then((res) => {
         options.success && options.success(res);
       }).catch((err) => {

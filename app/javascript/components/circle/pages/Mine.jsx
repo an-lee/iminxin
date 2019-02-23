@@ -20,7 +20,7 @@ class Mine extends React.Component {
     alert("注销", "你将注销当前登录状态", [
       { text: "取消" },
       { text: "确认", onPress: () => {api.logout();} },
-    ])
+    ]);
   }
 
   render() {
