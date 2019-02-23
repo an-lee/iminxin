@@ -47,6 +47,7 @@ class PostNew extends React.Component {
       },
       complete: () => {
         this.updateUI({submiting: false});
+        this.props.onSwitchTab("home");
       }
     });
   }
@@ -81,7 +82,8 @@ class PostNew extends React.Component {
 
 PostNew.propTypes = {
   me: PropTypes.object,
-  base_url: PropTypes.string
+  base_url: PropTypes.string,
+  onSwitchTab: PropTypes.function
 };
 
 export default PostNew;

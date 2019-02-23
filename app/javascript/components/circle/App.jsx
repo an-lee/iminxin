@@ -13,6 +13,10 @@ class App extends React.Component {
     };
   }
 
+  onSwitchTab = (tab) => {
+    this.setState({selectedTab: tab});
+  }
+
   render() {
     const iconStyle = (url) => {
       return {
@@ -42,14 +46,13 @@ class App extends React.Component {
             icon={<div style={iconStyle("/circle/home.svg")}/>}
             selectedIcon={<div style={iconSelectedStyle("/circle/home_selected.svg")}/>}
             selected={this.state.selectedTab === "home"}
-            onPress={() => {
-              this.setState({
-                selectedTab: "home",
-              });
-            }}
+            onPress={() => this.onSwitchTab("home")}
             data-seed="logId"
           >
-            <Home {...this.props} />
+            <Home
+              onSwitchTab={this.onSwitchTab}
+              {...this.props} 
+            />
           </TabBar.Item>
 
           <TabBar.Item
@@ -57,13 +60,12 @@ class App extends React.Component {
             icon={<div style={iconStyle("/circle/new.svg")}/>}
             selectedIcon={<div style={iconSelectedStyle("/circle/new_selected.svg")}/>}
             selected={this.state.selectedTab === "new"}
-            onPress={() => {
-              this.setState({
-                selectedTab: "new",
-              });
-            }}
+            onPress={() => this.onSwitchTab("new")}
           >
-            <PostNew  {...this.props} />
+            <PostNew
+              onSwitchTab={this.onSwitchTab}
+              {...this.props}
+            />
           </TabBar.Item>
 
           <TabBar.Item
@@ -71,13 +73,12 @@ class App extends React.Component {
             icon={<div style={iconStyle("/circle/mine.svg")}/>}
             selectedIcon={<div style={iconSelectedStyle("/circle/mine_selected.svg")}/>}
             selected={this.state.selectedTab === "mine"}
-            onPress={() => {
-              this.setState({
-                selectedTab: "mine",
-              });
-            }}
+            onPress={() => this.onSwitchTab("mine")}
           >
-            <Mine {...this.props} />
+            <Mine
+              onSwitchTab={this.onSwitchTab}
+              {...this.props} 
+            />
           </TabBar.Item>
         </TabBar>
         <style jsx>{`
