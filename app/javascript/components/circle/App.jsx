@@ -1,57 +1,99 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { NavBar, Card, WingBlank, WhiteSpace, Icon } from "antd-mobile";
-import "./App.less";
+import Home from "./pages/Home";
+import PostNew from "./pages/PostNew";
+import Mine from "./pages/Mine";
+import { TabBar } from "antd-mobile";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      circle: props.circle,
-      me: props.me
+      selectedTab: "home"
     };
   }
 
-  componentDidMount() {
-    if (this.state.me.is_member) {
-      console.log("redirect");
-    }
-  }
-
   render() {
-    const circle = this.props.circle;
-    const Logo = () => (
-      <img 
-        src={ circle.avatar_url } 
-        style={ { width: "2rem", height: "2rem", marginRight: "0.5rem" } }
-      />
-    );
+    const iconStyle = (url) => {
+      return {
+        width: "30px",
+        height: "30px",
+        background: `url(${url}) center center /  28px 28px no-repeat`
+      };
+    };
+
+    const iconSelectedStyle = (url) => {
+      return {
+        width: "32px",
+        height: "32px",
+        background: `url(${url}) center center /  30px 30px no-repeat`
+      };
+    };
 
     return (
-      <div>
-        <NavBar
-          mode="light"
+      <div className="app">
+        <TabBar
+          unselectedTintColor="#949494"
+          tintColor="#33A3F4"
+          barTintColor="white"
         >
-          <Logo />
-          { circle.name }
-        </NavBar>
+          <TabBar.Item
+            key="home"
+            icon={<div style={iconStyle("/circle/home.svg")}/>}
+            selectedIcon={<div style={iconSelectedStyle("/circle/home_selected.svg")}/>}
+            selected={this.state.selectedTab === "home"}
+            onPress={() => {
+              this.setState({
+                selectedTab: "home",
+              });
+            }}
+            data-seed="logId"
+          >
+            <Home />
+          </TabBar.Item>
 
-        <WhiteSpace size="xl" />
+          <TabBar.Item
+            key="new"
+            icon={<div style={iconStyle("/circle/new.svg")}/>}
+            selectedIcon={<div style={iconSelectedStyle("/circle/new_selected.svg")}/>}
+            selected={this.state.selectedTab === "new"}
+            onPress={() => {
+              this.setState({
+                selectedTab: "new",
+              });
+            }}
+          >
+            <PostNew />
+          </TabBar.Item>
 
-        <WingBlank size="lg">
-          <WhiteSpace size="lg" />
-          <Card>
-            <Card.Body>
-              <div>{circle.introduction}</div>
-            </Card.Body>
-            <Card.Footer content="footer content" extra={<div>extra footer content</div>} />
-          </Card>
-          <WhiteSpace size="lg" />
-        </WingBlank>
+          <TabBar.Item
+            key="mine"
+            icon={<div style={iconStyle("/circle/mine.svg")}/>}
+            selectedIcon={<div style={iconSelectedStyle("/circle/mine_selected.svg")}/>}
+            selected={this.state.selectedTab === "mine"}
+            onPress={() => {
+              this.setState({
+                selectedTab: "mine",
+              });
+            }}
+          >
+            <Mine />
+          </TabBar.Item>
+        </TabBar>
+        <style jsx>{`
+          .app {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0
+          }
+        `}</style>
+        <style jsx global>{`
+          body {
+            margin: 0;
+          }
+        `}</style>
       </div>
-
-      
     );
   }
 }

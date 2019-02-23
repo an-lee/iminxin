@@ -9,7 +9,7 @@ const lessLoader = {
     loader: "css-loader", // translates CSS into CommonJS
   }, {
     loader: "less-loader", // compiles Less to CSS
-    options: { modifyVars: theme }
+    options: { modifyVars: theme, javascriptEnabled: true }
   }]
 };
 

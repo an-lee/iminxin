@@ -20,8 +20,3 @@ html
     = favicon_link_tag current_circle.avatar_url
   body class=body_class
     = yield
-        
-    - if content_for?(:modal_window)
-      = yield(:modal_window)
-    - else
-      #modal-window

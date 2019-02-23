@@ -1,7 +1,7 @@
-const baseURL = document.URL;
+import axios from "axios";
 
 class Request {
-  constructor() {
+  constructor(props) {
     this.get = (options) => {
       options.method = "GET";
       this._request(options);
@@ -16,10 +16,15 @@ class Request {
       options.method = "POST";
       this._request(options);
     };
+
+    this.delete = (options) => {
+      options.method = "DELETE";
+      this._request(options);
+    };
   
     this._request = (options) => {
-      let requestUrl = baseUrl + options.url;
-      $.ajax({
+      let requestUrl = props.baseUrl + options.url;
+      axios({
         url: requestUrl,
         method: options.method,
         data: options.data

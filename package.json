@@ -15,7 +15,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react_ujs": "^2.4.4"
+    "react_ujs": "^2.4.4",
+    "styled-jsx": "^3.2.1"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.11.0",
@@ -27,8 +28,5 @@
   "scripts": {
     "lint": "yarn run eslint --ext .js --ext .jsx app/assets/javascripts app/javascript"
   },
-  "theme": {
-    "brand-primary": "red",
-    "color-text-base":  "#333"
-  }
+  "theme": {}
 }

@@ -1,24 +1,34 @@
 import request from "./request";
 
 class API {
-  constructor() {
+  constructor(props) {
+    this.login = (options) => {
+      options.url = "/login";
+      request.baseUrl = props.baseUrl;
+      request.get(options);
+    };
+
+    this.logout = (options) => {
+      options.url = "/logout";
+      request.baseUrl = props.baseUrl;
+      request.delete(options);
+    };
+
     this.getPagesHome = (options) => {
-      options.url = "/pages/home";
+      options.url = "api/home";
+      request.baseUrl = props.baseUrl;
       request.get(options);
-    },
+    };
   
-    this.getPagesCategory = (options) => {
-      options.url = "/pages/category";
+    this.getPagesPostNew = (options) => {
+      options.url = "api/category";
+      request.baseUrl = props.baseUrl;
       request.get(options);
-    },
-  
-    this.getPagesCart = (options) => {
-      options.url = "/pages/cart";
-      request.get(options);
-    },
+    };
   
     this.getPagesMine = (options) => {
-      options.url = "/pages/mine";
+      options.url = "api/cart";
+      request.baseUrl = props.baseUrl;
       request.get(options);
     };
   }

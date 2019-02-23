@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     match '/auth/failure', to: 'sessions#failure', via: :get
     delete '/logout', to: 'sessions#destroy', as: :logout
 
+    get '/intro', to: 'intro#index'
     get '/', to: 'app#index', as: :root
 
     namespace :api, default: { format: :json } do
