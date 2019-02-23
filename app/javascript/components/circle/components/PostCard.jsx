@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import renderHTML from "react-render-html";
 import Avatar from "./Avatar";
 import { Modal } from "antd-mobile";
-import Icon from "react-icons-kit";
-import { heart } from "react-icons-kit/fa/heart";
-import { heartO } from "react-icons-kit/fa/heartO";
-import { comment } from "react-icons-kit/fa/comment";
-import { commentO } from "react-icons-kit/fa/commentO";
-import { ellipsisH } from "react-icons-kit/fa/ellipsisH";
+import { ThumbsUp, MessageSquare, MoreHorizontal } from "react-feather";
 
 class PostCard extends React.Component {
   onMore = () => {
@@ -46,26 +41,26 @@ class PostCard extends React.Component {
               <div className="post-info">
                 <div className="post-info-author">{post.author.name}</div>
                 <div className="post-info-created-at">{post.created_at}</div>
-                <div className="post-info-more" onClick={this.onMore}><Icon icon={ellipsisH}/></div>
+                <div className="post-info-more" onClick={this.onMore}><MoreHorizontal size={18}/></div>
               </div>
               {renderHTML(post.content)}
             </div>
           </div>
-          <div className="post-card-footer" style={{color: "#467fcf"}}>
+          <div className="post-card-footer">
             <div className="post-action" onClick={this.onLike}>
               {
                 post.liked ?
-                  <Icon icon={heart}/>
+                  <ThumbsUp color="#467fcf" size={16} />
                   :
-                  <Icon icon={heartO}/>
+                  <ThumbsUp size={16}/>
               }
             </div>
             <div className="post-action" onClick={this.onComment}>
               {
                 post.commented ?
-                  <Icon icon={comment}/>
+                  <MessageSquare color="#467fcf" size={16}/>
                   :
-                  <Icon icon={commentO}/>
+                  <MessageSquare size={16}/>
               }
             </div>
           </div>
