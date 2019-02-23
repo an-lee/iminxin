@@ -11,12 +11,11 @@ import api from "../libs/api";
 class LoginModal extends React.Component {
   constructor(props) {
     super(props);
-    api.baseUrl = this.props.baseUrl;
+    api.baseUrl = this.props.base_url;
   }
 
   onLogin = () => {
-    // window.location.href = "login";
-    api.login;
+    api.login();
   }
 
   render() {
@@ -40,7 +39,7 @@ class LoginModal extends React.Component {
 }
 
 LoginModal.propTypes = {
-  baseUrl: PropTypes.string,
+  base_url: PropTypes.string,
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.function
 };

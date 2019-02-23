@@ -1,34 +1,35 @@
 import request from "./request";
 
 class API {
-  constructor(props) {
-    this.login = (options) => {
-      options.url = "/login";
-      request.baseUrl = props.baseUrl;
-      request.get(options);
+  constructor() {
+    this.baseUrl = "";
+    
+    this.login = () => {
+      window.location.href=`${this.baseUrl}/login`;
     };
 
-    this.logout = (options) => {
+    this.logout = (options={}) => {
       options.url = "/logout";
-      request.baseUrl = props.baseUrl;
+      request.baseUrl = this.baseUrl;
+      options.complete = () => {
+        console.log('here');
+        window.location.href=`${this.baseUrl}`;
+      };
       request.delete(options);
     };
 
-    this.getPagesHome = (options) => {
+    this.getPagesHome = (options={}) => {
       options.url = "api/home";
-      request.baseUrl = props.baseUrl;
       request.get(options);
     };
   
-    this.getPagesPostNew = (options) => {
+    this.getPagesPostNew = (options={}) => {
       options.url = "api/category";
-      request.baseUrl = props.baseUrl;
       request.get(options);
     };
   
-    this.getPagesMine = (options) => {
+    this.getPagesMine = (options={}) => {
       options.url = "api/cart";
-      request.baseUrl = props.baseUrl;
       request.get(options);
     };
   }

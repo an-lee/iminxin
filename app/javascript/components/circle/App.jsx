@@ -49,7 +49,7 @@ class App extends React.Component {
             }}
             data-seed="logId"
           >
-            <Home />
+            <Home {...this.props} />
           </TabBar.Item>
 
           <TabBar.Item
@@ -63,7 +63,7 @@ class App extends React.Component {
               });
             }}
           >
-            <PostNew />
+            <PostNew  {...this.props} />
           </TabBar.Item>
 
           <TabBar.Item
@@ -77,7 +77,7 @@ class App extends React.Component {
               });
             }}
           >
-            <Mine />
+            <Mine {...this.props} />
           </TabBar.Item>
         </TabBar>
         <style jsx>{`

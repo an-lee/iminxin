@@ -28,6 +28,5 @@ class Circles::SessionsController < Circles::BaseController
 
   def destroy
     user_sign_out
-    redirect_back(fallback_location: circle_root_path(current_circle))
   end
 end

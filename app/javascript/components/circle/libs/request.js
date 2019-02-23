@@ -1,7 +1,10 @@
 import axios from "axios";
+const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
 class Request {
-  constructor(props) {
+  constructor() {
+    this.baseUrl = "";
+
     this.get = (options) => {
       options.method = "GET";
       this._request(options);
@@ -23,16 +26,19 @@ class Request {
     };
   
     this._request = (options) => {
-      let requestUrl = props.baseUrl + options.url;
+      let requestUrl = this.baseUrl + options.url;
       axios({
+        headers: {
+          "X-CSRF-Token": csrfToken
+        },
         url: requestUrl,
         method: options.method,
         data: options.data
-      }).done((res) => {
+      }).then((res) => {
         options.success && options.success(res);
-      }).fail((res) => {
-        options.fail && options.fail(res);
-      }).always((res) => {
+      }).catch((err) => {
+        options.fail && options.fail(err);
+      }).then((res) => {
         options.complete && options.complete(res);
       });
     };

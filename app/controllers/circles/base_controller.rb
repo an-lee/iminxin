@@ -65,7 +65,7 @@ class Circles::BaseController < ActionController::Base
         is_member: current_circle_user&.member? ,
         holder_limited: current_circle_user&.holder_limited?
       },
-      base_url: format('circles/%s', current_circle.number)
+      base_url: format('/circles/%s', current_circle.number)
     }
   end
 end

@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
   # 用户视角的新圈子
   resources :circles, only: [], module: 'circles', param: :number do
-    get 'login', to: 'sessions#new', as: :login
+    get '/login', to: 'sessions#new', as: :login
     match '/auth/mixin/callback', to: 'sessions#create', via: [:get, :post], as: :session
     match '/auth/failure', to: 'sessions#failure', via: :get
     delete '/logout', to: 'sessions#destroy', as: :logout
