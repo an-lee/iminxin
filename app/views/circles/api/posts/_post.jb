@@ -1,0 +1,7 @@
+{
+  id: post.id,
+  content: simple_format(post.content),
+  author: render('circles/api/users/user', user: post.author),
+  created_at: time_ago_in_words(post.created_at),
+  can_edit: post.author == current_circle_user || current_circle_user.owner?
+}

@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import Home from "./pages/Home";
 import PostNew from "./pages/PostNew";
 import Mine from "./pages/Mine";
-import { TabBar } from "antd-mobile";
+import { TabBar, Modal } from "antd-mobile";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: "new"
+      selectedTab: "home"
     };
   }
 
@@ -92,6 +92,9 @@ class App extends React.Component {
         <style jsx global>{`
           body {
             margin: 0;
+            font-family: PingFang SC, miui, system-ui, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, sans-serif;
+            color: #495057;
+            font-size: 0.9375rem;
           }
         `}</style>
       </div>

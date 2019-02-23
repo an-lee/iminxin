@@ -83,7 +83,7 @@ class PostNew extends React.Component {
 PostNew.propTypes = {
   me: PropTypes.object,
   base_url: PropTypes.string,
-  onSwitchTab: PropTypes.function
+  onSwitchTab: PropTypes.any
 };
 
 export default PostNew;

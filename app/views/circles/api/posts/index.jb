@@ -1,0 +1,3 @@
+{
+  posts: render(partial: 'circles/api/posts/post', collection: @posts, as: :post)
+}
