@@ -3,9 +3,12 @@ import Avatar from "../components/Avatar";
 import PropTypes from "prop-types";
 import { 
   WhiteSpace,
-  List
+  List,
+  Modal
 } from "antd-mobile";
 import api from "../libs/api";
+
+const alert = Modal.alert;
 
 class Mine extends React.Component {
   constructor(props) {
@@ -14,7 +17,10 @@ class Mine extends React.Component {
   }
 
   onLogout = () => {
-    api.logout();
+    alert("注销", "你将注销当前登录状态", [
+      { text: "取消" },
+      { text: "确认", onPress: () => {api.logout();} },
+    ])
   }
 
   render() {
