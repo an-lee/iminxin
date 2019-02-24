@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import Home from "./pages/Home";
 import PostNew from "./pages/PostNew";
 import Mine from "./pages/Mine";
-import { TabBar, Modal } from "antd-mobile";
+import { TabBar } from "antd-mobile";
+import { Home as HomeIcon, User as UserIcon, PlusCircle as PlusCircleIcon } from "react-feather";
 
 class App extends React.Component {
   constructor(props) {
@@ -18,22 +19,6 @@ class App extends React.Component {
   }
 
   render() {
-    const iconStyle = (url) => {
-      return {
-        width: "30px",
-        height: "30px",
-        background: `url(${url}) center center /  28px 28px no-repeat`
-      };
-    };
-
-    const iconSelectedStyle = (url) => {
-      return {
-        width: "32px",
-        height: "32px",
-        background: `url(${url}) center center /  30px 30px no-repeat`
-      };
-    };
-
     return (
       <div className="app">
         <TabBar
@@ -43,8 +28,9 @@ class App extends React.Component {
         >
           <TabBar.Item
             key="home"
-            icon={<div style={iconStyle("/circle/home.svg")}/>}
-            selectedIcon={<div style={iconSelectedStyle("/circle/home_selected.svg")}/>}
+            title="圈子"
+            icon={<HomeIcon size={22}/>}
+            selectedIcon={<HomeIcon size={22}/>}
             selected={this.state.selectedTab === "home"}
             onPress={() => this.onSwitchTab("home")}
             data-seed="logId"
@@ -57,8 +43,9 @@ class App extends React.Component {
 
           <TabBar.Item
             key="new"
-            icon={<div style={iconStyle("/circle/new.svg")}/>}
-            selectedIcon={<div style={iconSelectedStyle("/circle/new_selected.svg")}/>}
+            title="分享"
+            icon={<PlusCircleIcon size={22}/>}
+            selectedIcon={<PlusCircleIcon size={22}/>}
             selected={this.state.selectedTab === "new"}
             onPress={() => this.onSwitchTab("new")}
           >
@@ -70,8 +57,9 @@ class App extends React.Component {
 
           <TabBar.Item
             key="mine"
-            icon={<div style={iconStyle("/circle/mine.svg")}/>}
-            selectedIcon={<div style={iconSelectedStyle("/circle/mine_selected.svg")}/>}
+            title="我的"
+            icon={<UserIcon size={22}/>}
+            selectedIcon={<UserIcon size={22}/>}
             selected={this.state.selectedTab === "mine"}
             onPress={() => this.onSwitchTab("mine")}
           >
