@@ -2,7 +2,10 @@ class Circles::API::PostsController < Circles::BaseController
   before_action :load_post, only: [:edit, :update, :destroy]
 
   def index
-    @posts = current_circle.posts.includes(:author, comments: :author).order(created_at: :desc).page(params[:page])
+    @posts = current_circle.posts
+              .includes(:author, comments: :author)
+              .order(created_at: :desc)
+              .page(params[:page])
   end
 
   def create

@@ -115,6 +115,12 @@ class PostCard extends React.Component {
                   :
                   <ThumbsUp size={16}/>
               }
+              {
+                post.likes_count > 0 ?
+                  <span style={{marginLeft: "0.5rem"}}>({post.likes_count})</span>
+                  :
+                  ""
+              }
             </div>
             <div className="post-action" onClick={this.onComment}>
               {
@@ -122,6 +128,12 @@ class PostCard extends React.Component {
                   <MessageSquare color="#467fcf" size={16}/>
                   :
                   <MessageSquare size={16}/>
+              }
+              {
+                post.comments.length > 0 ?
+                  <span style={{marginLeft: "0.5rem"}}>({post.comments.length})</span>
+                  :
+                  ""
               }
             </div>
           </div>
@@ -194,8 +206,11 @@ class PostCard extends React.Component {
 
           .post-card .post-card-footer .post-action {
             flex: 1;
-            text-align: center;
             padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            font-size: 0.75rem;
+            justify-content: center;
           }
 
           .post-card .post-content {
