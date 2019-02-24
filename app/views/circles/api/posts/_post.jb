@@ -3,5 +3,7 @@
   content: simple_format(post.content),
   author: render('circles/api/users/user', user: post.author),
   created_at: time_ago_in_words(post.created_at),
-  can_edit: post.author == current_circle_user || current_circle_user.owner?
+  can_edit: post.author == current_circle_user || current_circle_user.owner?,
+  is_owner: post.author == current_circle_user,
+  comments: render(partial: 'circles/api/comments/comment', collection: post.comments, as: :comment)
 }

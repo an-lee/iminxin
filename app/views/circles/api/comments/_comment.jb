@@ -1,0 +1,5 @@
+{
+  id: comment.id,
+  content: comment.content,
+  author: render('circles/api/users/user', user: comment.author)
+}

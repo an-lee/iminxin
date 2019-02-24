@@ -9,23 +9,29 @@ class API {
     };
 
     this.logout = (options={}) => {
-      request.baseUrl = this.baseUrl;
       options.url = "/logout";
       options.complete = () => {
         window.location.href=`${this.baseUrl}`;
       };
+      request.baseUrl = this.baseUrl;
       request.delete(options);
     };
 
     this.createPost = (options = {}) => {
-      request.baseUrl = this.baseUrl;
       options.url = "/api/posts";
+      request.baseUrl = this.baseUrl;
+      request.post(options);
+    };
+
+    this.createComment = (options = {}) => {
+      options.url = `/api/posts/${options.postId}/comments`;
+      request.baseUrl = this.baseUrl;
       request.post(options);
     };
 
     this.getPosts = (options={}) => {
-      request.baseUrl = this.baseUrl;
       options.url = "/api/posts";
+      request.baseUrl = this.baseUrl;
       request.get(options);
     };
   }

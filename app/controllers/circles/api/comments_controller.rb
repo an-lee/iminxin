@@ -14,7 +14,7 @@ class Circles::API::CommentsController < Circles::BaseController
   private
 
   def comment_params
-    params.require(:circle_app_comment).permit(:content)
+    params.require(:comment).permit(:content)
   end
 
   def load_post

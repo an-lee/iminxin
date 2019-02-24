@@ -34,7 +34,7 @@ class Home extends React.Component {
   render() {
     const PostList = () => (
       this.state.posts.map((post) => (
-        <PostCard key={post.id} post={post} />
+        <PostCard key={post.id} post={post} base_url={this.props.base_url} />
       ))
     );
 

@@ -31,6 +31,7 @@ class PostNew extends React.Component {
   onSubmit = () => {
     if (this.state.ui.submiting) return;
 
+    this.updateUI({submiting: true});
     Toast.loading("正在提交", 0);
     api.createPost({
       data: {

@@ -1,0 +1,3 @@
+{
+  comments: render(partial: 'circles/api/comments/comment', collection: @post.comments, as: :comment)
+}

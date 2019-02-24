@@ -1,6 +1,0 @@
-ul.media-list.comments-list data-post-id=comment.post.id
-  - comments.each do |comment|
-    li.media.comment-item data-comment-id=comment.id
-      .media-body
-        small.text-primary = format('%s: ', comment.author.name)
-        small.text-muted = comment.content

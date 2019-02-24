@@ -2,10 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import renderHTML from "react-render-html";
 import Avatar from "./Avatar";
-import { Modal } from "antd-mobile";
+import { Modal, TextareaItem, WingBlank, Button, WhiteSpace, Toast } from "antd-mobile";
 import { ThumbsUp, MessageSquare, MoreHorizontal } from "react-feather";
+import api from "../libs/api";
 
 class PostCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment: {
+        show: false,
+        content: ""
+      },
+      ui: {
+        submiting: false
+      }
+    };
+    api.baseUrl = this.props.base_url;
+  }
+
   onMore = () => {
     let operations = [
       { text: "点赞", onPress: this.onLike},
@@ -22,7 +37,49 @@ class PostCard extends React.Component {
   }
 
   onComment = () => {
-    // console.log("comment!");
+    const comment = this.state.comment;
+    comment.show = !comment.show;
+    this.setState({ comment });
+  }
+
+  onCommentChange = (content) => {
+    const comment = this.state.comment;
+    comment.content = content;
+    this.setState({ comment });
+  }
+
+  onCommentSubmit = () => {
+    if (this.state.ui.submiting) return;
+
+    this.updateUI({submiting: true});
+    Toast.loading("正在提交", 0);
+    api.createComment({
+      postId: this.props.post.id,
+      data: {
+        content: this.state.comment.content
+      },
+      fail: () => {
+        Toast.fail("出错了，请稍后重试", 1);
+      },
+      success: () => {
+        this.setState({
+          comment: {
+            show: false,
+            content: ""
+          }
+        });
+        Toast.success("成功发布", 1);
+      },
+      complete: () => {
+        this.updateUI({submiting: false});
+      }
+    });
+  }
+
+  updateUI = (ui) => {
+    this.setState({
+      ui: Object.assign({}, this.state.ui, ui)
+    });
   }
 
   onDelete = () => {
@@ -31,6 +88,7 @@ class PostCard extends React.Component {
   
   render() {
     const post = this.props.post;
+    const comment = this.state.comment;
 
     return (
       <div>
@@ -64,6 +122,28 @@ class PostCard extends React.Component {
               }
             </div>
           </div>
+          {
+            comment.show && 
+              <WingBlank style={{textAlign: "right"}}>
+                <TextareaItem
+                  rows={2}
+                  value={comment.content}
+                  onChange={this.onCommentChange}
+                  autoHeight
+                  name="回复"
+                  placeholder={`回复${post.author.name}:`}
+                />
+                <Button 
+                  type="primary" 
+                  size="small" 
+                  inline 
+                  onClick={this.onCommentSubmit} 
+                  disabled={!comment.content}
+                >确认</Button>
+                <WhiteSpace />
+              </WingBlank>
+          }
+          
         </div>
         <style jsx global>{`
           .post-card {
@@ -94,6 +174,7 @@ class PostCard extends React.Component {
           .post-card .post-info .post-info-author {
             font-size: 1rem;
             flex: 1;
+            color: ${post.is_owner ? "#fd9644" : "#49505E"}
           }
 
           .post-card .post-info .post-info-created-at {
@@ -101,7 +182,7 @@ class PostCard extends React.Component {
             color: #9aa0ac;
           }
 
-          .post-info-more {
+          .post-card .post-info-more {
             margin: 0 1rem;
           }
 
@@ -118,6 +199,13 @@ class PostCard extends React.Component {
           .post-card .avatar {
             margin-right: 0.5rem;
           }
+
+          .post-card textarea {
+            background: #efefef;
+            padding: 0.75rem;
+            font-size: 1rem;
+            line-height: 1.2rem;
+          }
         `}</style>
       </div>
     );
@@ -126,7 +214,8 @@ class PostCard extends React.Component {
 
 PostCard.propTypes = {
   post: PropTypes.object,
-  me: PropTypes.object
+  me: PropTypes.object,
+  base_url: PropTypes.string
 };
 
 export default PostCard;

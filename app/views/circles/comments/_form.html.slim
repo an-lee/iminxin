@@ -1,5 +1,0 @@
-= simple_form_for CircleAppComment.new, url: circle_post_comments_path(current_circle, post), remote: true do |f|
-    = f.input :content, label: false, input_html: { rows: '1' }
-    .text-right
-        = link_to '取消', "javascript:$('##{format('post-%s-comments-form', post.id)}').hide();", class: 'btn btn-sm btn-secondary btn-pill mr-3'
-        = f.submit '评论', class: 'btn btn-sm btn-pill btn-info'
