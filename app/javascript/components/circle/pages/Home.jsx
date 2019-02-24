@@ -16,6 +16,17 @@ class Home extends React.Component {
     api.baseUrl = this.props.base_url;
   }
 
+  updatePostComments = (postId, comments) => {
+    const posts = this.state.posts;
+    const index = posts.findIndex(post => post.id == postId);
+    if (index > -1) {
+      posts[index].comments = comments;
+      this.setState({
+        posts: posts
+      });
+    }
+  }
+
   componentDidMount() {
     if (this.state.posts.length < 1) {
       Toast.loading("正在加载", 0);
@@ -34,7 +45,7 @@ class Home extends React.Component {
   render() {
     const PostList = () => (
       this.state.posts.map((post) => (
-        <PostCard key={post.id} post={post} base_url={this.props.base_url} />
+        <PostCard key={post.id} post={post} base_url={this.props.base_url} updatePostComments={this.updatePostComments} />
       ))
     );
 

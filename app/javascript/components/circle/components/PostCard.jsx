@@ -5,6 +5,7 @@ import Avatar from "./Avatar";
 import { Modal, TextareaItem, WingBlank, Button, WhiteSpace, Toast } from "antd-mobile";
 import { ThumbsUp, MessageSquare, MoreHorizontal } from "react-feather";
 import api from "../libs/api";
+import CommentList from "./CommentList";
 
 class PostCard extends React.Component {
   constructor(props) {
@@ -51,23 +52,25 @@ class PostCard extends React.Component {
   onCommentSubmit = () => {
     if (this.state.ui.submiting) return;
 
+    const post = this.props.post;
     this.updateUI({submiting: true});
     Toast.loading("正在提交", 0);
     api.createComment({
-      postId: this.props.post.id,
+      postId: post.id,
       data: {
         content: this.state.comment.content
       },
       fail: () => {
         Toast.fail("出错了，请稍后重试", 1);
       },
-      success: () => {
+      success: (res) => {
         this.setState({
           comment: {
             show: false,
             content: ""
           }
         });
+        this.props.updatePostComments(post.id, res.data.comments);
         Toast.success("成功发布", 1);
       },
       complete: () => {
@@ -143,7 +146,10 @@ class PostCard extends React.Component {
                 <WhiteSpace />
               </WingBlank>
           }
-          
+          {
+            post.comments.length > 0 &&
+            <CommentList comments={post.comments} />
+          }
         </div>
         <style jsx global>{`
           .post-card {
@@ -215,7 +221,8 @@ class PostCard extends React.Component {
 PostCard.propTypes = {
   post: PropTypes.object,
   me: PropTypes.object,
-  base_url: PropTypes.string
+  base_url: PropTypes.string,
+  updatePostComments: PropTypes.any
 };
 
 export default PostCard;
