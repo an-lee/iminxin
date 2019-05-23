@@ -48,7 +48,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jb'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jquery-rails'
-gem 'bootstrap', '~> 4.1.0'
+gem 'bootstrap', '~> 4.3.1'
 gem 'simple_form', '~> 4.0.0'
 gem "bootstrap_form", ">= 4.0.0.alpha1"
 gem 'font-awesome-sass'
