@@ -7,7 +7,7 @@ ruby '2.3.3'
 gem 'rails', '~> 5.2.1'
 
 # App server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 
 # webpack
 gem 'webpacker', '~> 3.5'

@@ -215,7 +215,7 @@ GEM
     pg (0.18.0)
     popper_js (1.14.5)
     public_suffix (3.0.3)
-    puma (3.12.0)
+    puma (3.12.3)
     rack (2.0.6)
     rack-protection (2.0.3)
       rack
@@ -431,7 +431,7 @@ DEPENDENCIES
   mina-sidekiq (~> 1.0.3)
   openssl
   pg (= 0.18)
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2.1)
   rails-controller-testing
   rails-i18n (~> 5.0.3)
