@@ -58,7 +58,7 @@ gem 'status-page'
 gem 'browser_warrior', '>= 0.8.0'
 gem 'redis-namespace'
 gem 'sidekiq'
-gem 'kaminari', '~> 1.1.1'
+gem 'kaminari', '~> 1.2.1'
 gem 'rails-i18n', '~> 5.0.3'
 gem 'breadcrumbs_on_rails'
 
